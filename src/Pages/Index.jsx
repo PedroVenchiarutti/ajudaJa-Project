@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
-import Alert from '@mui/material/Alert';
 
-const HomePage = () => {
-  const [count, setCount] = useState(0);
+import Button from '@mui/material/Button'
+import '../index.scss'
+
+function Header() {
+
+
 
   return (
-    <div className="bg-gray-900 ">
-      <h1 className="bg-gray-800">TEstando o tw</h1>
-      <div>
-        <button type="button" onClick={() => setCount(count + 1)}>
-          Click me
-        </button>
-        <Alert>{count}</Alert>
-      </div>
+    <div className='max-w-full bg-navBg'>
+        <div className='h-20 items-center flex justify-around flex-nowrap flex-row max-w-screen-2xl'>
+          <h1 className='text-3xl'><a href="/home">Logo</a></h1>
+          <ul> 
+            <li className='font-secondary inline px-1.5'>Moon</li>
+            <li className='font-secondary inline px-1.5'>Inicio</li>
+            <li className='font-secondary inline px-1.5'>Sobre</li>
+            <li className='font-secondary inline px-1.5'>Meu perfil</li>
+          </ul>
+
+        </div>
     </div>
   );
 };
 
-export default HomePage;
+export default Header;
