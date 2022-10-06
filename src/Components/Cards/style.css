@@ -1,16 +1,28 @@
 .CardInformationToDown { 
-    animation: toDown 1000ms
+    animation: toDown 1000ms;
 }
 
 .CardInformationToTop { 
-  animation: toTop 1000ms;
+
+  animation: toTop 500ms  both;
+  
+  
+}
+
+.CardInformationToTop2 { 
+
+  animation: toTop2 1000ms  both;
+  
   
 }
 
 
+
+
+
 @keyframes toDown { 
     0% { 
-      transform: translateY(-20px);
+      transform: translateY(-100px);
       opacity: 0;
     }
   
@@ -22,13 +34,32 @@
 
   @keyframes toTop { 
     0% { 
-      transform: translateY(20px);
+      transform: translateY(0px);
       opacity: 1;
+      
     }
+
   
     100% { 
-      transform: translateY(0);
+      transform: translateY(-100px);
       opacity: 0;
-      display: none;
+      visibility: hidden;
+ 
+    }
+  }
+
+  @keyframes toTop2 { 
+    0% { 
+      transform: translateY(0px);
+      opacity: 0;
+      
+    }
+
+  
+    100% { 
+      transform: translateY(-10px);
+      opacity: 1;
+      
+ 
     }
   }
