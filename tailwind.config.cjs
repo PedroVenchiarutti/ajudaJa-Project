@@ -15,6 +15,7 @@ module.exports = {
     colors: { 
       'navBg': '#3DCC67',
       'navFontColor': '#316B44',
+      'firstSessionFontColor': '#3DCC67',
       'buttonColor': '#3DCC67',
       'firstBoxBg': '#6BBD99',
       'secondBoxBg': '#ACEFA4',
