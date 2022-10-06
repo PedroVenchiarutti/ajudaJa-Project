@@ -1,0 +1,34 @@
+.CardInformationToDown { 
+    animation: toDown 1000ms
+}
+
+.CardInformationToTop { 
+  animation: toTop 1000ms;
+  
+}
+
+
+@keyframes toDown { 
+    0% { 
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+  
+    100% { 
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes toTop { 
+    0% { 
+      transform: translateY(20px);
+      opacity: 1;
+    }
+  
+    100% { 
+      transform: translateY(0);
+      opacity: 0;
+      display: none;
+    }
+  }
