@@ -19,6 +19,7 @@ module.exports = {
       'firstBoxBg': '#6BBD99',
       'secondBoxBg': '#ACEFA4',
       'cardGreenBg': '#6DEE96',
+      'hoverFontColor': '#83AF1C',
       'cardGrayBg': '#D9D9D9',
       'faqGreenBg': '#40FF47',
       'faqGrayBg': '#FEFEFE',
