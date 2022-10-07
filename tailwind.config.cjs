@@ -29,7 +29,8 @@ module.exports = {
       'bgModalAlert': '#BCEF93',
       'colorFontHeadline': '#212529',
       'colorFontParagraph': '#495057',
-      'white': '#F3F3F3'
+      'white': '#F3F3F3',
+      'fontColor': '#fff',
     },
     fontFamily: { 
       'primary': ['DM Sans', 'sans-serif'],
