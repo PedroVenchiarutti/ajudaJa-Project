@@ -14,7 +14,7 @@ function Header() {
       <nav className="p-5 bg-navBg items-center md:flex md:items-center md:justify-between">
         <div className='flex justify-between'>
           <span className="text-2xl font-primary cursor-pointer md:ml-14 ml-4 ml:shadow">
-            <img className="inline w-[172px] h-[58.76] " src="public\images\logo-v2.png" />
+            <img className="inline w-[172px] h-[58.76] " src="images\logo-v2.png" />
           </span>
           <div onClick={()=> setMenu(!menu)} className='cursor-pointer py-4 text-3xl cursor-hiddenpointer md:hidden block mx-2'>
           <ion-icon name={menu ? 'close' : 'menu'}></ion-icon>
@@ -40,7 +40,7 @@ function Header() {
           <li className="mx-4 my-6 md:my-0">
             <a
               href="#"
-              className="text-3xl font-primaryr:text-hoverFontColor duration-500"
+              className="text-3xl font-primary hover:text-hoverFontColor duration-500"
             >
               <h1 className='font-primary'>
 
@@ -51,7 +51,7 @@ function Header() {
           <li className="mx-4 my-6 md:my-0">
             <a
               href="#"
-              className="text-3xl font-primaryr:text-hoverFontColor duration-500"
+              className="text-3xl font-primaryr hover:text-hoverFontColor duration-500"
             >
               <h1 className='font-primary'>
 

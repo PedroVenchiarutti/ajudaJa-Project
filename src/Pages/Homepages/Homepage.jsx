@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Header from '../components/Header';
+import Header from '../../components/Header';
 
 import Button from '@mui/material/Button'
 import '../../index.scss'
@@ -17,10 +17,10 @@ function Homepage() {
      
     </div>
     <div className='max-w-xl'>
-      <img className='md:mt-24   pt-40 md:pt-0  pb-12 md:w-[629px] md:h-[671px] pr-7' src="public/images/img-header.svg" alt="" />
+      <img className='md:mt-24   pt-40 md:pt-0  pb-12 md:w-[629px] md:h-[671px] pr-7' src="images/img-header.svg" alt="" />
     </div>
     </div>
-      <button className=' mt-4 group bg-buttonColor hover:bg-faqGrayBg md:p-[16px] md:ml-48 md:mr-18 border-2 shadow-2xl p-2 
+      <button className=' mt-4 group bg-buttonColor hover:bg-faqGrayBg md:p-[16px] md:ml-48 md:mr-18 border-[1px] border-hidden hover:border-solid shadow-2xl p-2 
       mr-20 ml-[10%] rounded-lg hover:animate-pulse duration-500'>
         <h1 className='text-xl group-hover:text-buttonColor duration-500
         text-fontColor md:font-bold'>
