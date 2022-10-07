@@ -13,7 +13,7 @@ function Header() {
     <div className='fixed w-screen'>
       <nav className="p-5 bg-navBg items-center md:flex md:items-center md:justify-between">
         <div className='flex justify-between'>
-          <span className="text-2xl font-secondary cursor-pointer md:ml-14 ml-4 ml:shadow">
+          <span className="text-2xl font-primary cursor-pointer md:ml-14 ml-4 ml:shadow">
             <img className="inline w-[172px] h-[58.76] " src="public\images\logo-v2.png" />
           </span>
           <div onClick={()=> setMenu(!menu)} className='cursor-pointer py-4 text-3xl cursor-hiddenpointer md:hidden block mx-2'>
@@ -30,25 +30,33 @@ function Header() {
           <li className="mx-4 my-6 md:my-0">
             <a
               href="#"
-              className="text-3xl font-secondary hover:text-hoverFontColor duration-500"
+              className="text-3xl font-secoprimary hover:text-hoverFontColor duration-500"
             >
+              <h1 className='font-primary'>
               Início
+              </h1>
             </a>
           </li>
           <li className="mx-4 my-6 md:my-0">
             <a
               href="#"
-              className="text-3xl font-secondary hover:text-hoverFontColor duration-500"
+              className="text-3xl font-primaryr:text-hoverFontColor duration-500"
             >
+              <h1 className='font-primary'>
+
               Sobre
+              </h1>
             </a>
           </li>
           <li className="mx-4 my-6 md:my-0">
             <a
               href="#"
-              className="text-3xl font-secondary hover:text-hoverFontColor duration-500"
+              className="text-3xl font-primaryr:text-hoverFontColor duration-500"
             >
+              <h1 className='font-primary'>
+
               Meu perfil
+              </h1>
             </a>
           </li>
         </ul>

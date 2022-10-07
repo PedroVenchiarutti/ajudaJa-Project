@@ -10,6 +10,9 @@ module.exports = {
         'user-image': '50%',
         'modalSucess': '50px',
         'modalAlert': '17px'
+      },
+      animation: {
+        'Bounce': 'bounce 1s infinite',
       }
     },
     colors: { 
