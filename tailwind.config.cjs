@@ -35,6 +35,14 @@ module.exports = {
         toLeft: { 
           '0%': {transform: 'translateX(-20px)', opacity: '0'}, 
           '100%': {transform: 'translateX(0)', opacity: '1'}
+        }, 
+        toDownFAQ: { 
+          '0%': {transform: 'translateY(-10px)', opacity: '0.5'}, 
+          '100%': {transform: 'translateY(0px)', opacity: '1'}
+        },
+        toUpFAQ: { 
+          '0%': {transform: 'translateY(0px)', opacity: '1'}, 
+          '100%': {transform: 'translateY(-5px)', opacity: '0', visibility: 'hidden'}
         }
       },
       animation: { 
@@ -44,7 +52,9 @@ module.exports = {
         'CardInformationToDown2': 'toDown2 1000ms',
         'CardInformationToTop2': 'toTop2 1000ms both;',
         'contentClass':'toLeft 1000ms;',
-        'contentClassReverse': 'toRight 1000ms;'
+        'contentClassReverse': 'toRight 1000ms;',
+        'faqAnimationToDown':' toDownFAQ 500ms',
+        'faqAnimationToTop':'toUpFAQ 500ms both'
       }
     },
     colors: { 
