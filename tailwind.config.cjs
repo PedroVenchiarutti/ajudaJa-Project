@@ -10,6 +10,41 @@ module.exports = {
         'user-image': '50%',
         'modalSucess': '50px',
         'modalAlert': '17px'
+      }, 
+      keyframes: { 
+        toDown: { 
+          '0%': {transform: 'translateY(-100px)', opacity: '0'}, 
+          '100%': {transform: 'translateY(0px)', opacity: '1'}
+        },
+        toTop: { 
+          '0%': {transform: 'translateY(0px)', opacity: '1'}, 
+          '100%': {transform: 'translateY(-100px)', opacity: '0', visibility: 'hidden'}
+        },
+        toDown2: { 
+          '0%': {transform: 'translateY(-100px)', opacity: '1'}, 
+          '100%': {transform: 'translateY(0px)', opacity: '1'}
+        },
+        toTop2: { 
+          '0%': {transform: 'translateY(0px)', opacity: '1'}, 
+          '100%': {transform: 'translateY(-100px)', opacity: '1', visibility: 'hidden'}
+        },
+        toRight: { 
+          '0%': {transform: 'translateX(20px)', opacity: '0'}, 
+          '100%': {transform: 'translateX(0)', opacity: '1'}
+        },
+        toLeft: { 
+          '0%': {transform: 'translateX(-20px)', opacity: '0'}, 
+          '100%': {transform: 'translateX(0)', opacity: '1'}
+        }
+      },
+      animation: { 
+        'CardInformationToDown': 'toDown 1000ms',
+        'CardInformationToTop': 'toTop 500ms  both;',
+        'noneAnimation': 'none',
+        'CardInformationToDown2': 'toDown2 1000ms',
+        'CardInformationToTop2': 'toTop2 1000ms both;',
+        'contentClass':'toLeft 1000ms;',
+        'contentClassReverse': 'toRight 1000ms;'
       }
     },
     colors: { 

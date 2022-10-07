@@ -6,9 +6,9 @@ import DoctorMan from '../../assets/images/doctor-man.svg'
 export default function Information() { 
 
 
-    const contentClass = 'contentClass m-2.5 flex flex-col sm:flex-row md:flex-row justify-center items-center gap-1 sm:gap-10 animation-toRight  '
-    const contentClassReverse = 'contentClassReverse m-2.5 flex flex-col sm:flex-row-reverse md:flex-row-reverse justify-center items-center gap-1 sm:gap-10 '
-    const svgImage = 'flex justify-self-center w-20 sm:w-24'
+    const contentClass = 'animate-contentClass m-2.5 flex flex-col sm:flex-row md:flex-row justify-center items-center gap-1 sm:gap-10 animation-toRight  '
+    const contentClassReverse = 'animate-contentClassReverse m-2.5 flex flex-col sm:flex-row-reverse md:flex-row-reverse justify-center items-center gap-1 sm:gap-10 '
+    const svgImage = 'flex justify-self-center w-20 sm:w-24 transform hover:scale-110 transition duration-300'
     const firstBox = 'm-2.5 bg-firstBoxBg rounded-input p-2.5 sm:w-[50rem] sm:text-xl shadow-md transform hover:scale-95 transition duration-300'
     const secondBox = 'm-2.5 sm:m-0 bg-secondBoxBg p-2.5 rounded-input sm:w-[50rem] sm:text-xl shadow-md transform hover:scale-95 transition duration-300 '
 
