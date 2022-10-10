@@ -54,16 +54,20 @@ module.exports = {
         'contentClass':'toLeft 1000ms;',
         'contentClassReverse': 'toRight 1000ms;',
         'faqAnimationToDown':' toDownFAQ 500ms',
-        'faqAnimationToTop':'toUpFAQ 500ms both'
+        'faqAnimationToTop':'toUpFAQ 500ms both',
+        'Bounce': 'bounce 1s infinite',
+
       }
     },
     colors: { 
       'navBg': '#3DCC67',
       'navFontColor': '#316B44',
+      'firstSessionFontColor': '#3DCC67',
       'buttonColor': '#3DCC67',
       'firstBoxBg': '#6BBD99',
       'secondBoxBg': '#ACEFA4',
       'cardGreenBg': '#6DEE96',
+      'hoverFontColor': '#83AF1C',
       'cardGrayBg': '#D9D9D9',
       'faqGreenBg': '#40FF47',
       'faqGrayBg': '#FEFEFE',
@@ -72,7 +76,8 @@ module.exports = {
       'bgModalAlert': '#BCEF93',
       'colorFontHeadline': '#212529',
       'colorFontParagraph': '#495057',
-      'white': '#F3F3F3'
+      'white': '#F3F3F3',
+      'fontColor': '#fff',
     },
     fontFamily: { 
       'primary': ['DM Sans', 'sans-serif'],
