@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 
+
 import Header from '../../Components/Header';
 
 import Information from '../Information/Information'
 import FAQ from '../FAQ/FAQ'
 import Cards from '../Cards/Cards'
+import Footer from '../../components/Footer';
 
 import Button from '@mui/material/Button'
 import '../../index.scss'
@@ -41,8 +43,10 @@ function Homepage() {
       <Information/>
       <Cards/>
       <FAQ/>
+      <Footer/>
     </div>
   );
 };
+
 
 export default Homepage;

@@ -56,7 +56,6 @@ module.exports = {
         'faqAnimationToDown':' toDownFAQ 500ms',
         'faqAnimationToTop':'toUpFAQ 500ms both',
         'Bounce': 'bounce 1s infinite',
-
       }
     },
     colors: { 
