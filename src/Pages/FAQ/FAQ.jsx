@@ -31,7 +31,6 @@ export default function FAQ() {
                     </div>
                 </Fade>
 
-
                 <Fade left>
                     <div className={cardFAQ()}>
                         <div className={cardTitleFAQ(FAQ1)} onClick={e => setFAQ2(!FAQ2)}>
