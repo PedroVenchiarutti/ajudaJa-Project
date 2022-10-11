@@ -6,7 +6,7 @@ import Chatbox from '../Pages/ChatBox';
 const RouterApp = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<Chatbox />} />
+      <Route path="/" element={<HomePage />} />
       
     </Routes>
   </Router>
