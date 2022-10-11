@@ -3,6 +3,7 @@ import Person from '../../assets/images/people.svg'
 import Money from '../../assets/images/money.svg'
 import Family from '../../assets/images/security.svg'
 import {boxGreen, imageSVG, titleBox, textBox,testMoneyToggle, cardlifeSecurityTitle, cardLifeSecurityContent, cardMoneyTitle, cardMoneyContent, cardFamilyContent, FAQCards} from './classTailwind'
+import Fade from 'react-reveal/Fade';
 
 export default function Cards() { 
   
@@ -16,7 +17,7 @@ export default function Cards() {
    
     return(
         <section className="w-full">
-
+            <Fade bottom>
             <div className={FAQCards}>
 
                 {/* Box 1 */}
@@ -110,6 +111,8 @@ export default function Cards() {
                         </div>
                 </div>
             </div>
+
+            </Fade>
         </section>
     )
 
