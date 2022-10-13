@@ -56,7 +56,6 @@ module.exports = {
         'faqAnimationToDown':' toDownFAQ 500ms',
         'faqAnimationToTop':'toUpFAQ 500ms both',
         'Bounce': 'bounce 1s infinite',
-
       }
     },
     colors: { 
@@ -78,6 +77,7 @@ module.exports = {
       'colorFontParagraph': '#495057',
       'white': '#F3F3F3',
       'fontColor': '#fff',
+      'bgSingUp' : '#E4E4E4'
     },
     fontFamily: { 
       'primary': ['DM Sans', 'sans-serif'],
