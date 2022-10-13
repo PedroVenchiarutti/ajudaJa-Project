@@ -43,7 +43,7 @@ const UserInformation = () => {
             <div className=" sm:p-5 md:w-[700px] lg:w-[1080px] m-auto pt-6">
 
                 <div className="title  px-2 pb-10">
-                    <h1 className="text-2xl  md:text-3xl font-bold">Informe aqui alguma alergia, condição ou síndrome que você possui!</h1>
+                    <h1 className="text-2xl  md:text-3xl font-bold pb-3">Informe aqui alguma alergia, condição ou síndrome que você possui!</h1>
                     <p className="text-sm ">Por favor, siga o exemplo abaixo</p>
                 </div>
 
@@ -76,9 +76,9 @@ const UserInformation = () => {
 
                     </div>
 
-                    <div className=" p-6 lg:w-[50%] flex flex-col md:flex-row">
+                    <div className=" p-6 lg:w-[50%] flex content-center items-center lg:items-start flex-col md:flex-row gap-2">
 
-                        <p className="text-lg">Essas informações estarão visiveis em seu perfil
+                        <p className="text-lg ">Essas informações estarão visiveis em seu perfil
                             <strong> qualquer pessoa que escanar seu código QR </strong>
                             irá visualiza-las.</p>
 
