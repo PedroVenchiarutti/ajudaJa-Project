@@ -8,7 +8,6 @@ import FAQ from '../FAQ/FAQ'
 import Cards from '../Cards/Cards'
 import Footer from '../../components/Footer';
 
-import Button from '@mui/material/Button'
 import '../../index.scss'
 
 function Homepage() {
