@@ -3,54 +3,68 @@ import Header from "../../Components/Header";
 import PersonSVG from '../../../public/images/image-firs-seasson.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { LteMobiledata } from "@mui/icons-material";
 
 const UserInformation = () => { 
- 
-    const [serviceList, setServiceList] = useState([{service: ''}])
+
+        const [formValues, setFormsValues] = useState([{id: 1, description:''}])
+       
+    
+           const handleChange = (i,e) => { 
+            let newFormValues = [...formValues];
+            let add = i + 1
+            newFormValues[i].id = add++
+            newFormValues[i].description = e.target.value;
+            setFormsValues( newFormValues)
+        
+        }
+
+        const addFormFields = () => { 
+            let newFormValues = [...formValues];
+            let abc = [...formValues, {id: '' , description: ''}]
+                setFormsValues(abc)
+            console.log(newFormValues)
+
+        }
+
+        const removeFormFields = (i) => { 
+            let newFormValues = [...formValues];
+            newFormValues.splice(i, 1);
+            setFormsValues(newFormValues)
+        }
+
+  
 
     return(
         <div className="bg-white ">
             <Header/>
 
         <div className="w-full pt-28">
-            <div className="w-[1080px] m-auto pt-6">
+            <div className=" sm:p-5 md:w-[700px] lg:w-[1080px] m-auto pt-6">
 
-                <div className="title pb-10">
-                    <h1 className="text-3xl font-bold">Informe aqui alguma alergia, condição ou síndrome que você possui!</h1>
+                <div className="title  px-2 pb-10">
+                    <h1 className="text-2xl  md:text-3xl font-bold">Informe aqui alguma alergia, condição ou síndrome que você possui!</h1>
                     <p className="text-sm ">Por favor, siga o exemplo abaixo</p>
                 </div>
 
-                <div className="flex justify-between">
+                <div className="flex flex-col lg:flex-row justify-between">
                     <div className="flex flex-col gap-2 ">
-                        <div>
-                            <input className="border w-[400px] p-1 rounded-md" type="text" placeholder="Asma" />
-                        </div>
-
-                        <div className="flex gap-1 items-center">
+                
+                 
+                                {formValues.map((element, index)=> (
+                                       <div key={index} className="flex justify-center lg:justify-start gap-1 items-center px-2">
+                                
+                                       <input className="border w-[300px] p-1 rounded-md" type="text"  placeholder="Insira sua doença ou alergia aqui"  onChange={e => handleChange(index, e)} />
+                                       <button onClick={()=> addFormFields()} >
+                                           <AddCircleOutlineIcon/> </button>
+                                           {index ?
+                                            <button onClick={() => removeFormFields(index)}>
+                                            <DeleteForeverIcon />
+                                        </button> : <div className="invisible"><DeleteForeverIcon /></div> }
+                                
+                                       </div>
+                                ))}
                             
-                        <input className="border w-[400px] p-1 rounded-md" type="text" placeholder="Alergia a amendoim" /> 
-                        <button onClick={e => inputSick()}>
-                            <AddCircleOutlineIcon/> </button>
-                            <button>
-                                <DeleteForeverIcon />
-                            </button>
-                        </div>
-
-                        {serviceList.map((item, key)=> { 
-                            return(
-                                <div key={key} className="flex gap-1 items-center">
-                            
-                                <input className="border w-[400px] p-1 rounded-md" type="text" placeholder="Alergia a amendoim" /> 
-                                <button onClick={e => inputSick()}>
-                                    <AddCircleOutlineIcon/> </button>
-                                    <button>
-                                        <DeleteForeverIcon />
-                                    </button>
-                                </div>
-                            )
-                        })}
-
-                        
 
                  
                      
@@ -62,7 +76,7 @@ const UserInformation = () => {
 
                     </div>
 
-                    <div className="w-[50%] flex">
+                    <div className=" p-6 lg:w-[50%] flex flex-col md:flex-row">
 
                         <p className="text-lg">Essas informações estarão visiveis em seu perfil
                             <strong> qualquer pessoa que escanar seu código QR </strong>
