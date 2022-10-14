@@ -8,6 +8,9 @@ import FAQ from '../FAQ/FAQ'
 import Cards from '../Cards/Cards'
 import Footer from '../../Components/Footer';
 
+import Chatbox from '../ChatBox'
+
+
 import '../../index.scss'
 
 function Homepage() {
@@ -45,6 +48,7 @@ function Homepage() {
       <Information/>
       <Cards/>
       <FAQ/>
+      <Chatbox/>
       <Footer/>
     </div>
   );
