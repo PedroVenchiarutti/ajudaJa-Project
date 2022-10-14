@@ -8,6 +8,7 @@ import FAQ from '../FAQ/FAQ'
 import Cards from '../Cards/Cards'
 import Footer from '../../Components/Footer';
 import Chatbox from '../ChatBox'
+import Fade from 'react-reveal/Fade';
 
 import '../../index.scss'
 
@@ -17,11 +18,12 @@ function Homepage() {
     <Header />
     <div className='flex md:max-h-[520px]'>
 
-    <div className='max-w-3xl flex-col flex-1 md:max-h-72 md:pr-0 pr-16'>
-      <h1  className='pt-32 md:mr-3 text-right font-secondary md:text-[60px] leading-relaxed text-[25px] font-bold pl-10'>Saia de casa<h1   className='text-firstSessionFontColor'>Sem se</h1  ><font    className='text-firstSessionFontColor flex-row'> preocupar </font >com o amanhã!</h1 >
-
-     
-    </div>
+    <Fade left>
+      <div className='max-w-3xl flex-col flex-1 md:max-h-72 md:pr-0 pr-16'>
+        <h1  className='pt-32 md:mr-3 text-right font-secondary md:text-[60px] leading-relaxed text-[25px] font-bold pl-10'>Saia de casa<h1   className='text-firstSessionFontColor'>Sem se</h1  ><font    className='text-firstSessionFontColor flex-row'> preocupar </font >com o amanhã!</h1 >
+      
+      </div>
+    </Fade>
     <div className='max-w-[800px]'>
       <img className='md:mt-28  pt-40 md:pt-0  pb-12 md:w-[900px] md:h-[580px] pr-10' src="images/na_feb_50.jpg" alt="" />
     </div>
