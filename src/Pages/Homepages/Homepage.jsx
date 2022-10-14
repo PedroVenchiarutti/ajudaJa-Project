@@ -6,7 +6,7 @@ import Header from '../../Components/Header';
 import Information from '../Information/Information'
 import FAQ from '../FAQ/FAQ'
 import Cards from '../Cards/Cards'
-import Footer from '../../components/Footer';
+import Footer from '../../Components/Footer';
 
 import '../../index.scss'
 

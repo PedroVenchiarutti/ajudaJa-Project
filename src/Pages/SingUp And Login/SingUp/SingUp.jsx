@@ -84,7 +84,7 @@ export default function SingUp() {
         <div className="items-center">
 
          
-        <AccountCircleOutlinedIcon sx={{fontSize: 400  }} className="mt-40 ml-40"/>
+        <AccountCircleOutlinedIcon sx={{fontSize: 150}} className="mt-40 ml-40"/>
         </div>
         <form className="flex-col flex items-center mt-20 pl-[240px]" onSubmit={handleSubmit}>
         <h1 className="text-center text-3xl ">
