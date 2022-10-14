@@ -27,7 +27,7 @@ function Header() {
           </li>
           <li className="mx-4 my-6 md:my-0">
             <a
-              href="#"
+              href="/"
               className="text-3xl font-secoprimary hover:text-hoverFontColor duration-500"
             >
               <h1 className='font-primary'>
@@ -48,7 +48,7 @@ function Header() {
           </li>
           <li className="mx-4 my-6 md:my-0">
             <a
-              href="#"
+              href="/MyProfile"
               className="text-3xl font-primaryr hover:text-hoverFontColor duration-500"
             >
               <h1 className='font-primary'>

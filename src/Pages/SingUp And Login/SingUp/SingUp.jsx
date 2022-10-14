@@ -7,11 +7,6 @@ import Header from "../../../Components/Header";
 
 const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
 
-
-
-
-
-
 export default function SingUp() {
     const [firstName, setfirstName] = useState('');
     const [password, setPassword] = useState('');
