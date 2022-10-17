@@ -15,8 +15,10 @@ import '../../index.scss'
 
 function Homepage() {
   return (
-    <div>
+    <div className='w-full'>
     <Header />
+    <div className='max-w-[1270px]'>
+    
     <div className='flex md:max-h-[520px]'>
 
 
@@ -52,6 +54,7 @@ function Homepage() {
       <FAQ/>
       <Chatbox/>
       <Footer/>
+    </div>
     </div>
   );
 };

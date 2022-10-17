@@ -1,10 +1,10 @@
-
 import React, {useState, useRef, useEffect} from "react";
 import axios from "axios";
 import ReactInputDateMask from 'react-input-date-mask';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import {storage} from '../../../Components/connectionFirebase'
-import {ref, uploadBytes} from 'firebase/storage'
+import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
+import {v4} from 'uuid'
 
 
 import Header from "../../../Components/Header";
@@ -39,7 +39,9 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
 
     const [imageUpload, setImageUpload] = useState(null);
     const [preview, setPreview] = useState('');
+    const [imgUrl, setImgUrl] = useState('');
     const fileInputRef = useRef(null);
+
     
 
     useEffect(() => {
@@ -67,10 +69,15 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
 
     const uploadImage = () => {
         if(imageUpload == null) return;
-        const imageRef = ref(storage, `images/${imageUpload.name}`)
+        const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
             console.log('Uploaded a blob or file!');
+            getDownloadURL(imageRef)
+      .then((url) => {
+        console.log(url);
+      })
             setSucess(true);
+            console.log(urlImg)
         } )
 
     }
@@ -90,6 +97,8 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
                 gender: sex,
                 name: firstName,
                 lastname:  lastName,
+                avatar: imgUrl,
+
             }
             ).then((response) => {
                 console.log(response)
@@ -108,6 +117,7 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
         function next(e){
             handleSubmit(e);
             uploadImage();
+            
                     }
 
         
@@ -116,7 +126,7 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
     
 
   return (
-<
+
 <div className="bg-bgSingUp h-screen">
 
     <Header />
@@ -138,7 +148,7 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
         <button className="w-52 h-52  rounded-[50%] cursor-pointer mt-36 ml-44 border absolute" onClick={(e) => {
             e.preventDefault();
             fileInputRef.current.click();
-        }}>Upload</button>)
+        }}>Foto de perfil</button>)
     }
         
 
@@ -151,7 +161,7 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
             Cadastro
         </h1>
             <input  type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="placeholder-colorFontHeadline  bg-faqGrayBg border-b p-1 max-w-3xl w-96 mt-5"/>
-            <input  type="text" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Nome de usuario (Apenas para login)" className="placeholder-colorFontHeadline  max-w-3xl w-96 mt-5 border-b bg-faqGrayBg p-1"/>
+            <input  type="text" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Nome de usuario" className="placeholder-colorFontHeadline  max-w-3xl w-96 mt-5 border-b bg-faqGrayBg p-1"/>
             {/* <ReactInputDateMask mask='mm-dd-yyyy' value={dateNasc} required showMaskOnFocus='true'  showMaskOnHover='true' onChange={(e) => setDateNasc(e.target.value)} className='placeholder-colorFontHeadline  max-w-3xl w-96 mt-5 border-b bg-faqGrayBg p-1' /> */}
             <input  type="text" value={dateNasc} onChange={(e) => setDateNasc(e.target.value)} placeholder="Data de nascimento" className="placeholder-colorFontHeadline  max-w-3xl w-96 mt-5 border-b bg-faqGrayBg p-1"/>
             <div className="mt-4">
