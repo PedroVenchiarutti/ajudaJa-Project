@@ -61,7 +61,7 @@ const MyProfile = () => {
                               <img className="w-[200px]" src={EditProfilePNG} alt="" />
                               <div className=" flex flex-col gap-2">
                                   <button onClick={GenerateQRCode} className="border mr-5 px-6 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white ">Gerar código QR</button>
-                                  <button className="px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 hover:text-navFontColor hover:border ">Alterar foto</button>
+                                
                               </div>
 
                               <img src={qrcode} alt="" />
@@ -75,7 +75,7 @@ const MyProfile = () => {
                                       <label className="text-xl " htmlFor="">
                                          Data de Nascimento
                                       </label>
-                                      <input className="border-b-2 text-xl " type="date" value={birthday} readOnly />
+                                      <input className="border-b-2 text-xl " type="date" value={birthday}  />
                                   </div>
                                       <div className="self-start pl-1 lg:pl-[78px] font-bold text-xl"><label className="pr-6" > Contatos de emergência </label>
                                       <button onClick={handleAdd}>
