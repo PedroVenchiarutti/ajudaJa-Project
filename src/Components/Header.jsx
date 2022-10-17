@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import CloseIcon from '@mui/icons-material/Close';
 
 
 

@@ -1,3 +1,4 @@
+
 import React, {useState, useRef, useEffect} from "react";
 import axios from "axios";
 import ReactInputDateMask from 'react-input-date-mask';
@@ -35,6 +36,7 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
     const [sex, setSex] = useState('');
     const [dateNasc, setDateNasc] = useState(''); 
     const [sucess, setSucess] = useState(false);
+
     const [imageUpload, setImageUpload] = useState(null);
     const [preview, setPreview] = useState('');
     const fileInputRef = useRef(null);
@@ -56,10 +58,12 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
         [imageUpload]);
 
 
+
     function getaPTesta (){
         axios.get('https://ajudajaapi.herokuapp.com/api/private/users').then( response => console.log(response))
 
     }
+
 
     const uploadImage = () => {
         if(imageUpload == null) return;
@@ -70,8 +74,6 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
         } )
 
     }
-
-
     
     
     const handleSubmit = (e) => {
@@ -102,17 +104,21 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
         }
 
 
+
         function next(e){
             handleSubmit(e);
             uploadImage();
                     }
+
         
 
     
     
 
   return (
+<
 <div className="bg-bgSingUp h-screen">
+
     <Header />
     
      
@@ -149,6 +155,7 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
             {/* <ReactInputDateMask mask='mm-dd-yyyy' value={dateNasc} required showMaskOnFocus='true'  showMaskOnHover='true' onChange={(e) => setDateNasc(e.target.value)} className='placeholder-colorFontHeadline  max-w-3xl w-96 mt-5 border-b bg-faqGrayBg p-1' /> */}
             <input  type="text" value={dateNasc} onChange={(e) => setDateNasc(e.target.value)} placeholder="Data de nascimento" className="placeholder-colorFontHeadline  max-w-3xl w-96 mt-5 border-b bg-faqGrayBg p-1"/>
             <div className="mt-4">
+
         
 
             <label htmlFor="" className="mr-[240px]">
@@ -167,6 +174,7 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
             
             <div className="mt-5 mb-1 text-center">
             <button onClick={getBack}className='group bg-buttonColor hover:bg- md:p-1 border-[1px] border-hidden shadow-2xl p-1
+
        rounded-lg hover:animate-pulse duration-500hhhhhhh
        ' >
           <h1 className=' group-hover:animate-pulse text-faqGrayBg md:font-bold text-xl pl-10 pr-10'>
@@ -183,12 +191,14 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
       </button> 
 
 
+
        <p className="mt-4">
          Já tem conta no Ajuda.JÁ? {' '}
          <a href="/" className='text-buttonColor'>
              Clique aqui
          </a>
        </p>
+
 
             </div>
             
