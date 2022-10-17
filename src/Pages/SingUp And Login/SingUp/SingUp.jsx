@@ -1,10 +1,9 @@
-import React, {useState} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import axios from "axios";
 import ReactInputDateMask from 'react-input-date-mask';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { storage } from "../../../Components/connectionFirebase";
-
-
+import {storage} from '../../../Components/connectionFirebase'
+import {ref, uploadBytes} from 'firebase/storage'
 
 
 import Header from "../../../Components/Header";
@@ -16,40 +15,6 @@ import Header from "../../../Components/Header";
 
 
 const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
-
-
-
-const firebaseUpload = (e) => {
-    e.preventDefault();
-    console.log(e);
-    const file = e.target[0]?.files[0];
-    if (!file) return;
-    const storageRef = ref(storage, `image/user/${file.name}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    uploadTask.on(
-        "state_changed",
-      (snapshot) => {
-          console.log("snapshot", snapshot);
-      },
-      (error) => {}
-      );
-      uploadTask.then((res) => {
-          getDownloadURL(storageRef)
-          .then((url) => {
-              let urlImage = url;
-              setImgURL(urlImage);
-              personalDataRecord({
-                  ...personalName,
-                  img: urlImage,
-                });
-                setProgress(true);
-            })
-            .catch((error) => {
-                console.log(error);
-                return <div>Error...</div>;
-            });
-        });
-    };
     
     
     
@@ -70,13 +35,41 @@ const firebaseUpload = (e) => {
     const [sex, setSex] = useState('');
     const [dateNasc, setDateNasc] = useState(''); 
     const [sucess, setSucess] = useState(false);
- 
+    const [imageUpload, setImageUpload] = useState(null);
+    const [preview, setPreview] = useState('');
+    const fileInputRef = useRef(null);
+    
+
+    useEffect(() => {
+        if (imageUpload){
+            const reader = new FileReader();
+            reader.onload = () => {
+                setPreview(reader.result);
+            }
+            
+            reader.readAsDataURL(imageUpload)
+        } else {
+
+
+        }}, 
+        
+        [imageUpload]);
+
 
     function getaPTesta (){
         axios.get('https://ajudajaapi.herokuapp.com/api/private/users').then( response => console.log(response))
 
     }
 
+    const uploadImage = () => {
+        if(imageUpload == null) return;
+        const imageRef = ref(storage, `images/${imageUpload.name}`)
+        uploadBytes(imageRef, imageUpload).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+            setSucess(true);
+        } )
+
+    }
 
 
     
@@ -98,21 +91,20 @@ const firebaseUpload = (e) => {
             }
             ).then((response) => {
                 console.log(response)
-                setSucess(true)
                 getaPTesta()
             }).catch((err) => {
                 console.log(err)
                 getaPTesta()
             })
         }
-
         function getBack(){
             window.location.href = "/";
         }
 
 
-        function next(){
-            handleSubmit();
+        function next(e){
+            handleSubmit(e);
+            uploadImage();
                     }
         
 
@@ -134,10 +126,17 @@ const firebaseUpload = (e) => {
         
         <div className="items-center ml-40 pr-28">
 
-         
-        <AccountCircleOutlinedIcon sx={{fontSize: 250  }} className="mt-28 ml-44 absolute"> 
-        </AccountCircleOutlinedIcon>
-        <input type="file" id="fileImg" className="ml-36 absolute placeholder-colorFontHeadline max-w-3xl w-80 mt-[362px] border-b bg-faqGrayBg p-1 "/>
+         {preview ? (<img className='w-52 h-52  rounded-[50%] cursor-pointer mt-36 ml-44 border absolute' src={preview} style={{objectFit: 'cover'}} onClick={() =>{
+            setPreview(null)
+         }} alt="" /> ):(
+        <button className="w-52 h-52  rounded-[50%] cursor-pointer mt-36 ml-44 border absolute" onClick={(e) => {
+            e.preventDefault();
+            fileInputRef.current.click();
+        }}>Upload</button>)
+    }
+        
+
+        <input type="file" ref={fileInputRef} accept='image/*' id="fileImg" onChange={(e) => setImageUpload(e.target.files[0])} className="ml-36 absolute hidden placeholder-colorFontHeadline max-w-3xl w-80 mt-[362px] border-b bg-faqGrayBg p-1 "/>
         <input  type="text" value={firstName} onChange={(e) => setfirstName(e.target.value)} placeholder="Primeiro nome" className="ml-36 absolute placeholder-colorFontHeadline max-w-3xl w-80 mt-[408.3px] border-b bg-faqGrayBg p-1 "/>
             <input  type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Ultimo Nome" className="ml-36 placeholder-colorFontHeadline absolute mt-[463px]  max-w-3xl w-80 border-b bg-faqGrayBg p-1"/>
         </div>
@@ -182,15 +181,7 @@ const firebaseUpload = (e) => {
         Avançar
           </h1>
       </button> 
-      <button onClick={firebaseUpload} className='group bg-buttonColor hover:bg- md:p-1 border-[1px] border-hidden  shadow-2xl p-1 
-       rounded-lg hover:animate-pulse duration-500hhhhhhh
-       ml-16
-       ' >
-          <h1 className=' group-hover:animate-pulse text-faqGrayBg md:font-bold text-xl pl-10 pr-10'>
-        Avançar
-          </h1>
-      </button> 
-      
+
 
        <p className="mt-4">
          Já tem conta no Ajuda.JÁ? {' '}
