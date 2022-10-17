@@ -10,6 +10,7 @@ import Footer from '../../Components/Footer';
 import Chatbox from '../ChatBox'
 import Fade from 'react-reveal/Fade';
 
+
 import '../../index.scss'
 
 function Homepage() {
@@ -17,6 +18,7 @@ function Homepage() {
     <div>
     <Header />
     <div className='flex md:max-h-[520px]'>
+
 
     <Fade left>
       <div className='max-w-3xl flex-col flex-1 md:max-h-72 md:pr-0 pr-16'>

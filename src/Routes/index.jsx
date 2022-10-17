@@ -8,15 +8,19 @@ import MyProfilePublic from '../Pages/MyProfilePublic'
 import EditProfile from '../Pages/EditProfile'
 
 
+
+
 const RouterApp = () => (
   <Router>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path='/singup' element={<SingUp/>} />
       <Route path='/userInformation' element={<UserInformation/>} />
+
       <Route path='/MyProfile' element={<MyProfile/>} />
       <Route path='/MyProfilePublic' element={<MyProfilePublic/>} />
       <Route path='/EditProfile' element={<EditProfile/>} />
+
     </Routes>
   </Router>
 );
