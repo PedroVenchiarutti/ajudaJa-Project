@@ -15,7 +15,6 @@ const FormLogin = () => {
     const handleSubmit = (e) => { 
         e.preventDefault()
         login(email, password)
-        
     }
 
     return (

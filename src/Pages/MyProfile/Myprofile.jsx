@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import EditProfilePNG from '../../../public/images/editprofile.png'
@@ -6,6 +6,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import QRCode from 'qrcode'
 import Fade from 'react-reveal/Fade';
+import Api from "../../Api/api";
 
 
 const MyProfile = () => {
@@ -16,6 +17,20 @@ const MyProfile = () => {
     const [birthday, setBirthday] = useState('1997-06-10');
     const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/')
     const [qrcode, setQrCode] = useState('')
+    useEffect(() => {
+        Api.get('/private/client/162').then((response) => {
+            setUsername(response.data.username)
+            setEmail(response.data.email)
+            setCellphone(response.data.emergencynumber)
+            setBirthday(response.data.birthday)
+        }).then(() => {
+            console.log(username)
+            console.log(email)
+            console.log(cellphone)
+            console.log(birthday)
+        })
+        
+    }, [])
 
     const GenerateQRCode = _ => { 
         QRCode.toDataURL(url, (err, url)=> { 
@@ -68,7 +83,7 @@ const MyProfile = () => {
                           </div>
                           <div className="pt-4 formAndButtons flex flex-col lg:w-[550px] content-center ">
                               <form className="flex flex-col gap-5 items-center ">
-                                  <input className=" border-b-2 w-[400px] text-xl " value={username} type="text" readOnly/>
+                                  <input className="border-b-2 w-[400px] text-xl " value={username} type="text" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={email}  type="email" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={cellphone}  type="tel" readOnly/>
                                   <div className="flex gap-2 mr-16">
