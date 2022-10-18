@@ -29,7 +29,7 @@ function Homepage() {
       </div>
     </Fade>
     <div className='max-w-[800px]'>
-      <img className='md:mt-28  pt-40 md:pt-0  pb-12 md:w-[900px] md:h-[580px] pr-10' src="images/na_feb_50.jpg" alt="" />
+      <img className='md:mt-28  pt-40 md:pt-0  pb-12 md:w-[900px] md:h-[580px] pl-10' src="images/na_feb_50.jpg" alt="" />
     </div>
     </div>
     <a href="/singup">

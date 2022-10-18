@@ -1,32 +1,18 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {
+    useState,
+    useRef, 
+    useEffect
+} from "react";
 import axios from "axios";
-import ReactInputDateMask from 'react-input-date-mask';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import {storage} from '../../../Components/connectionFirebase'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
-
-
 import Header from "../../../Components/Header";
+import {urlSignUp} from "../../../Components/Axios/AxiosRoutes";
+import {IMaskInput} from 'react-imask';
 
-
-
-
-
-
-
-const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    export default function SingUp() {
+    export default function SignUp() {
     const [firstName, setfirstName] = useState('');
     const [password, setPassword] = useState('');
     const [userName, setUserName] = useState('');
@@ -36,13 +22,11 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
     const [sex, setSex] = useState('');
     const [dateNasc, setDateNasc] = useState(''); 
     const [sucess, setSucess] = useState(false);
-
+    const [emergencyNumber, setEmergencynumber] = useState('');
     const [imageUpload, setImageUpload] = useState(null);
     const [preview, setPreview] = useState('');
     const [imgUrl, setImgUrl] = useState('');
     const fileInputRef = useRef(null);
-
-    
 
     useEffect(() => {
         if (imageUpload){
@@ -50,85 +34,64 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
             reader.onload = () => {
                 setPreview(reader.result);
             }
-            
             reader.readAsDataURL(imageUpload)
-        } else {
-
-
-        }}, 
-        
+        } else {}}, 
         [imageUpload]);
 
-
-
-    function getaPTesta (){
-        axios.get('https://ajudajaapi.herokuapp.com/api/private/users').then( response => console.log(response))
-
-    }
-
-
+ 
     const uploadImage = () => {
         if(imageUpload == null) return;
         const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
         uploadBytes(imageRef, imageUpload).then((snapshot) => {
             console.log('Uploaded a blob or file!');
             getDownloadURL(imageRef)
-      .then((url) => {
-        console.log(url);
-      })
-            setSucess(true);
-            console.log(urlImg)
-        } )
-
+            .then((url) => {
+                setImgUrl(url);
+                console.log(url)
+                handleSubmit(url)
+            })
+        })
     }
     
     
-    const handleSubmit = (e) => {
-        e.preventDefault()        
-        axios.post(urlSingUp, 
-            {
-                username: userName,
-                email: email,
-                password: password,
-                passwordConfirmation: confirmPassword,  
-                birthday: dateNasc,
-                emergencynumber: "11999999999",
-                helth_insurance: "Nao",
-                gender: sex,
-                name: firstName,
-                lastname:  lastName,
-                avatar: imgUrl,
-
-            }
+    const handleSubmit = (url) => {
+        axios.post(urlSignUp,  {
+            username: userName,
+            email: email,
+            password: password,
+            passwordConfirmation: confirmPassword,  
+            birthday: dateNasc,
+            emergencynumber: emergencyNumber.replace('(', '').replace(')', '').replace('-', '').replace(' ', ''),
+            helth_insurance: "Nao",
+            gender: sex,
+            name: firstName,
+            lastname:  lastName,
+            avatar: url,
+        }
             ).then((response) => {
                 console.log(response)
-                getaPTesta()
+                setSucess(true)
             }).catch((err) => {
                 console.log(err)
-                getaPTesta()
             })
         }
+
+
         function getBack(){
             window.location.href = "/";
         }
 
 
 
-        function next(e){
-            handleSubmit(e);
+        function next(){
             uploadImage();
-            
-                    }
-
+        }
         
-
     
     
 
   return (
-
-<div className="bg-bgSingUp h-screen">
-
+<div className="bg-bgSignUp h-screen">
     <Header />
     
      
@@ -138,7 +101,7 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
                 <h1 className="pl-[490px]">CADASTRO REALIZADO COM SUCESSO!!</h1>
             </section>
             ) : (
-                <div className="bg-bgSingUp pt-10 font-secondary flex">
+                <div className="bg-bgSignUp pt-10 font-secondary flex">
         
         <div className="items-center ml-40 pr-28">
 
@@ -151,13 +114,14 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
         }}>Foto de perfil</button>)
     }
         
-
+        <IMaskInput mask='(00) 00000-0000' type="text" value={emergencyNumber} onChange={(e) => setEmergencynumber(e.target.value)} placeholder="Número de emêrgencia" className="ml-36 absolute placeholder-colorFontHeadline max-w-3xl w-80 mt-[362px] border-b bg-faqGrayBg p-1 "/>
         <input type="file" ref={fileInputRef} accept='image/*' id="fileImg" onChange={(e) => setImageUpload(e.target.files[0])} className="ml-36 absolute hidden placeholder-colorFontHeadline max-w-3xl w-80 mt-[362px] border-b bg-faqGrayBg p-1 "/>
         <input  type="text" value={firstName} onChange={(e) => setfirstName(e.target.value)} placeholder="Primeiro nome" className="ml-36 absolute placeholder-colorFontHeadline max-w-3xl w-80 mt-[408.3px] border-b bg-faqGrayBg p-1 "/>
             <input  type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Ultimo Nome" className="ml-36 placeholder-colorFontHeadline absolute mt-[463px]  max-w-3xl w-80 border-b bg-faqGrayBg p-1"/>
         </div>
-        <form className="bg-faqGrayBg shadow-2xl flex-col flex items-center rounded-2xl pb-1 mt-[100px] pr-5 pl-96 pt-2" onSubmit={handleSubmit}>
+        <form className="bg-faqGrayBg shadow-2xl flex-col flex items-center rounded-2xl pb-1 mt-[100px] pr-5 pl-96 pt-2" onSubmit={(e) => e.preventDefault()}>
         <h1 className="text-center text-3xl ">
+            
             Cadastro
         </h1>
             <input  type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="placeholder-colorFontHeadline  bg-faqGrayBg border-b p-1 max-w-3xl w-96 mt-5"/>
@@ -216,7 +180,7 @@ const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
 
          
     </div>
-            ) }
+    )}
 </div>
   )
 }

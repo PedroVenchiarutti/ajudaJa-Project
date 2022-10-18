@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <div className='w-full'>
-    <div className='fixed w-screen z-50 max-w-[1270px] '>
+    <div className='fixed w-screen z-50 max-w-[1400px] '>
       <nav className="p-5 bg-navBg items-center md:flex md:items-center md:justify-between">
         <div className='flex justify-between'>
           <span className="text-2xl font-primary cursor-pointer md:ml-14 ml-4 ml:shadow">
