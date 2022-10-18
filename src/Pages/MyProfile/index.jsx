@@ -87,7 +87,7 @@ const MyProfile = () => {
                                       return (
                                          <div key={i} className="flex gap-2">
                       
-                                             <input className=" border-b-2  text-xl "  placeholder="Número de Emergência" onChange={e => handleChange(e, i)} type="tel" />
+                                             <input className=" border-b-2  text-xl "  placeholder="Número de Emergência"  type="tel" readOnly />
                                              <button onClick={e => handleDelete(e,i)}><DeleteForeverIcon/></button>
                                          </div>
                                       )
@@ -98,7 +98,7 @@ const MyProfile = () => {
                       
                               <div className="buttons py-6 pt-14 flex gap-4 justify-center">
                       
-                                  <button className="border px-8 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white "><a href="/editProfile">Editar</a></button>
+                                  <button className="border px-8 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white "><a href="/editprofile">Editar</a></button>
                               <button className="px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 hover:text-navFontColor hover:border ">Informações Adicionais</button>
                               </div>
                               <button className="mx-24 px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border "><a href={qrcode} download="qrcode.png">Baixar Código QR</a></button>

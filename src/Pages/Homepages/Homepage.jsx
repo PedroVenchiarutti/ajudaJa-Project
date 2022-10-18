@@ -41,7 +41,7 @@ function Homepage() {
 
         <button className='group hover:bg-navBg duration-500 md:p-[15px] md:ml-[83px] md:pl-10 md:pr-10 mr-[1px] border-2 pl-5 mt-4  p-2 rounded-lg shadow-2xl ml-2 pr-5'>
           <h1 className='group-hover:text-faqGrayBg group-hover:animate-pulse text-buttonColor md:font-bold text-xl'>
-        Login
+        <a href="/login">Login</a>
           </h1>
       </button> 
 
