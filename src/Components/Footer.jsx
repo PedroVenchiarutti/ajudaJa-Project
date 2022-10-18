@@ -2,7 +2,9 @@ import React from 'react';
 
 export default function Footer (){
     return(
-        <div className="mt-44 flex bg-navBg h-36 w-screen text-center md:text-2xl text-[10px]">
+      <div className='w-full'>
+
+        <div className="w-m-[1270px] mt-44 flex bg-navBg h-36 w-screen text-center md:text-2xl text-[10px]">
         <img
           src="images\logo-v2.png"
           alt=""
@@ -20,6 +22,7 @@ export default function Footer (){
           <ion-icon name="call"></ion-icon>
           <ion-icon name="mail"></ion-icon>
         </div>
+      </div>
       </div>
     )
 

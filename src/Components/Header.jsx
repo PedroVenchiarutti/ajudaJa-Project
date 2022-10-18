@@ -16,11 +16,14 @@ function Header() {
   }
 
   return (
-    <div className='fixed w-screen z-50'>
+    <div className='w-full'>
+    <div className='fixed w-screen z-50 max-w-[1400px] '>
       <nav className="p-5 bg-navBg items-center md:flex md:items-center md:justify-between">
         <div className='flex justify-between'>
           <span className="text-2xl font-primary cursor-pointer md:ml-14 ml-4 ml:shadow">
-            <a href="/"><img className="inline w-[172px] h-[58.76px] " src="images\logo-v2.png" /></a>
+            <a href="/">
+            <img className="inline w-[172px] h-[58.76px] " src="images\logo-v2.png" />
+            </a>
           </span>
           <div onClick={()=> setMenu(!menu)} className='cursor-pointer py-4 text-3xl cursor-hiddenpointer md:hidden block mx-2'>
           <ion-icon name={menu ? 'close' : 'menu'}></ion-icon>
@@ -49,18 +52,17 @@ function Header() {
               className="text-3xl font-primary hover:text-hoverFontColor duration-500"
             >
               <h1 className='font-primary'>
-
               Sobre
               </h1>
             </a>
           </li>
           <li className="mx-4 my-6 md:my-0">
             <a
-              href="/myprofile"
+
+              href="/myprofile"     
               className="text-3xl font-primaryr hover:text-hoverFontColor duration-500"
             >
               <h1 className='font-primary'>
-
               Meu perfil
               </h1>
             </a>
@@ -71,6 +73,7 @@ function Header() {
           </li>
         </ul>
       </nav>
+    </div>
     </div>
   );
 }

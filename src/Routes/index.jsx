@@ -12,6 +12,7 @@ import { AuthContext, AuthProvider } from '../contexts/auth';
 
 
 
+
 const RouterApp = () => { 
 
   
@@ -83,5 +84,6 @@ const RouterApp = () => {
     </Router>
   
 )};
+
 
 export default RouterApp;
