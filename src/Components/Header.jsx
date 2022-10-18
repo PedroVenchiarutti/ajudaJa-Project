@@ -1,11 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { AuthContext } from "../contexts/auth";
 
 
 
 function Header() {
 
   const [menu, setMenu] =   useState(false);  
+  const {authenticated, logout} = useContext(AuthContext)
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    logout();
+  }
 
   return (
     <div className='w-full'>
@@ -50,13 +58,18 @@ function Header() {
           </li>
           <li className="mx-4 my-6 md:my-0">
             <a
-              href="/singup"
+
+              href="/myprofile"     
               className="text-3xl font-primaryr hover:text-hoverFontColor duration-500"
             >
               <h1 className='font-primary'>
               Meu perfil
               </h1>
             </a>
+          </li>
+
+          <li>
+            <button onClick={e => handleClick(e)}><LogoutIcon/></button>
           </li>
         </ul>
       </nav>
