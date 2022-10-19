@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import HomePage from '../Pages/Homepages/Homepage';
-import SingUp from '../Pages/SingUp/SingUp';
+import SignUp from '../Pages/SingUp/SingUp';
 import UserInformation from '../Pages/UserInformation/userinformation'
 import MyProfile from '../Pages/MyProfile/Myprofile';
 import MyProfilePublic from '../Pages/MyProfilePublic'
@@ -55,7 +55,7 @@ const RouterApp = () => {
       <AuthProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path='/signup' element={<SingUp/>} />
+        <Route path='/signup' element={<SignUp/>} />
         <Route path='/login' element={
           <PrivateLogin>
             <Login/>

@@ -7,7 +7,7 @@ import axios from "axios";
 import {storage} from '../../Components/connectionFirebase'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
-import Header from "../../Components/Header";
+import Header from "../../Components/Header/Header";
 import {urlSignUp} from "../../Components/Axios/AxiosRoutes";
 import {IMaskInput} from 'react-imask';
 import {ToastContainer} from 'react-toastify';
