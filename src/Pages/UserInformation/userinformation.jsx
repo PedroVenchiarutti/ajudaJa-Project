@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "../../Components/Header";
+import Header from "../../Components/Header/Header";
 import PersonSVG from '../../../public/images/image-firs-seasson.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
