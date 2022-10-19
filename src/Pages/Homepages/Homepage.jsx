@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 
-import Header from '../../Components/Header';
+import Header from '../../Components/Header/Header';
 
 import Information from '../Information/Information'
 import FAQ from '../FAQ/FAQ'
 import Cards from '../Cards/Cards'
-import Footer from '../../Components/Footer';
+import Footer from '../../Components/Footer/Footer';
 import Chatbox from '../ChatBox'
 import Fade from 'react-reveal/Fade';
 

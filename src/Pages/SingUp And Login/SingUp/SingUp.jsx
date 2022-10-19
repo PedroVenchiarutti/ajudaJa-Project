@@ -3,7 +3,7 @@ import axios from "axios";
 import ReactInputDateMask from 'react-input-date-mask';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
-import Header from "../../../Components/Header";
+import Header from "../../../Components/Header/Header";
 
 const urlSingUp = 'https://ajudajaapi.herokuapp.com/api/public/register'
 
