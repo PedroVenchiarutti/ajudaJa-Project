@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Header from "../../Components/Header/";
-import PersonSVG from '/public/images/image-firs-seasson.png'
+import PersonSVG from '/images/image-firs-seasson.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { LteMobiledata } from "@mui/icons-material";

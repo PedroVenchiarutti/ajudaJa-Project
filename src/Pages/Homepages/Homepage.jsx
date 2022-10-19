@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-
+import axios from 'axios';
 
 import Header from '../../Components/Header';
 
-import Information from '../Information/Information'
-import FAQ from '../FAQ/FAQ'
-import Cards from '../Cards/Cards'
+import Information from '../Information/Information';
+import FAQ from '../FAQ/FAQ';
+import Cards from '../Cards/Cards';
 import Footer from '../../Components/Footer';
 import Chatbox from '../ChatBox'
 import Fade from 'react-reveal/Fade';
 
 
-import '../../index.scss'
+
+import '../../index.scss';
 
 function Homepage() {
 
@@ -60,7 +61,6 @@ function Homepage() {
       <Footer/>
     </>
   );
-};
-
+}
 
 export default Homepage;
