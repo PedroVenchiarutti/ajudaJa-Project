@@ -4,10 +4,12 @@ import Api from "../Api/api";
 
 const USER_STORAGE_KEY = 'username';
 const TOKEN_STORAGE_KEY = 'token'
+const ID_STORAGE_KEY = 'id';
 
 const saveUserInStorage = (user, token) => { 
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
     localStorage.setItem(TOKEN_STORAGE_KEY, token)
+    localStorage.setItem(ID_STORAGE_KEY, user.id)
 }
 
 const getUserFromStorage = () => JSON.parse(localStorage.getItem(USER_STORAGE_KEY));

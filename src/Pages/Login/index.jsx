@@ -17,7 +17,6 @@ const FormLogin = () => {
     const handleSubmit = (e) => { 
         e.preventDefault()
         login(email, password)
-        
     }
 
     const keyHandler = e => { 
@@ -87,7 +86,7 @@ const FormLogin = () => {
                             <a onClick={e => setSuccess(true)} className="hover:underline text-sm" >Esqueceu sua senha?</a>
                                 <button onClick={handleSubmit} className="my-4 w-[100%] px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border  hover:text-navFontColor hover:border ">Entrar</button>
                         
-                                <a className="hover:underline" href="/singup">Não tem cadastro? <strong>Cadastre-se agora!</strong></a>
+                                <a className="hover:underline" href="/signup">Não tem cadastro? <strong>Cadastre-se agora!</strong></a>
                             </div>
                         
                             </div>

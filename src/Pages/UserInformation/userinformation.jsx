@@ -78,7 +78,7 @@ const UserInformation = () => {
 
                     <div className=" p-6 lg:flex-row  flex content-center items-center lg:items-start flex-col gap-2">
 
-                        <p className="text-lg ">Essas informações estarão visiveis em seu perfil
+                        <p className="text-lg ">Essas informações estarão visiveis em seu perfil,
                             <strong> qualquer pessoa que escanar seu código QR </strong>
                             irá visualiza-las.</p>
 
