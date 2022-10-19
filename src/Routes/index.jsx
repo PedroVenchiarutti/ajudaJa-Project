@@ -7,6 +7,7 @@ import MyProfile from '../Pages/MyProfile/Myprofile';
 import MyProfilePublic from '../Pages/MyProfilePublic'
 import EditProfile from '../Pages/EditProfile'
 import Login from '../Pages/Login';
+import PasswordRecuperation from '../Pages/passwordRecuperation';
 import { AuthContext, AuthProvider } from '../contexts/auth';
 
 
@@ -15,8 +16,6 @@ import { AuthContext, AuthProvider } from '../contexts/auth';
 
 const RouterApp = () => { 
 
-  
-  
   const Private = ({children}) => { 
     const {authenticated} = useContext(AuthContext);
     console.log(authenticated)
@@ -78,6 +77,10 @@ const RouterApp = () => {
              <EditProfile/> 
           </Private>
        
+        } />
+
+        <Route path='/newpassword' element= {
+          <PasswordRecuperation/>
         } />
       </Routes>
       </AuthProvider>
