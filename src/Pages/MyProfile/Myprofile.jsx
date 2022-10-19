@@ -1,52 +1,40 @@
 import React, {useState, useEffect} from "react";
 import Header from '../../Components/Header/Header'
 import Footer from '../../Components/Footer/Footer'
-import EditProfilePNG from '../../../public/images/editprofile.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import QRCode from 'qrcode'
 import Fade from 'react-reveal/Fade';
 import Api from "../../Api/api";
+import { notify } from "../../Components/alerts";
 
 
 const MyProfile = () => {
-
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [cellphone, setCellphone] = useState('');
-    const [birthday, setBirthday] = useState('');
+    const [state, setState ] = useState([])
+    
+    const [client, setClient] = useState({
+        username: '',
+        email: '',
+        cellphone: '',
+        birthday: '',
+        avatar: '',
+    })
     const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/')
     const [qrcode, setQrCode] = useState('')
-    const [avatar, setAvatar] = useState('')
+
     const config = {headers:{
         'authorization': `${localStorage.getItem('token')}`
     }}
-    const id = localStorage.getItem('id')
-    
-    useEffect((e) => {
-        Api.get(`/private/client/${id}`, config).then((response) => {
-            setUsername(response.data.user.username)
-            setEmail(response.data.user.email)
-            setCellphone(response.data.user_informations.emergencynumber)
-            setBirthday(response.data.user_informations.birthday)
-            setAvatar(response.data.user_informations.avatar)
-            console.log(response.data)
-        }).then(() => {
-        })
 
-        
-    }, [])
+    const id = localStorage.getItem('id')
 
     const GenerateQRCode = _ => { 
         QRCode.toDataURL(url, (err, url)=> { 
             if(err) return console.error(err)
-
             setQrCode(url)
-            console.log(avatar)
         })
     }
 
-    const [state, setState ] = useState([])
 
     const handleAdd = e => { 
         e.preventDefault()
@@ -66,6 +54,21 @@ const MyProfile = () => {
         deleteVal.splice(i, 1)
         setState(deleteVal)
     }
+    useEffect((e) => {
+        Api.get(`/private/client/${id}`, config).then((response) => {
+            setClient({
+                username: response.data.user.username,
+                email: response.data.user.email,
+                cellphone: response.data.user_informations.emergencynumber,
+                birthday: response.data.user_informations.birthday,
+                avatar: response.data.user_informations.avatar
+            
+            })
+    
+        }).then(() => {
+    })
+    }, [])
+
 
 
     return (
@@ -78,7 +81,7 @@ const MyProfile = () => {
                       
                       <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-10 py-5 rounded-lg pb-10 px-4">
                           <div className="flex justify-center items-center ">
-                              <img className="w-[200px]" src={EditProfilePNG} alt="" />
+                              <img className="w-52 h-52 object-cover mr-7" src={client.avatar} alt="" />
                               <div className=" flex flex-col gap-2">
                                   <button onClick={GenerateQRCode} className="border mr-5 px-6 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white ">Gerar código QR</button>
                                 
@@ -88,14 +91,14 @@ const MyProfile = () => {
                           </div>
                           <div className="pt-4 formAndButtons flex flex-col lg:w-[550px] content-center ">
                               <form className="flex flex-col gap-5 items-center ">
-                                  <input className="border-b-2 w-[400px] text-xl " value={username} type="text" readOnly/>
-                                  <input className="border-b-2 w-[400px] text-xl " value={email}  type="email" readOnly/>
-                                  <input className="border-b-2 w-[400px] text-xl " value={cellphone}  type="tel" readOnly/>
+                                  <input className="border-b-2 w-[400px] text-xl " value={client.username} type="text" readOnly/>
+                                  <input className="border-b-2 w-[400px] text-xl " value={client.email}  type="email" readOnly/>
+                                  <input className="border-b-2 w-[400px] text-xl " value={client.cellphone}  type="tel" readOnly/>
                                   <div className="flex gap-2">
                                       <label className="text-xl mr-3" htmlFor="">
                                          Data de Nascimento
                                       </label>
-                                      <input className="border-b-2 text-xl w-[200px]"  value={birthday} />
+                                      <input className="border-b-2 text-xl w-[200px]"  value={client.birthday}/>
                                   </div>
                                       <div className="self-start pl-1 lg:pl-[78px] font-bold text-xl"><label className="pr-6" > Contatos de emergência </label>
                                       <button onClick={handleAdd}>

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import HomePage from '../Pages/Homepages/Homepage';
-import SignUp from '../Pages/SingUp/SingUp';
+import SignUp from '../Pages/SignUp/SignUp';
 import UserInformation from '../Pages/UserInformation/userinformation'
 import MyProfile from '../Pages/MyProfile/Myprofile';
 import MyProfilePublic from '../Pages/MyProfilePublic'
