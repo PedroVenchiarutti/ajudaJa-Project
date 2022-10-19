@@ -11,24 +11,29 @@ import Api from "../../Api/api";
 
 const MyProfile = () => {
 
-    const [username, setUsername] = useState('Demerson Oliveira');
-    const [email, setEmail] = useState('demersontorres520@gmail.com');
-    const [cellphone, setCellphone] = useState('+55 (13) 9742-67835');
-    const [birthday, setBirthday] = useState('1997-06-10');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [cellphone, setCellphone] = useState('');
+    const [birthday, setBirthday] = useState('');
     const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/')
     const [qrcode, setQrCode] = useState('')
-    useEffect(() => {
-        Api.get('/private/client/162').then((response) => {
-            setUsername(response.data.username)
-            setEmail(response.data.email)
-            setCellphone(response.data.emergencynumber)
-            setBirthday(response.data.birthday)
+    const [avatar, setAvatar] = useState('')
+    const config = {headers:{
+        'authorization': `${localStorage.getItem('token')}`
+    }}
+    const id = localStorage.getItem('id')
+    
+    useEffect((e) => {
+        Api.get(`/private/client/${id}`, config).then((response) => {
+            setUsername(response.data.user.username)
+            setEmail(response.data.user.email)
+            setCellphone(response.data.user_informations.emergencynumber)
+            setBirthday(response.data.user_informations.birthday)
+            setAvatar(response.data.user_informations.avatar)
+            console.log(response.data)
         }).then(() => {
-            console.log(username)
-            console.log(email)
-            console.log(cellphone)
-            console.log(birthday)
         })
+
         
     }, [])
 
@@ -36,8 +41,8 @@ const MyProfile = () => {
         QRCode.toDataURL(url, (err, url)=> { 
             if(err) return console.error(err)
 
-            console.log(url)
             setQrCode(url)
+            console.log(avatar)
         })
     }
 
@@ -86,11 +91,11 @@ const MyProfile = () => {
                                   <input className="border-b-2 w-[400px] text-xl " value={username} type="text" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={email}  type="email" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={cellphone}  type="tel" readOnly/>
-                                  <div className="flex gap-2 mr-16">
-                                      <label className="text-xl " htmlFor="">
+                                  <div className="flex gap-2">
+                                      <label className="text-xl mr-3" htmlFor="">
                                          Data de Nascimento
                                       </label>
-                                      <input className="border-b-2 text-xl " type="date" value={birthday}  />
+                                      <input className="border-b-2 text-xl w-[200px]"  value={birthday} />
                                   </div>
                                       <div className="self-start pl-1 lg:pl-[78px] font-bold text-xl"><label className="pr-6" > Contatos de emergência </label>
                                       <button onClick={handleAdd}>

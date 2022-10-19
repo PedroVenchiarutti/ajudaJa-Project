@@ -28,8 +28,9 @@ const FormLogin = () => {
                         <input className="border-b-2" type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
                         <input className="border-b-2" placeholder="Senha" type="password" value={password} onChange={e => setPassword(e.target.value)} />
                         <div>
+                        <a href="/signup">
                             <button onClick={handleSubmit} className="my-4 px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border  hover:text-navFontColor hover:border ">Login</button>
-                                                <button className="ml-2 border px-8 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white "><a href="/singup">Cadastrar</a></button>
+                                                <button className="ml-2 border px-8 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white ">Cadastrar</button></a>
                         </div>
                         </div> 
                    
