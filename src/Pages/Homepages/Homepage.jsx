@@ -10,13 +10,17 @@ import Footer from '../../Components/Footer/Footer';
 import Chatbox from '../ChatBox'
 import Fade from 'react-reveal/Fade';
 
+
 import '../../index.scss'
 
 function Homepage() {
   return (
-    <div>
+    <div className='w-full'>
     <Header />
+    <div className='max-w-[1270px]'>
+    
     <div className='flex md:max-h-[520px]'>
+
 
     <Fade left>
       <div className='max-w-3xl flex-col flex-1 md:max-h-72 md:pr-0 pr-16'>
@@ -25,7 +29,7 @@ function Homepage() {
       </div>
     </Fade>
     <div className='max-w-[800px]'>
-      <img className='md:mt-28  pt-40 md:pt-0  pb-12 md:w-[900px] md:h-[580px] pr-10' src="images/na_feb_50.jpg" alt="" />
+      <img className='md:mt-28  pt-40 md:pt-0  pb-12 md:w-[900px] md:h-[580px] pl-10' src="images/na_feb_50.jpg" alt="" />
     </div>
     </div>
     <a href="/singup">
@@ -50,6 +54,7 @@ function Homepage() {
       <FAQ/>
       <Chatbox/>
       <Footer/>
+    </div>
     </div>
   );
 };

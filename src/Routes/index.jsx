@@ -13,6 +13,7 @@ import { AuthContext, AuthProvider } from '../contexts/auth';
 
 
 
+
 const RouterApp = () => { 
 
   const Private = ({children}) => { 
@@ -86,5 +87,6 @@ const RouterApp = () => {
     </Router>
   
 )};
+
 
 export default RouterApp;
