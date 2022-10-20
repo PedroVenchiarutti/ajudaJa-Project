@@ -7,6 +7,11 @@ import MyProfile from '../Pages/MyProfile';
 import MyProfilePublic from '../Pages/MyProfilePublic'
 import EditProfile from '../Pages/EditProfile'
 import Login from '../Pages/Login';
+<<<<<<< main
+=======
+import NewSignUp from '../Pages/newSignUp';
+import PasswordRecuperation from '../Pages/passwordRecuperation';
+>>>>>>> local
 import { AuthContext, AuthProvider } from '../contexts/auth';
 
 
@@ -79,6 +84,14 @@ const RouterApp = () => {
           </Private>
        
         } />
+<<<<<<< main
+=======
+
+        <Route path='/newpassword' element= {
+          <PasswordRecuperation/>
+        } />
+        <Route path='/nsingup' element={<NewSignUp/>} />
+>>>>>>> local
       </Routes>
       </AuthProvider>
     </Router>
