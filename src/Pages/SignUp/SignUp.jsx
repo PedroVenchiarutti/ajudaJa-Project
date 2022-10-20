@@ -11,7 +11,9 @@ import Header from "../../Components/Header/Header";
 import {urlSignUp} from "../../Components/Axios/AxiosRoutes";
 import {IMaskInput} from 'react-imask';
 import {ToastContainer} from 'react-toastify';
-import {notify, noImage} from '../../Components/alerts'
+import {noCamps, noImage} from '../../Components/alerts'
+import {AlertSH} from '../../Components/alerts'
+import * as yup from 'yup'
 
 
     
@@ -41,30 +43,52 @@ import {notify, noImage} from '../../Components/alerts'
             reader.readAsDataURL(imageUpload)
         } else {}}, 
         [imageUpload]);
-
- 
-    const uploadImage = () => {
-        if (preview == null) { 
-
-            noImage();
-            console.log('sajin')
-
+        
+        
+        const uploadImage = () => {
+            if (preview == null) { 
+                AlertSH({title: 'Insira uma Foto de perfil!' })
+            } else{
             
+                if(imageUpload == null) return;
 
-        } else{
-
-
-            if(imageUpload == null) return;
-            const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-            uploadBytes(imageRef, imageUpload).then((snapshot) => {
-                console.log('Uploaded a blob or file!');
-                getDownloadURL(imageRef)
-                .then((url) => {
-                    setImgUrl(url);
-                    console.log(url)
-                    handleSubmit(url)   
-                })
-            })
+            if (password == ''){
+                AlertSH({title: 'Insira sua senha!', icon: 'warning', buttonText: 'Ok'})
+                stop();
+            }if (sex == ''){
+                AlertSH({title: 'Insira seu sexo!', icon: 'warning', buttonText: 'Ok'})
+                stop();
+            }if (dateNasc == ''){
+                AlertSH({title: 'Insira sua data de nascimento!', icon: 'warning', buttonText: 'Ok'})
+                stop();
+            }if(userName == ''){
+                AlertSH({title: 'Insira um nome de usuário!', icon: 'warning', buttonText: 'Ok'})
+                stop();
+            } if (email == ''){
+                AlertSH({title: 'Insira seu email!', icon: 'warning', buttonText: 'Ok'})
+                stop();
+            } if (lastName == ''){
+                AlertSH({title: 'Insira seu último nome!', icon: 'warning', buttonText: 'Ok'})
+                stop();
+            } if (firstName == ''){
+                AlertSH({title: 'Insira seu primeiro nome!', icon: 'warning', buttonText: 'Ok'})
+                stop();
+            }if (emergencyNumber == ''){
+                AlertSH({title: 'Insira seu número de emergência!', icon: 'warning', buttonText: 'Ok'})
+                stop();
+            }else{
+                const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+                uploadBytes(imageRef, imageUpload).then((snapshot) => {
+                    console.log('Uploaded a blob or file!');
+                    getDownloadURL(imageRef)
+                    .then((url) => {
+                        setImgUrl(url);
+                        console.log(url)
+                        handleSubmit(url)
+                    }
+                )
+                }   
+            )}     
         }
     }
         
@@ -88,20 +112,16 @@ import {notify, noImage} from '../../Components/alerts'
                 console.log(response)
                 setSucess(true)
             }).catch((err) => {
-                console.log(err)
+                console.log(err.response.data)
+                noCamps();
             })
         }
 
-
-        function getBack(){
-            window.location.href = "/";
-        }
 
 
 
         function next(){
             uploadImage();
-
         }
         
     
@@ -164,7 +184,7 @@ import {notify, noImage} from '../../Components/alerts'
             
             
             <div className="mt-5 mb-1 text-center">
-            <button onClick={getBack}className='group bg-buttonColor hover:bg- md:p-1 border-[1px] border-hidden shadow-2xl p-1
+            <button onClick={() => window.location.href='/'}className='group bg-buttonColor hover:bg- md:p-1 border-[1px] border-hidden shadow-2xl p-1
 
        rounded-lg hover:animate-pulse duration-500hhhhhhh
        ' >

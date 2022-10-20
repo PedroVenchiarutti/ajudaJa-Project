@@ -6,7 +6,6 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import QRCode from 'qrcode'
 import Fade from 'react-reveal/Fade';
 import Api from "../../Api/api";
-import { notify } from "../../Components/alerts";
 
 
 const MyProfile = () => {
@@ -18,6 +17,8 @@ const MyProfile = () => {
         cellphone: '',
         birthday: '',
         avatar: '',
+        firstname: '',
+        lastname: '',
     })
     const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/')
     const [qrcode, setQrCode] = useState('')
@@ -54,9 +55,12 @@ const MyProfile = () => {
         deleteVal.splice(i, 1)
         setState(deleteVal)
     }
+
     useEffect((e) => {
         Api.get(`/private/client/${id}`, config).then((response) => {
             setClient({
+                firstname: response.data.user_informations.name,
+                lastname: response.data.user_informations.lastname,
                 username: response.data.user.username,
                 email: response.data.user.email,
                 cellphone: response.data.user_informations.emergencynumber,
@@ -91,6 +95,7 @@ const MyProfile = () => {
                           </div>
                           <div className="pt-4 formAndButtons flex flex-col lg:w-[550px] content-center ">
                               <form className="flex flex-col gap-5 items-center ">
+                                  <input className="border-b-2 w-[400px] text-xl " value={client.firstname +' '+ client.lastname} type="text" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={client.username} type="text" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={client.email}  type="email" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={client.cellphone}  type="tel" readOnly/>
