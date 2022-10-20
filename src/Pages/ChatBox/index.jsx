@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SendIcon from '@mui/icons-material/Send';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import io from 'socket.io-client';
+import { AuthContext } from '../../contexts/auth';
 
 import {
   chatPreview,
@@ -13,10 +14,12 @@ import {
 } from './classTailwind';
 
 const socket = io('http://localhost:3333');
-// definindo a sala
-const room = 'room1';
 
 const Chatbox = (props) => {
+  // definindo a sala
+  const { user } = useContext(AuthContext);
+  const room = `chat01#${user.username}`;
+
   const [textMessage, setTextMessage] = useState('');
   const [closeWindow, setCloseWindow] = useState(true);
   const [myArray, updateMyArray] = useState([]);
@@ -26,11 +29,13 @@ const Chatbox = (props) => {
   const onClick = () => {
     updateMyArray((arr) => [...arr, `${textMessage}`]);
 
-    // Envinado a msg para o backend
-    socket.emit('chat_message', {
+    const data = {
       room,
       message: textMessage,
-    });
+      username: user.username,
+    };
+
+    socket.emit('message', data);
 
     setTextMessage('');
   };
@@ -46,6 +51,20 @@ const Chatbox = (props) => {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [textMessage]);
+
+  useEffect(() => {
+    socket.emit('select_room', {
+      room,
+      user: user.username,
+      userID: user.id,
+    });
+  }, [user, room]);
+
+  useEffect(() => {
+    socket.on('message', (data) => {
+      console.log(data);
+    });
+  }, []);
 
   return (
     <div className={chatPreview(closeWindow)}>
