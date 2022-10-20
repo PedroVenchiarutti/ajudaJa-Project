@@ -1,12 +1,13 @@
 import React, {useContext} from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import HomePage from '../Pages/Homepages/Homepage';
-import SingUp from '../Pages/SingUp And Login/SingUp/SingUp';
-import UserInformation from '../Pages/UserInformation'
-import MyProfile from '../Pages/MyProfile';
+import SignUp from '../Pages/SignUp/SignUp';
+import UserInformation from '../Pages/UserInformation/userinformation'
+import MyProfile from '../Pages/MyProfile/Myprofile';
 import MyProfilePublic from '../Pages/MyProfilePublic'
 import EditProfile from '../Pages/EditProfile'
 import Login from '../Pages/Login';
+import PasswordRecuperation from '../Pages/passwordRecuperation';
 import { AuthContext, AuthProvider } from '../contexts/auth';
 
 
@@ -15,8 +16,6 @@ import { AuthContext, AuthProvider } from '../contexts/auth';
 
 const RouterApp = () => { 
 
-  
-  
   const Private = ({children}) => { 
     const {authenticated} = useContext(AuthContext);
     console.log(authenticated)
@@ -55,7 +54,7 @@ const RouterApp = () => {
       <AuthProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path='/singup' element={<SingUp/>} />
+        <Route path='/signup' element={<SignUp/>} />
         <Route path='/login' element={
           <PrivateLogin>
             <Login/>
@@ -78,6 +77,10 @@ const RouterApp = () => {
              <EditProfile/> 
           </Private>
        
+        } />
+
+        <Route path='/newpassword' element= {
+          <PasswordRecuperation/>
         } />
       </Routes>
       </AuthProvider>
