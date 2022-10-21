@@ -8,17 +8,20 @@ import { urlSignUp } from '../../Components/Axios/AxiosRoutes';
 import { IMaskInput } from 'react-imask';
 import { ToastContainer } from 'react-toastify';
 import { notify, noImage } from '../../Components/alerts';
-import { Navigate } from 'react-router-dom';
-import useValidations from '../../Hooks/useValidation';
-import schema from '../../Validations/schemaUserValidation';
-import * as yup from 'yup';
+import schemaValidation from '../../Validations/schemaUserValidation';
+import { async } from '@firebase/util';
 
-export default async function SignUp() {
-  const [firstName, setfirstName] = useState('');
+export default function SignUp() {
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+  });
+
+  // const [firstName, setfirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
-  const [lastName, setLastName] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [sex, setSex] = useState('');
   const [dateNasc, setDateNasc] = useState('');
@@ -27,43 +30,22 @@ export default async function SignUp() {
   const [imageUpload, setImageUpload] = useState(null);
   const [preview, setPreview] = useState(null);
   const [imgUrl, setImgUrl] = useState('');
+  const [error, setError] = useState({
+    type: '',
+    message: '',
+  });
   const fileInputRef = useRef(null);
 
-  // useEffect(() => {
-  //   if (imageUpload) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       setPreview(reader.result);
-  //     };
-  //     reader.readAsDataURL(imageUpload);
-  //   } else {
-  //   }
-  // }, [imageUpload]);
-
-  // dados que seraos enviado para o hook validar
-  const data = {
-    firstName,
-    lastName,
-  };
-
-  const validation = async () => {
-    schema.validate(data);
-
-    try {
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  if (!(await validation())) return;
-
   useEffect(() => {
-    validation();
-  }, [data]);
-
-  // Hooks de validacao de formulario
-  // const { isValidate, newErrors } = useValidations(schema, data);
-
-  // console.log('errors', isValidate);
+    if (imageUpload) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(imageUpload);
+    } else {
+    }
+  }, [imageUpload]);
 
   const uploadImage = () => {
     if (preview == null) {
@@ -82,6 +64,34 @@ export default async function SignUp() {
       });
     }
   };
+
+  const data = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+  };
+
+  if (!validation()) return;
+
+  console.log(error);
+
+  useEffect(() => {
+    const validation = async () => {
+      let schema = schemaValidation.validate(data);
+
+      try {
+        await schema;
+        console.log('validou');
+      } catch (error) {
+        setError({
+          type: 'error',
+          message: error.message,
+        });
+      }
+    };
+    validation();
+  }, [user]);
+
+  console.log(error);
 
   const handleSubmit = (url) => {
     axios
@@ -111,12 +121,15 @@ export default async function SignUp() {
       });
   };
 
+  function getBack() {
+    window.location.href = '/';
+  }
+
   function next() {
     uploadImage();
   }
 
   return (
-    // <h1>Sign Up</h1>
     <div className="bg-bgSignUp h-screen">
       <Header />
 
@@ -167,15 +180,15 @@ export default async function SignUp() {
             />
             <input
               type="text"
-              value={firstName}
-              onChange={(e) => setfirstName(e.target.value)}
+              value={user.firstName}
+              onChange={(e) => setUser({ ...user, firstName: e.target.value })}
               placeholder="Primeiro nome"
               className="ml-36 absolute placeholder-colorFontHeadline max-w-3xl w-80 mt-[408.3px] border-b bg-faqGrayBg p-1 "
             />
             <input
               type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              value={user.lastName}
+              onChange={(e) => setUser({ ...user, lastName: e.target.value })}
               placeholder="Ultimo Nome"
               className="ml-36 placeholder-colorFontHeadline absolute mt-[463px]  max-w-3xl w-80 border-b bg-faqGrayBg p-1"
             />
@@ -199,7 +212,7 @@ export default async function SignUp() {
               placeholder="Nome de usuario"
               className="placeholder-colorFontHeadline  max-w-3xl w-96 mt-5 border-b bg-faqGrayBg p-1"
             />
-
+            {/* <ReactInputDateMask mask='mm-dd-yyyy' value={dateNasc} required showMaskOnFocus='true'  showMaskOnHover='true' onChange={(e) => setDateNasc(e.target.value)} className='placeholder-colorFontHeadline  max-w-3xl w-96 mt-5 border-b bg-faqGrayBg p-1' /> */}
             <input
               type="text"
               value={dateNasc}
@@ -252,11 +265,10 @@ export default async function SignUp() {
 
             <div className="mt-5 mb-1 text-center">
               <button
-                onClick={() => <Navigate to="/" />}
+                onClick={getBack}
                 className="group bg-buttonColor hover:bg- md:p-1 border-[1px] border-hidden shadow-2xl p-1
-
-       rounded-lg hover:animate-pulse duration-500hhhhhhh
-       "
+     rounded-lg hover:animate-pulse duration-500hhhhhhh
+     "
               >
                 <h1 className=" group-hover:animate-pulse text-faqGrayBg md:font-bold text-xl pl-10 pr-10">
                   Voltar
@@ -265,9 +277,9 @@ export default async function SignUp() {
               <button
                 onClick={next}
                 className="group bg-buttonColor hover:bg- md:p-1 border-[1px] border-hidden  shadow-2xl p-1 
-       rounded-lg hover:animate-pulse duration-500hhhhhhh
-       ml-16
-       "
+     rounded-lg hover:animate-pulse duration-500hhhhhhh
+     ml-16
+     "
               >
                 <h1 className=" group-hover:animate-pulse text-faqGrayBg md:font-bold text-xl pl-10 pr-10">
                   Avançar
