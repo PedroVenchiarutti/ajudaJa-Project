@@ -13,7 +13,7 @@ import useValidations from '../../Hooks/useValidation';
 import schema from '../../Validations/schemaUserValidation';
 import * as yup from 'yup';
 
-export default function SignUp() {
+export default async function SignUp() {
   const [firstName, setfirstName] = useState('');
   const [password, setPassword] = useState('');
   const [userName, setUserName] = useState('');
@@ -46,10 +46,24 @@ export default function SignUp() {
     lastName,
   };
 
-  // Hooks de validacao de formulario
-  const { isValidate, newErrors } = useValidations(schema, data);
+  const validation = async () => {
+    schema.validate(data);
 
-  console.log('errors', isValidate);
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  if (!(await validation())) return;
+
+  useEffect(() => {
+    validation();
+  }, [data]);
+
+  // Hooks de validacao de formulario
+  // const { isValidate, newErrors } = useValidations(schema, data);
+
+  // console.log('errors', isValidate);
 
   const uploadImage = () => {
     if (preview == null) {
