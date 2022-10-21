@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
-import EditProfilePNG from '../../../public/images/editprofile.png'
+import EditProfilePNG from '/images/editprofile.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Modal from "../../Components/Modal";

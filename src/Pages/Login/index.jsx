@@ -1,20 +1,13 @@
 import React, {useState, useContext} from "react";
-import Header from "../../Components/Header";
-import Api from "../../Api/api";
 import { AuthContext } from "../../contexts/auth";
-<<<<<<< main
-=======
-import logo from "../../../public/images/logo-v2.png"
+import logo from "/images/logo-v2.png"
 import Fade from 'react-reveal/Fade';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from "../../Components/TextField"
-import NewSignUp from "../newSignUp";
 
->>>>>>> local
 
-const urlRegister = 'https://ajudajaapi.herokuapp.com/api/public/login'
 
-const FormLogin = () => { 
+const FormLogin = ({goToRegister}) => { 
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -24,17 +17,38 @@ const FormLogin = () => {
     const handleSubmit = (e) => { 
         e.preventDefault()
         login(email, password)
-        
     }
+
+    const keyHandler = e => { 
+        if(e.key === 'Enter') { 
+            return handleSubmit(e) }
+       
+    }
+
+    const handleChangeEmail = e => { 
+        setEmail(e.target.value)
+    }
+
+    const handleChangePassword =  e => { 
+        setPassword(e.target.value)
+    }
+
+    const newPassword = e => { 
+        alert('Veja sua caixa de entrada')
+        setSuccess(false)
+        setEmail('')
+    }
+
+    const newPasswordKey = e => { 
+        if(e.key === 'Enter') { 
+            return newPassword(e)
+        }
+    }
+
 
     return (
         <>
-<<<<<<< main
-            <Header/>
-            <div className="w-[100w] h-[100vh] pt-32 bg-white">
-                <div className="m-w-[1020px]">
-=======
-        
+            
             <div className="w-[100w] h-[100vh] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
                 <div className="grid grid-cols-1 md:grid-cols-2 h-[100vh]">
 
@@ -72,7 +86,7 @@ const FormLogin = () => {
                             <a onClick={e => setSuccess(true)} className="hover:underline text-sm" >Esqueceu sua senha?</a>
                                 <button onClick={handleSubmit} className="my-4 w-[100%] px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border  hover:text-navFontColor hover:border ">Entrar</button>
                         
-                                <a className="hover:underline" href="/singup">Não tem cadastro? <strong>Cadastre-se agora!</strong></a>
+                                <a onClick={goToRegister} className="hover:underline" >Não tem cadastro? <strong>Cadastre-se agora!</strong></a>
                             </div>
                         
                             </div>
@@ -96,18 +110,11 @@ const FormLogin = () => {
                             <a onClick={e => setSuccess(false)} className=" hover:underline text-md" > <ArrowLeftIcon />Voltar </a>
                            
                         </div>
->>>>>>> local
                     
-                    <div className="box bg-[#fff] w-[500px] h-[270px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
-                        <h1 className="text-lg font-bold">Faça seu login!</h1>
-                        <input className="border-b-2" type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
-                        <input className="border-b-2" placeholder="Senha" type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                        <div>
-                            <button onClick={handleSubmit} className="my-4 px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border  hover:text-navFontColor hover:border ">Login</button>
-                                                <button className="ml-2 border px-8 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white "><a href="/singup">Cadastrar</a></button>
                         </div>
-                        </div> 
-                   
+                </Fade> : null
+                   } 
+                 
                 </div>
 
             </div>

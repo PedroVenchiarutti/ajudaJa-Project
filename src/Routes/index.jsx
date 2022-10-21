@@ -1,17 +1,13 @@
 import React, {useContext} from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import HomePage from '../Pages/Homepages/Homepage';
-import SingUp from '../Pages/SingUp And Login/SingUp/SingUp';
-import UserInformation from '../Pages/UserInformation'
-import MyProfile from '../Pages/MyProfile';
+import SignUp from '../Pages/SignUp/SignUp';
+import UserInformation from '../Pages/UserInformation/userinformation'
+import MyProfile from '../Pages/MyProfile/Myprofile';
 import MyProfilePublic from '../Pages/MyProfilePublic'
 import EditProfile from '../Pages/EditProfile'
-import Login from '../Pages/Login';
-<<<<<<< main
-=======
-import NewSignUp from '../Pages/newSignUp';
+import LoginAndSign from '../Pages/LoginAndSignUp';
 import PasswordRecuperation from '../Pages/passwordRecuperation';
->>>>>>> local
 import { AuthContext, AuthProvider } from '../contexts/auth';
 
 
@@ -20,8 +16,6 @@ import { AuthContext, AuthProvider } from '../contexts/auth';
 
 const RouterApp = () => { 
 
-  
-  
   const Private = ({children}) => { 
     const {authenticated} = useContext(AuthContext);
     console.log(authenticated)
@@ -60,10 +54,10 @@ const RouterApp = () => {
       <AuthProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path='/singup' element={<SingUp/>} />
+        <Route path='/signup' element={<SignUp/>} />
         <Route path='/login' element={
           <PrivateLogin>
-            <Login/>
+            <LoginAndSign/>
           </PrivateLogin>
         
         } />
@@ -84,14 +78,12 @@ const RouterApp = () => {
           </Private>
        
         } />
-<<<<<<< main
-=======
 
         <Route path='/newpassword' element= {
           <PasswordRecuperation/>
         } />
-        <Route path='/nsingup' element={<NewSignUp/>} />
->>>>>>> local
+
+        
       </Routes>
       </AuthProvider>
     </Router>

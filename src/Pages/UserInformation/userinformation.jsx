@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Header from "../../Components/Header";
-import PersonSVG from '/images/image-firs-seasson.png'
+import Header from "../../Components/Header/";
+import PersonSVG from '/public/images/image-firs-seasson.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { LteMobiledata } from "@mui/icons-material";
@@ -78,7 +78,7 @@ const UserInformation = () => {
 
                     <div className=" p-6 lg:flex-row  flex content-center items-center lg:items-start flex-col gap-2">
 
-                        <p className="text-lg ">Essas informações estarão visiveis em seu perfil
+                        <p className="text-lg ">Essas informações estarão visiveis em seu perfil,
                             <strong> qualquer pessoa que escanar seu código QR </strong>
                             irá visualiza-las.</p>
 

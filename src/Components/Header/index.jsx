@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { AuthContext } from "../contexts/auth";
+import { AuthContext } from "../../contexts/auth";
 
 
 
