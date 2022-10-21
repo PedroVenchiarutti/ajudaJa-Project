@@ -1,31 +1,40 @@
-import React, { useState } from 'react';
-import Header from '../../Components/Header';
-import Footer from '../../Components/Footer';
-import EditProfilePNG from '../../../public/images/editprofile.png';
+import React, { useState, useEffect } from 'react';
+import Header from '../../Components/Header/Header';
+import Footer from '../../Components/Footer/Footer';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import QRCode from 'qrcode';
 import Fade from 'react-reveal/Fade';
+import Api from '../../Api/api';
+import { notify } from '../../Components/alerts';
 
 const MyProfile = () => {
-  const [username, setUsername] = useState('Demerson Oliveira');
-  const [email, setEmail] = useState('demersontorres520@gmail.com');
-  const [cellphone, setCellphone] = useState('+55 (13) 9742-67835');
-  const [birthday, setBirthday] = useState('1997-06-10');
-  const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/');
+  const [state, setState] = useState([]);
 
+  const [client, setClient] = useState({
+    username: '',
+    email: '',
+    cellphone: '',
+    birthday: '',
+    avatar: '',
+  });
+  const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/');
   const [qrcode, setQrCode] = useState('');
+
+  const config = {
+    headers: {
+      authorization: `${localStorage.getItem('token')}`,
+    },
+  };
+
+  const id = localStorage.getItem('id');
 
   const GenerateQRCode = (_) => {
     QRCode.toDataURL(url, (err, url) => {
       if (err) return console.error(err);
-
-      console.log(url);
       setQrCode(url);
     });
   };
-
-  const [state, setState] = useState([]);
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -45,6 +54,20 @@ const MyProfile = () => {
     deleteVal.splice(i, 1);
     setState(deleteVal);
   };
+  
+  // useEffect((e) => {
+  //   Api.get(`/private/client/${id}`, config)
+  //     .then((response) => {
+  //       setClient({
+  //         username: response.data.user.username,
+  //         email: response.data.user.email,
+  //         cellphone: response.data.user_informations.emergencynumber,
+  //         birthday: response.data.user_informations.birthday,
+  //         avatar: response.data.user_informations.avatar,
+  //       });
+  //     })
+  //     .then(() => {});
+  // }, []);
 
   return (
     <div className="w-full   bg-white">
@@ -55,7 +78,11 @@ const MyProfile = () => {
         <Fade bottom>
           <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-10 py-5 rounded-lg pb-10 px-4">
             <div className="flex justify-center items-center ">
-              <img className="w-[200px]" src={EditProfilePNG} alt="" />
+              <img
+                className="w-52 h-52 object-cover mr-7"
+                src={client.avatar}
+                alt=""
+              />
               <div className=" flex flex-col gap-2">
                 <button
                   onClick={GenerateQRCode}
@@ -70,31 +97,30 @@ const MyProfile = () => {
             <div className="pt-4 formAndButtons flex flex-col lg:w-[550px] content-center ">
               <form className="flex flex-col gap-5 items-center ">
                 <input
-                  className=" border-b-2 w-[400px] text-xl "
-                  value={username}
+                  className="border-b-2 w-[400px] text-xl "
+                  value={client.username}
                   type="text"
                   readOnly
                 />
                 <input
                   className="border-b-2 w-[400px] text-xl "
-                  value={email}
+                  value={client.email}
                   type="email"
                   readOnly
                 />
                 <input
                   className="border-b-2 w-[400px] text-xl "
-                  value={cellphone}
+                  value={client.cellphone}
                   type="tel"
                   readOnly
                 />
-                <div className="flex gap-2 mr-16">
-                  <label className="text-xl " htmlFor="">
+                <div className="flex gap-2">
+                  <label className="text-xl mr-3" htmlFor="">
                     Data de Nascimento
                   </label>
                   <input
-                    className="border-b-2 text-xl "
-                    type="date"
-                    value={birthday}
+                    className="border-b-2 text-xl w-[200px]"
+                    value={client.birthday}
                   />
                 </div>
                 <div className="self-start pl-1 lg:pl-[78px] font-bold text-xl">

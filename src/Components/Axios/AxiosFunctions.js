@@ -27,7 +27,6 @@ export const postSignUp = (url) => {
 
 
 // DEV ONLY
-
 export const get = () => {
     axios.get(urlGetUser, {
         headers: {

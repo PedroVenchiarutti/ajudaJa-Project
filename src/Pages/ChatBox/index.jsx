@@ -13,7 +13,7 @@ import {
   titleChat,
 } from './classTailwind';
 
-const socket = io('http://localhost:3333');
+// const socket = io('http://localhost:3333');
 
 const Chatbox = (props) => {
   // definindo a sala
@@ -48,23 +48,23 @@ const Chatbox = (props) => {
     }
   };
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [textMessage]);
+  // useEffect(() => {
+  //   bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  // }, [textMessage]);
 
-  useEffect(() => {
-    socket.emit('select_room', {
-      room,
-      user: user.username,
-      userID: user.id,
-    });
-  }, [user, room]);
+  // useEffect(() => {
+  //   socket.emit('select_room', {
+  //     room,
+  //     user: user.username,
+  //     userID: user.id,
+  //   });
+  // }, [user, room]);
 
-  useEffect(() => {
-    socket.on('message', (data) => {
-      console.log(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   socket.on('message', (data) => {
+  //     console.log(data);
+  //   });
+  // }, []);
 
   return (
     <div className={chatPreview(closeWindow)}>

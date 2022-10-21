@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import Header from '../../Components/Header';
+import Header from '../../Components/Header/Header';
 
 import Information from '../Information/Information';
 import FAQ from '../FAQ/FAQ';
 import Cards from '../Cards/Cards';
-import Footer from '../../Components/Footer';
+import Footer from '../../Components/Footer/Footer';
 import Chatbox from '../ChatBox';
 import Fade from 'react-reveal/Fade';
 
@@ -38,7 +38,7 @@ function Homepage() {
             />
           </div>
         </div>
-        <a href="/singup">
+        <a href="/signup">
           <button
             className=" mt-4 group bg-buttonColor hover:bg-faqGrayBg md:p-[16px] md:ml-24 md:mr-18 border-[1px] border-hidden hover:border-solid shadow-2xl p-2 
       mr-20 ml-[10%] rounded-lg hover:animate-pulse duration-500"
@@ -52,11 +52,13 @@ function Homepage() {
           </button>
         </a>
 
-        <button className="group hover:bg-navBg duration-500 md:p-[15px] md:ml-[83px] md:pl-10 md:pr-10 mr-[1px] border-2 pl-5 mt-4  p-2 rounded-lg shadow-2xl ml-2 pr-5">
-          <h1 className="group-hover:text-faqGrayBg group-hover:animate-pulse text-buttonColor md:font-bold text-xl">
-            <a href="/login">Login</a>
-          </h1>
-        </button>
+        <a href="/login">
+          <button className="group hover:bg-navBg duration-500 md:p-[15px] md:ml-[83px] md:pl-10 md:pr-10 mr-[1px] border-2 pl-5 mt-4  p-2 rounded-lg shadow-2xl ml-2 pr-5">
+            <h1 className="group-hover:text-faqGrayBg group-hover:animate-pulse text-buttonColor md:font-bold text-xl">
+              Login
+            </h1>
+          </button>
+        </a>
 
         <Information />
         <Cards />
