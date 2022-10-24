@@ -1,5 +1,10 @@
-import React, {useContext} from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom';
 import HomePage from '../Pages/Homepages/Homepage';
 import SignUp from '../Pages/SignUp/SignUp';
 import UserInformation from '../Pages/UserInformation/userinformation'
@@ -24,32 +29,28 @@ const RouterApp = () => {
     } else { 
       return <Navigate to='/login'/>
     }
-  }
+  };
 
-  const PrivateCard = ({ children }) => { 
-    const {authenticated} = useContext(AuthContext);
+  const PrivateCard = ({ children }) => {
+    const { authenticated } = useContext(AuthContext);
 
-    if(!authenticated) { 
-      return <Navigate to="/login"/>
-    } else { 
+    if (!authenticated) {
+      return <Navigate to="/login" />;
+    } else {
       return children;
     }
-  }
+  };
 
-  const PrivateLogin = ({children}) => { 
-    const {authenticated} = useContext(AuthContext);
-    if(authenticated) { 
-      return <Navigate to='/myprofile'/>
-    } else { 
-      return children
+  const PrivateLogin = ({ children }) => {
+    const { authenticated } = useContext(AuthContext);
+    if (authenticated) {
+      return <Navigate to="/myprofile" />;
+    } else {
+      return children;
     }
-  }
+  };
 
-  
-  
-  return(
-
-  
+  return (
     <Router>
       <AuthProvider>
       <Routes>
@@ -82,12 +83,10 @@ const RouterApp = () => {
         <Route path='/newpassword' element= {
           <PasswordRecuperation/>
         } />
-
       </Routes>
       </AuthProvider>
     </Router>
-  
-)};
-
+  );
+};
 
 export default RouterApp;

@@ -5,7 +5,7 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from "../../Components/TextField";
 import InputDate from "../../Components/InputDate";
 import RowRadioButtonsGroup from "../../Components/Radio";
-import {storage} from '../../Components/connectionFirebase'
+import {storage} from '../../Api/api'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
 import {noImage} from '../../Components/alerts'
