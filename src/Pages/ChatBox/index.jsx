@@ -43,9 +43,9 @@ const Chatbox = (props) => {
     }
   };
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [textMessage]);
+  // useEffect(() => {
+  //   bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  // }, [textMessage]);
 
   return (
     <div className={chatPreview(closeWindow)}>

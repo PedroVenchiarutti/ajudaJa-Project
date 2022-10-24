@@ -56,9 +56,8 @@ const RouterApp = () => {
         <Route path='/login' element={
           <PrivateLogin>
             <LoginAndSign/>
-          </PrivateLogin>
-        
-        } />
+            </PrivateLogin>
+            } />
         <Route path='/userInformation' element={
         <UserInformation/>} />
         <Route path='/myprofile' element={

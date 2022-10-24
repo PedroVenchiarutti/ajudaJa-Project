@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import Header from '../../Components/Header';
+import Header from '../../Components/Header/Header';
 
 import Information from '../Information/Information';
 import FAQ from '../FAQ/FAQ';
