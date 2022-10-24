@@ -35,6 +35,6 @@ export const get = () => {
     }).then((response) => {
         console.log(response)
     }).catch((err) => {
-        console.log(err)
+        console.log(err.data.response)
     })
 }

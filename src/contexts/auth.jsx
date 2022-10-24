@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import Api from '../Api/api';
+import { testeAlert } from '../Components/alerts';
 
 const USER_STORAGE_KEY = 'username';
 const TOKEN_STORAGE_KEY = 'token';
@@ -59,12 +60,17 @@ export const AuthProvider = ({ children }) => {
       Api.post('/public/login', { email, password })
         .then((resp) => {
           setLoggedUserState(resp.data.user, resp.data.user.token);
-
           return <Navigate to="/" />;
         })
         .catch((err) => {
-          console.log(err);
-        });
+          console.log(err.response.data);
+          testeAlert({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data,
+          });
+
+            });
   };
 
   const logout = () => {

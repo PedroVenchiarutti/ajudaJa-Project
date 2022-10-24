@@ -55,19 +55,19 @@ const MyProfile = () => {
     setState(deleteVal);
   };
   
-  // useEffect((e) => {
-  //   Api.get(`/private/client/${id}`, config)
-  //     .then((response) => {
-  //       setClient({
-  //         username: response.data.user.username,
-  //         email: response.data.user.email,
-  //         cellphone: response.data.user_informations.emergencynumber,
-  //         birthday: response.data.user_informations.birthday,
-  //         avatar: response.data.user_informations.avatar,
-  //       });
-  //     })
-  //     .then(() => {});
-  // }, []);
+   useEffect((e) => {
+     Api.get(`/private/client/${id}`, config)
+       .then((response) => {
+         setClient({
+           username: response.data.user.username,
+           email: response.data.user.email,
+           cellphone: response.data.user_informations.emergencynumber,
+           birthday: response.data.user_informations.birthday,
+           avatar: response.data.user_informations.avatar,
+         });
+       })
+      .then(() => {});
+   }, []);
 
   return (
     <div className="w-full   bg-white">

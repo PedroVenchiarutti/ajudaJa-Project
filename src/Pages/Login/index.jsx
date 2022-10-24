@@ -4,8 +4,7 @@ import logo from "/images/logo-v2.png"
 import Fade from 'react-reveal/Fade';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from "../../Components/TextField"
-
-
+import { noImage, testeAlert } from "../../Components/alerts";
 
 const FormLogin = ({goToRegister}) => { 
 
@@ -16,6 +15,7 @@ const FormLogin = ({goToRegister}) => {
 
     const handleSubmit = (e) => { 
         e.preventDefault()
+        
         login(email, password)
     }
 

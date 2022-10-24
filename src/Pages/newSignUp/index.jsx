@@ -5,21 +5,21 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from "../../Components/TextField";
 import InputDate from "../../Components/InputDate/";
 import RowRadioButtonsGroup from "../../Components/Radio";
-import {storage} from '../../Api/api'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
 import {v4} from 'uuid'
-import {noImage} from '../../Components/alerts'
+import {notify, noImage} from '../../Components/alerts'
 import Api from "../../Api/api";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-
+import schemaValidation from "../../Validations/schemaUserValidation";
+import storage from '../../Api/api'
 
 
 const newSignUp = ({backToLogin}) => { 
 
-    const [date, setDate] = useState(null)
-    const [state, setState] = useState({
-        firstname: '',
-        lastname: '',
+    const [date, setDate] = useState()
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
         password: '',
         confirmPassword: '',
         username: '', 
@@ -33,9 +33,19 @@ const newSignUp = ({backToLogin}) => {
     const [imageUpload, setImageUpload] = useState(null);
     const [preview, setPreview] = useState(null);   
     const [imgUrl, setImgUrl] = useState('');
+    const [error, setError] = useState('');
     const fileInputRef = useRef(null);
 
     
+    const data = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        password: user.password,
+        date: date,
+        username: user.username,
+        email: user.email,
+        emergencyNumber: user.emergencyNumber,
+      };
 
     useEffect(() => {
         if (imageUpload){
@@ -47,44 +57,63 @@ const newSignUp = ({backToLogin}) => {
         } else {}}, 
         [imageUpload]);
 
+
+
+          useEffect(() => {
+            const validation = async () => {
+              let schema = schemaValidation.validate(data);
+        
+              try {
+                await schema;
+                console.log('validou');
+            } catch (error) {
+                setError({
+                    type: 'error',
+                    message: error.message,
+                });
+            }
+        };
+        validation();
+    }, [user]);
+    
+    console.log(user.firstName)
+          console.log(error);
  
-    const uploadImage = () => {
-        if (preview == null) { 
-
-            noImage();
-
-        } else{
-
-            if(imageUpload == null) return;
-            const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
-            uploadBytes(imageRef, imageUpload).then((snapshot) => {
+          const uploadImage = () => {
+            if (preview == null) {
+              noImage();
+              console.log('sajin');
+            } else {
+              if (imageUpload == null) return;
+              const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
+              uploadBytes(imageRef, imageUpload).then((snapshot) => {
                 console.log('Uploaded a blob or file!');
-                getDownloadURL(imageRef)
-                .then((url) => {
-                    setImgUrl(url);
-                    handleSubmit(url)   
-                })
-            })
-        }
-    }
+                getDownloadURL(imageRef).then((url) => {
+                  setImgUrl(url);
+                  console.log(url);
+                  handleSubmit(url);
+                });
+              });
+            }
+          };
         
     const handleChange = prop => e => { 
         e.preventDefault()
-        setState({...state, [prop]: e.target.value})
+        setUser({...user, [prop]: e.target.value})
     }
 
     const handleSubmit = (url) => {
         Api.post('/public/register', { 
-            username: state.username,
-            email: state.email,
-            password: state.password,
-            passwordConfirmation: state.confirmPassword,  
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            passwordConfirmation: user.confirmPassword,  
             birthday: date,
-            emergencynumber: state.emergencyNumber,
+            emergencynumber: user.emergencyNumber,
             helth_insurance: "Não informado no momento",
-            gender: state.gender,
-            name: state.firstname,
-            lastname:  state.lastname,
+            gender: user.gender,
+            name: user.firstName,
+            lastname:  user.lastName,
             avatar: url,
 
         }).then(resp => { 
@@ -124,13 +153,13 @@ const newSignUp = ({backToLogin}) => {
                                 <button onClick={backToLogin}><img className="w-[80px] md:w-[120px]" src={logo} alt="" /></button>
                             </div>
 
-                            <Input label="Nome de usuário" type='text' info={state.username} handleChange={handleChange('username')} />
+                            <Input label="Nome de usuário" type='text' info={user.username} handleChange={handleChange('username')} />
 
-                            <Input label="Insira seu email" type='email' info={state.email} handleChange={handleChange('email')} />
+                            <Input label="Insira seu email" type='email' info={user.email} handleChange={handleChange('email')} />
                             
                             
-                            <Input label="Insira sua senha"  type='password' info={state.password} handleChange={handleChange('password')} />
-                            <Input label="Repita sua senha"  type='password' info={state.confirmPassword} handleChange={handleChange('confirmPassword')}  />
+                            <Input label="Insira sua senha"  type='password' info={user.password} handleChange={handleChange('password')} />
+                            <Input label="Repita sua senha"  type='password' info={user.confirmPassword} handleChange={handleChange('confirmPassword')}  />
                           
 
                           
@@ -140,7 +169,7 @@ const newSignUp = ({backToLogin}) => {
                             <a onClick={backToLogin} className="hover:underline hover:cursor-pointer text-sm" >Usuário já cadastrado? <strong>Volte para o login!</strong></a>
                                 
                             <a onClick={e => { 
-                                if(state.username === '' || state.password === '' || state.confirmPassword === '' || state.email === '') return setSuccess(false) 
+                                if(user.username === '' || user.password === '' || user.confirmPassword === '' || user.email === '') return setSuccess(false) 
                                 else return setSuccess(true)
                             }} className="hover:cursor-pointer text-sm flex items-center hover:text-navFontColor" >Próximo <ArrowRightIcon/></a>
                             </div>
@@ -169,8 +198,8 @@ const newSignUp = ({backToLogin}) => {
                       <img className="w-[120px]" src={logo} alt="" />
                         </div>
                         <input type="file" ref={fileInputRef} accept='image/*' id="fileImg" onChange={(e) => setImageUpload(e.target.files[0])} className="ml-36 absolute hidden placeholder-colorFontParagraph max-w-3xl w-80 mt-[362px] border-b bg-faqGrayBg p-1 "/>
-                        <Input type="text" info={state.firstname} handleChange={handleChange('firstname')} label="Seu nome"/>
-                        <Input type="text" info={state.lastname} handleChange={handleChange('lastname')} label="Seu sobrenome"/>
+                        <Input type="text" info={user.firstName} handleChange={handleChange('firstName')} label="Seu nome"/>
+                        <Input type="text" info={user.lastName} handleChange={handleChange('lastName')} label="Seu sobrenome"/>
 
                      
 
@@ -183,7 +212,7 @@ const newSignUp = ({backToLogin}) => {
                      
 
 
-                        <Input type="number" placeholder='00 00000 0000' info={state.emergencyNumber} handleChange={handleChange('emergencyNumber')} label="Telefone de emergência"/>
+                        <Input type="number" placeholder='00 00000 0000' info={user.emergencyNumber} handleChange={handleChange('emergencyNumber')} label="Telefone de emergência"/>
                         
 
                         <RowRadioButtonsGroup  handleChange={handleChange('gender')}/>
