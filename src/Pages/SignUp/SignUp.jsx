@@ -70,8 +70,6 @@ export default function SignUp() {
     lastName: user.lastName,
   };
 
-  if (!validation()) return;
-
   console.log(error);
 
   useEffect(() => {
@@ -89,6 +87,7 @@ export default function SignUp() {
       }
     };
     validation();
+    if (!validation()) return;
   }, [user]);
 
   console.log(error);

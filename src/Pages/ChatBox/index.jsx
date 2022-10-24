@@ -13,7 +13,7 @@ import {
   titleChat,
 } from './classTailwind';
 
-// const socket = io('http://localhost:3333');
+const socket = io('http://localhost:3333');
 
 const Chatbox = (props) => {
   // definindo a sala
