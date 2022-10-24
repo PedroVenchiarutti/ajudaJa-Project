@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import Header from '../../Components/Header/'
 import Footer from '../../Components/Footer/'
 import EditProfilePNG from '/images/editprofile.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -79,7 +78,6 @@ const MyProfile = () => {
 
       return (
           <div className="w-full   bg-white"> 
-          <Header/>
       
             <div className="lg:w-[1080px] pt-32 grid m-auto"> 
             

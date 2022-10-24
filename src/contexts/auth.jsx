@@ -68,7 +68,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    confirm('Você realmente deseja sair?')
     setUnloggedUserState();
+    return <Navigate to='/'/>
   };
 
   const state = {

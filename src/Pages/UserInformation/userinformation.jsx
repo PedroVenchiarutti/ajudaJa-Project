@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Header from "../../Components/Header/";
 import PersonSVG from '/images/image-firs-seasson.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -37,7 +36,7 @@ const UserInformation = () => {
 
     return(
         <div className="bg-white ">
-            <Header/>
+            
 
         <div className="w-full pt-28">
             <div className=" sm:p-5 md:w-[700px] lg:w-[1080px] m-auto pt-6">

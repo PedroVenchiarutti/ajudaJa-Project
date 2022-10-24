@@ -4,6 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import io from 'socket.io-client';
 
+
 import {
   chatPreview,
   botMessage,
@@ -12,7 +13,7 @@ import {
   titleChat,
 } from './classTailwind';
 
-const socket = io('http://localhost:3333');
+// const socket = io('http://localhost:3333');
 // definindo a sala
 const room = 'room1';
 
@@ -27,10 +28,10 @@ const Chatbox = (props) => {
     updateMyArray((arr) => [...arr, `${textMessage}`]);
 
     // Envinado a msg para o backend
-    socket.emit('chat_message', {
-      room,
-      message: textMessage,
-    });
+    // socket.emit('chat_message', {
+    //   room,
+    //   message: textMessage,
+    // });
 
     setTextMessage('');
   };

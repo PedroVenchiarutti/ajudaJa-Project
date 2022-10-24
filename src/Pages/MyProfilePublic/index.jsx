@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Header from '../../Components/newHeader'
 import Footer from '../../Components/Footer'
 import EditProfilePNG from '/images/editprofile.png'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
@@ -15,7 +14,6 @@ const MyProfile = () => {
 
     return (
         <div className="w-full   bg-white">
-            <Header/>
 
                     {/* Content */}
                 <div className="lg:w-[1080px] pt-32 grid m-auto">

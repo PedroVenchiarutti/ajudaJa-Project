@@ -74,7 +74,7 @@ const FormLogin = ({goToRegister}) => {
                   <h1 className="text-lg font-bold">
                     Bem-vindo, faça seu login!
                   </h1>
-                  <img className="w-[120px]" src={logo} alt="" />
+                  <a href="/"><img className="w-[120px]" src={logo} alt="" /></a>
                 </div>
 
                 <Input

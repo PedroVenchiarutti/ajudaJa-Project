@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import Header from '../../Components/Header/Header';
+
 
 import Information from '../Information/Information';
 import FAQ from '../FAQ/FAQ';
@@ -18,7 +18,7 @@ function Homepage() {
 
   return (
     <>
-     <Header />
+    
       <div className='w-[100%] m-auto '>
      
       <div className='w-[1280px] m-auto'>
