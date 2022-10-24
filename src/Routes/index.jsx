@@ -6,7 +6,7 @@ import UserInformation from '../Pages/UserInformation/userinformation'
 import MyProfile from '../Pages/MyProfile/Myprofile';
 import MyProfilePublic from '../Pages/MyProfilePublic'
 import EditProfile from '../Pages/EditProfile'
-import Login from '../Pages/Login';
+import LoginAndSign from '../Pages/LoginAndSignUp';
 import PasswordRecuperation from '../Pages/passwordRecuperation';
 import { AuthContext, AuthProvider } from '../contexts/auth';
 
@@ -57,7 +57,7 @@ const RouterApp = () => {
         <Route path='/signup' element={<SignUp/>} />
         <Route path='/login' element={
           <PrivateLogin>
-            <Login/>
+            <LoginAndSign/>
           </PrivateLogin>
         
         } />
@@ -82,6 +82,7 @@ const RouterApp = () => {
         <Route path='/newpassword' element= {
           <PasswordRecuperation/>
         } />
+
       </Routes>
       </AuthProvider>
     </Router>

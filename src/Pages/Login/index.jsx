@@ -7,7 +7,8 @@ import Input from "../../Components/TextField"
 
 
 
-const FormLogin = () => { 
+
+const FormLogin = ({goToRegister}) => { 
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -86,7 +87,7 @@ const FormLogin = () => {
                             <a onClick={e => setSuccess(true)} className="hover:underline text-sm" >Esqueceu sua senha?</a>
                                 <button onClick={handleSubmit} className="my-4 w-[100%] px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border  hover:text-navFontColor hover:border ">Entrar</button>
                         
-                                <a className="hover:underline" href="/signup">Não tem cadastro? <strong>Cadastre-se agora!</strong></a>
+                                <a onClick={goToRegister} className="hover:underline" >Não tem cadastro? <strong>Cadastre-se agora!</strong></a>
                             </div>
                         
                             </div>

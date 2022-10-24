@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Header from '../../Components/Header/Header'
-import Footer from '../../Components/Footer/Footer'
+import Footer from '../../Components/Footer'
 import EditProfilePNG from '../../../public/images/editprofile.png'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Fade from 'react-reveal/Fade';

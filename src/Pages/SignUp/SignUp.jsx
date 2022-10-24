@@ -97,6 +97,7 @@ import Swal from "sweetalert2";
         
     
     const handleSubmit = (url) => {
+        
         axios.post(urlSignUp,  {
             username: userName,
             email: email,
@@ -125,6 +126,7 @@ import Swal from "sweetalert2";
 
         function next(){
             uploadImage();
+
         }
         
     

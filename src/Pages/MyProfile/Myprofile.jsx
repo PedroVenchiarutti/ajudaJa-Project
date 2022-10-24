@@ -1,6 +1,7 @@
+
 import React, {useState, useEffect} from "react";
 import Header from '../../Components/Header/Header'
-import Footer from '../../Components/Footer/Footer'
+import Footer from '../../Components/Footer'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import QRCode from 'qrcode'
@@ -56,11 +57,10 @@ const MyProfile = () => {
         setState(deleteVal)
     }
 
+    
     useEffect((e) => {
         Api.get(`/private/client/${id}`, config).then((response) => {
             setClient({
-                firstname: response.data.user_informations.name,
-                lastname: response.data.user_informations.lastname,
                 username: response.data.user.username,
                 email: response.data.user.email,
                 cellphone: response.data.user_informations.emergencynumber,
@@ -95,7 +95,6 @@ const MyProfile = () => {
                           </div>
                           <div className="pt-4 formAndButtons flex flex-col lg:w-[550px] content-center ">
                               <form className="flex flex-col gap-5 items-center ">
-                                  <input className="border-b-2 w-[400px] text-xl " value={client.firstname +' '+ client.lastname} type="text" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={client.username} type="text" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={client.email}  type="email" readOnly/>
                                   <input className="border-b-2 w-[400px] text-xl " value={client.cellphone}  type="tel" readOnly/>
