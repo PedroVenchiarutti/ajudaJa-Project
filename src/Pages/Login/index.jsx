@@ -1,3 +1,4 @@
+
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/auth';
 import logo from '/images/logo-v2.png';
@@ -11,6 +12,7 @@ const FormLogin = ({goToRegister}) => {
   const [password, setPassword] = useState('');
   const { authenticated, login } = useContext(AuthContext);
   const [success, setSuccess] = useState(false);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,6 +45,7 @@ const FormLogin = ({goToRegister}) => {
   const newPasswordKey = (e) => {
     if (e.key === 'Enter') {
       return newPassword(e);
+
     }
   };
 
@@ -67,6 +70,7 @@ const FormLogin = ({goToRegister}) => {
             </Fade>
           </div>
 
+
           {success ? null : (
             <Fade right>
               <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:h-[390px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
@@ -75,6 +79,7 @@ const FormLogin = ({goToRegister}) => {
                     Bem-vindo, faça seu login!
                   </h1>
                   <img className="w-[120px]" src={logo} alt="" />
+
                 </div>
 
                 <Input

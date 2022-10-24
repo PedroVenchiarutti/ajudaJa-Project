@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 
 
 
+
 export const inputText = ({info, handleChange, type, label, onKeyUp,placeholder }) => { 
     
     return(

@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { storage } from '../../Components/connectionFirebase';
@@ -301,3 +302,4 @@ export default function SignUp() {
     </div>
   );
 }
+

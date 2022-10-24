@@ -78,9 +78,7 @@ const RouterApp = () => {
 
         <Route path='/newpassword' element= {
           <PasswordRecuperation/>
-        } />
 
-        
       </Routes>
       </AuthProvider>
     </Router>

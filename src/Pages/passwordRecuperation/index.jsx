@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import InputPassword from '../../Components/inputPassword';
 import { useLocation } from 'react-router-dom';
@@ -134,3 +135,4 @@ const passwordRecuperation = () => {
 };
 
 export default passwordRecuperation;
+

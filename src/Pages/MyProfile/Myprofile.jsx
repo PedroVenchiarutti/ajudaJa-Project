@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from "react";
+
 import Header from '../../Components/Header/'
 import Footer from '../../Components/Footer/'
 import EditProfilePNG from '/images/editprofile.png'
+
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import QRCode from 'qrcode'
 import Fade from 'react-reveal/Fade';
 import Api from "../../Api/api";
 import { notify } from "../../Components/alerts";
+
 
 
 const MyProfile = () => { 

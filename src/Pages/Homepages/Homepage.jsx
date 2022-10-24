@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import Header from '../../Components/Header/Header';
-
 import Information from '../Information/Information';
 import FAQ from '../FAQ/FAQ';
 import Cards from '../Cards/Cards';
 import Footer from '../../Components/Footer';
+
 import Chatbox from '../ChatBox'
 import Fade from 'react-reveal/Fade';
 
@@ -34,6 +34,7 @@ function Homepage() {
         <img className='md:mt-28  pt-40 md:pt-0  pb-12 md:w-[900px] md:h-[580px] pl-10' src="images/na_feb_50.jpg" alt="" />
       </div>
       </div>
+
       <a href="/signup">
         <button className=' mt-4 group bg-buttonColor hover:bg-faqGrayBg md:p-[16px] md:ml-24 md:mr-18 border-[1px] border-hidden hover:border-solid shadow-2xl p-2
         mr-20 ml-[10%] rounded-lg hover:animate-pulse duration-500'>
