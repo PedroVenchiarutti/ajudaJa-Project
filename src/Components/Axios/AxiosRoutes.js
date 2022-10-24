@@ -1,6 +1,6 @@
 
 //POST
-export const urlSignUp = "https://ajudajaapi.herokuapp.com/api/public/register";
+export const urlSignUp = "/public/signup";
 export const urlSignIn = "https://ajudajaapi.herokuapp.com/api/public/login";
 
 

@@ -55,7 +55,6 @@ const RouterApp = () => {
       <AuthProvider>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path='/signup' element={<SignUp/>} />
         <Route path='/login' element={
           <PrivateLogin>
             <LoginAndSign/>

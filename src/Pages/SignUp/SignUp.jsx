@@ -108,8 +108,8 @@ export default function SignUp() {
           .replace(' ', ''),
         helth_insurance: 'Nao',
         gender: sex,
-        name: firstName,
-        lastname: lastName,
+        name: 'firstName',
+        lastname: 'lastName',
         avatar: url,
       })
       .then((response) => {

@@ -1,4 +1,3 @@
-
   import { initializeApp } from "firebase/app";
   import {getStorage} from "firebase/storage";
   
@@ -28,9 +27,8 @@ import axios from 'axios';
 
 const Api = axios.create({
   // baseURL: import.meta.env.VITE_URL_API
-  baseURL: 'http://localhost:3333/api',
+  baseURL: 'https://ajudajaapi.herokuapp.com/api',
 });
 
-console.log(import.meta.env.VITE_URL_API);
-
+console.log(import.meta.env.VITE_URL_API)
 export default Api;
