@@ -6,7 +6,7 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from '../../Components/TextField';
 import Api from '../../Api/api';
 
-const FormLogin = () => {
+const FormLogin = ({goToRegister}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { authenticated, login } = useContext(AuthContext);
@@ -106,7 +106,7 @@ const FormLogin = () => {
                     Entrar
                   </button>
 
-                  <a className="hover:underline" href="/signup">
+                  <a className="hover:underline" onClick={goToRegister}>
                     Não tem cadastro? <strong>Cadastre-se agora!</strong>
                   </a>
                 </div>
