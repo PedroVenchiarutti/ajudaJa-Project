@@ -14,6 +14,8 @@ import {ToastContainer} from 'react-toastify';
 import {noCamps, noImage} from '../../Components/alerts'
 import {AlertSH} from '../../Components/alerts'
 import * as yup from 'yup'
+import { Loading } from "../../Components/alerts";
+import Swal from "sweetalert2";
 
 
     
@@ -47,7 +49,7 @@ import * as yup from 'yup'
         
         const uploadImage = () => {
             if (preview == null) { 
-                AlertSH({title: 'Insira uma Foto de perfil!' })
+                //AlertSH({title: 'Insira uma Foto de perfil!' })
             } else{
             
                 if(imageUpload == null) return;
@@ -77,6 +79,7 @@ import * as yup from 'yup'
                 AlertSH({title: 'Insira seu número de emergência!', icon: 'warning', buttonText: 'Ok'})
                 stop();
             }else{
+               Loading()
                 const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
                 uploadBytes(imageRef, imageUpload).then((snapshot) => {
                     console.log('Uploaded a blob or file!');
@@ -94,7 +97,6 @@ import * as yup from 'yup'
         
     
     const handleSubmit = (url) => {
-        
         axios.post(urlSignUp,  {
             username: userName,
             email: email,
@@ -111,6 +113,7 @@ import * as yup from 'yup'
             ).then((response) => {
                 console.log(response)
                 setSucess(true)
+                Swal.close()
             }).catch((err) => {
                 console.log(err.response.data)
                 noCamps();

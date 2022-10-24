@@ -30,5 +30,19 @@ function AlertSH (props) {
         })
 
 }
+
+function Loading (props ) {
+    Swal.fire({
+        title: 'Carregando...',
+        allowOutsideClick: false,
+        didOpen: (props) => {
+            Swal.showLoading()
+        }
+    })
+
+
+}
+
+
  
-export {noImage , noCamps, AlertSH}
+export {noImage , noCamps, AlertSH, Loading}; 
