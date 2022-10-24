@@ -52,11 +52,11 @@ const FormLogin = ({goToRegister}) => {
             <div className="w-[100w] h-[100vh] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
                 <div className="grid grid-cols-1 md:grid-cols-2 h-[100vh]">
 
-                        <div className="hidden md:block bg-gradient-to-t from-navFontColor to-firstSessionFontColor drop-shadow-lg pl-10 pt-20">
+                        <div className="hidden md:block bg-gradient-to-t from-navFontColor to-firstSessionFontColor drop-shadow-lg  ">
                        <Fade left>
-                           <div className="mt-32 m-auto relative">
+                           <div className="flex flex-col items-center justify-center h-[100vh] ">
                            
-                               <h2 className="font-bold text-white text-6xl px-4 pb-3 drop-shadow-md">Saia de casa  </h2>
+                               <h2 className="font-bold text-white text-6xl pr-[160px] pb-3 drop-shadow-md">Saia de casa  </h2>
                            
                                 <h2 className="font-medium text-white px-4 pb-2 text-5xl drop-shadow-md">
                                     sem se

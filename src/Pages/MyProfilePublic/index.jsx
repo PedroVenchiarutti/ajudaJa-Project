@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Header from '../../Components/Header'
+import Header from '../../Components/newHeader'
 import Footer from '../../Components/Footer'
 import EditProfilePNG from '../../../public/images/editprofile.png'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';

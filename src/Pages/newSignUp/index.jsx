@@ -3,7 +3,7 @@ import logo from "/images/logo-v2.png"
 import Fade from 'react-reveal/Fade';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from "../../Components/TextField";
-import InputDate from "../../Components/InputDate";
+import InputDate from "../../Components/InputDate/";
 import RowRadioButtonsGroup from "../../Components/Radio";
 import {storage} from '../../Components/connectionFirebase'
 import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
@@ -112,16 +112,16 @@ const newSignUp = ({backToLogin}) => {
     return (
         <>
         
-            <div className="w-[100w] h-[100vh] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
-                <div className="grid grid-cols-1 md:grid-cols-2 h-[100vh]">
+            <div className="w-[100w] h-[100%] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
+                <div className="grid grid-cols-1  md:p-0 md:grid-cols-2 h-[100vh]">
 
                     
 
                 {success ? null : <Fade left>
-                        <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:h-[470px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
+                        <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:h-[470px] h-[500px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
                             <div className="flex justify-between items-center">
-                                <h1 className="text-lg font-bold">Cadastre-se agora!</h1>
-                                <button onClick={backToLogin}><img className="w-[120px]" src={logo} alt="" /></button>
+                                <h1 className="text-md md:text-lg font-bold">Cadastre-se agora!</h1>
+                                <button onClick={backToLogin}><img className="w-[80px] md:w-[120px]" src={logo} alt="" /></button>
                             </div>
 
                             <Input label="Nome de usuário" type='text' info={state.username} handleChange={handleChange('username')} />
@@ -134,7 +134,7 @@ const newSignUp = ({backToLogin}) => {
                           
 
                           
-                            <div className="pt-10 flex justify-between  content-center ">
+                            <div className="pt-10 flex justify-between md:flex-row flex-col gap-5  content-center ">
                            
 
                             <a onClick={backToLogin} className="hover:underline hover:cursor-pointer text-sm" >Usuário já cadastrado? <strong>Volte para o login!</strong></a>
