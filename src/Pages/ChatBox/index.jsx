@@ -11,6 +11,7 @@ import {
   messageArea,
   titleChat,
 } from './classTailwind';
+import Message from '../../Components/Message';
 
 const socket = io('http://localhost:3333');
 
@@ -27,12 +28,35 @@ const Chatbox = (props) => {
       id: 1,
       message: 'Olá, como posso te ajudar?',
       user: 'bot',
+      timer: '14:20',
+    },
+    {
+      id: 2,
+      message: 'Poderia me tirar uma duvida?',
+      user: 'user',
+      timer: '14:25',
+    },
+    {
+      id: 3,
+      message: 'Claro oque voce precisa?',
+      user: 'bot',
+      timer: '14:30',
+    },
+    {
+      id: 4,
+      message: 'Nao consigo fazer o login',
+      user: 'user',
+      timer: '14:40',
+    },
+    {
+      id: 5,
+      message: 'Vc precisa fazer o login com o seu email e senha',
+      user: 'bot',
+      timer: '15:20',
     },
   ]);
   const [newData, setNewData] = useState({});
   const bottomRef = useRef(null);
-
-  // console.log('ary', myArray);
 
   const onClick = () => {
     // updateMyArray((arr) => [...arr, `${textMessage}`]);
@@ -43,7 +67,6 @@ const Chatbox = (props) => {
       username: user.username,
     };
     socket.emit('message', data);
-    // returnMesssage();
     setTextMessage('');
   };
 
@@ -94,21 +117,19 @@ const Chatbox = (props) => {
       <div className={closeWindow ? 'hidden' : ''}>
         <div className={messageArea}>
           {/* <div className={botMessage}>Bom dia, no que posso ajudar?</div> */}
-          {msg.map((item) => {
-            return (
-              <div
-                className={item.user === 'user' ? chatMessage : botMessage}
-                key={item.id}
-              >
-                {item.message}
-              </div>
-            );
-          })}
+          {msg.map((item) => (
+            <Message
+              key={item.id}
+              message={item.message}
+              user={item.user}
+              timer={item.timer}
+            />
+          ))}
           <div ref={bottomRef} />
         </div>
-        <div className="fixed h-[30px] m-2 flex gap-2 pb-1">
+        <div className="fixed h-[30px] m-2 flex gap-2 pb-1 w-full">
           <input
-            className="pl-1 rounded-lg drop-shadow-md "
+            className="pl-1 rounded-lg drop-shadow-md w-10/12 outline-none"
             type="text"
             value={textMessage}
             onKeyUp={(e) => keyHandler(e)}
