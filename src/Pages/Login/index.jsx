@@ -5,6 +5,7 @@ import Fade from 'react-reveal/Fade';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from '../../Components/TextField';
 import Api from '../../Api/api';
+import { Link } from 'react-router-dom';
 
 const FormLogin = ({goToRegister}) => {
   const [email, setEmail] = useState('');
@@ -74,7 +75,7 @@ const FormLogin = ({goToRegister}) => {
                   <h1 className="text-lg font-bold">
                     Bem-vindo, faça seu login!
                   </h1>
-                  <a href="/"><img className="w-[120px]" src={logo} alt="" /></a>
+                  <Link to="/"><img className="w-[120px]" src={logo} alt="" /></Link>
                 </div>
 
                 <Input

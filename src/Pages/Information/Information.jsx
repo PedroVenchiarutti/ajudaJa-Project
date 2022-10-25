@@ -16,7 +16,7 @@ export default function Information() {
     return ( 
 
         
-    <div className="w-[100%] pt-32">
+    <div className="w-[100%] pt-20">
 
             <Fade left>
             
