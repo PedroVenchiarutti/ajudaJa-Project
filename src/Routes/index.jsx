@@ -9,6 +9,8 @@ import EditProfile from '../Pages/EditProfile'
 import LoginAndSign from '../Pages/LoginAndSignUp';
 import PasswordRecuperation from '../Pages/passwordRecuperation';
 import { AuthContext, AuthProvider } from '../contexts/auth';
+import Login from '../Pages/Login'
+import Register from '../Pages/newSignUp'
 
 
 
@@ -78,9 +80,17 @@ const RouterApp = () => {
         
         <Route path='/login' element={
           <PrivateLogin>
-            <LoginAndSign/>
+            <Login/>
             </PrivateLogin>
             } />
+
+             
+        <Route path='/register' element={
+          <PrivateLogin>
+            <Register/>
+            </PrivateLogin>
+            } />
+
 
         <Route path='/newpassword' element= {
           <PasswordRecuperation/>

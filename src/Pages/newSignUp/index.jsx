@@ -11,6 +11,7 @@ import {v4} from 'uuid'
 import {notify, noImage} from '../../Components/alerts'
 import Api from "../../Api/api";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { Link } from "react-router-dom";
 
 
 
@@ -137,7 +138,7 @@ const newSignUp = ({backToLogin}) => {
                             <div className="pt-10 flex justify-between md:flex-row flex-col gap-5  content-center ">
                            
 
-                            <a onClick={backToLogin} className="hover:underline hover:cursor-pointer text-sm" >Usuário já cadastrado? <strong>Volte para o login!</strong></a>
+                            <Link to='/login' className="hover:underline hover:cursor-pointer text-sm" >Usuário já cadastrado? <strong>Volte para o login!</strong></Link>
                                 
                             <a onClick={e => { 
                                 if(state.username === '' || state.password === '' || state.confirmPassword === '' || state.email === '') return setSuccess(false) 

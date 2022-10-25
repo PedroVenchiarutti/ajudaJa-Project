@@ -107,9 +107,9 @@ const FormLogin = ({goToRegister}) => {
                     Entrar
                   </button>
 
-                  <a className="hover:underline" onClick={goToRegister}>
+                  <Link className="hover:underline" to='/register'>
                     Não tem cadastro? <strong>Cadastre-se agora!</strong>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </Fade>
