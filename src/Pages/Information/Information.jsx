@@ -1,7 +1,7 @@
 
 import React from "react";
-import DoctorGirl from '../../assets/images/doctor-girl.svg'
-import DoctorMan from '../../assets/images/doctor-man.svg'
+import DoctorGirl from '/images/doctor-girl.svg'
+import DoctorMan from '/images/doctor-man.svg'
 import Fade from 'react-reveal/Fade';
 
 export default function Information() { 

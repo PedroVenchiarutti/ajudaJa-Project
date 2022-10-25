@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../Components/Header/Header';
-import Footer from '../../Components/Footer/Footer';
+
+import Header from '../../Components/Header/';
+import Footer from '../../Components/Footer/';
+import EditProfilePNG from '/images/editprofile.png';
+
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import QRCode from 'qrcode';
@@ -9,8 +12,6 @@ import Api from '../../Api/api';
 import { notify } from '../../Components/alerts';
 
 const MyProfile = () => {
-  const [state, setState] = useState([]);
-
   const [client, setClient] = useState({
     username: '',
     email: '',
@@ -18,8 +19,18 @@ const MyProfile = () => {
     birthday: '',
     avatar: '',
   });
+
   const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/');
   const [qrcode, setQrCode] = useState('');
+  const [state, setState] = useState([]);
+
+  const id = localStorage.getItem('id');
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    const abc = [...state, []];
+    setState(abc);
+  };
 
   const config = {
     headers: {
@@ -27,19 +38,11 @@ const MyProfile = () => {
     },
   };
 
-  const id = localStorage.getItem('id');
-
   const GenerateQRCode = (_) => {
     QRCode.toDataURL(url, (err, url) => {
       if (err) return console.error(err);
       setQrCode(url);
     });
-  };
-
-  const handleAdd = (e) => {
-    e.preventDefault();
-    const abc = [...state, []];
-    setState(abc);
   };
 
   const handleChange = (e, i) => {
@@ -54,27 +57,27 @@ const MyProfile = () => {
     deleteVal.splice(i, 1);
     setState(deleteVal);
   };
-  
-  // useEffect((e) => {
-  //   Api.get(`/private/client/${id}`, config)
-  //     .then((response) => {
-  //       setClient({
-  //         username: response.data.user.username,
-  //         email: response.data.user.email,
-  //         cellphone: response.data.user_informations.emergencynumber,
-  //         birthday: response.data.user_informations.birthday,
-  //         avatar: response.data.user_informations.avatar,
-  //       });
-  //     })
-  //     .then(() => {});
-  // }, []);
+
+  useEffect((e) => {
+    Api.get(`/private/client/${id}`, config)
+      .then((response) => {
+        setClient({
+          username: response.data.user.username,
+          email: response.data.user.email,
+          cellphone: response.data.user_informations.emergencynumber,
+          birthday: response.data.user_informations.birthday,
+          avatar: response.data.user_informations.avatar,
+        });
+      })
+      .then(() => {});
+  }, []);
 
   return (
     <div className="w-full   bg-white">
       <Header />
 
-      {/* Content */}
       <div className="lg:w-[1080px] pt-32 grid m-auto">
+        {/* Content */}
         <Fade bottom>
           <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-10 py-5 rounded-lg pb-10 px-4">
             <div className="flex justify-center items-center ">

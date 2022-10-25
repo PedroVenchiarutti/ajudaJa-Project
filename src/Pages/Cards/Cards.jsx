@@ -1,7 +1,7 @@
 import React, { useState }  from "react";
-import Person from '../../assets/images/people.svg'
-import Money from '../../assets/images/money.svg'
-import Family from '../../assets/images/security.svg'
+import Person from '/images/people.svg'
+import Money from '/images/money.svg'
+import Family from '/images/security.svg'
 import {boxGreen, imageSVG, titleBox, textBox,testMoneyToggle, cardlifeSecurityTitle, cardLifeSecurityContent, cardMoneyTitle, cardMoneyContent, cardFamilyContent, FAQCards} from './classTailwind'
 import Fade from 'react-reveal/Fade';
 

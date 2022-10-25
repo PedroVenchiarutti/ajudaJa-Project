@@ -4,7 +4,6 @@ import SendIcon from '@mui/icons-material/Send';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import io from 'socket.io-client';
 import { AuthContext } from '../../contexts/auth';
-
 import {
   chatPreview,
   botMessage,
@@ -23,22 +22,38 @@ const Chatbox = (props) => {
   const [textMessage, setTextMessage] = useState('');
   const [closeWindow, setCloseWindow] = useState(true);
   const [myArray, updateMyArray] = useState([]);
-
+  const [msg, setMsg] = useState([
+    {
+      id: 1,
+      message: 'Olá, como posso te ajudar?',
+      user: 'bot',
+    },
+  ]);
+  const [newData, setNewData] = useState({});
   const bottomRef = useRef(null);
 
-  const onClick = () => {
-    updateMyArray((arr) => [...arr, `${textMessage}`]);
+  // console.log('ary', myArray);
 
+  const onClick = () => {
+    // updateMyArray((arr) => [...arr, `${textMessage}`]);
+    setMsg([...msg, { message: textMessage, user: 'user' }]);
     const data = {
       room,
       message: textMessage,
       username: user.username,
     };
-
     socket.emit('message', data);
-
+    // returnMesssage();
     setTextMessage('');
   };
+
+  useEffect(() => {
+    socket.on('message_bot', (data) => {
+      if (data == null) return;
+      // updateMyArray((arr) => [...arr, `${data.message}`]);
+      setMsg([...msg, { message: data.message, user: 'bot' }]);
+    });
+  }, [newData]);
 
   const keyHandler = (e) => {
     if (e.key === 'Enter') {
@@ -48,9 +63,15 @@ const Chatbox = (props) => {
     }
   };
 
-  // useEffect(() => {
-  //   bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  // }, [textMessage]);
+  useEffect(() => {
+    socket.on('message_new', (data) => {
+      console.log('data', data);
+    });
+  }, [newData]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [textMessage]);
 
   // useEffect(() => {
   //   socket.emit('select_room', {
@@ -60,32 +81,30 @@ const Chatbox = (props) => {
   //   });
   // }, [user, room]);
 
-  // useEffect(() => {
-  //   socket.on('message', (data) => {
-  //     console.log(data);
-  //   });
-  // }, []);
+  // console.log('msg', msg);
 
   return (
     <div className={chatPreview(closeWindow)}>
       <div className={titleChat(closeWindow)}>
         <h3 className="font-bold">{closeWindow ? `` : `ChatBot - Online`}</h3>
-
         <button onClick={(_) => setCloseWindow(!closeWindow)}>
           {closeWindow ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />}
         </button>
       </div>
-
       <div className={closeWindow ? 'hidden' : ''}>
         <div className={messageArea}>
-          <div className={botMessage}>Bom dia, no que posso ajudar?</div>
-          {myArray.map((e) => (
-            <div className={chatMessage}>
-              {e}
-
-              <div ref={bottomRef}> </div>
-            </div>
-          ))}
+          {/* <div className={botMessage}>Bom dia, no que posso ajudar?</div> */}
+          {msg.map((item) => {
+            return (
+              <div
+                className={item.user === 'user' ? chatMessage : botMessage}
+                key={item.id}
+              >
+                {item.message}
+              </div>
+            );
+          })}
+          <div ref={bottomRef} />
         </div>
         <div className="fixed h-[30px] m-2 flex gap-2 pb-1">
           <input
@@ -103,5 +122,35 @@ const Chatbox = (props) => {
     </div>
   );
 };
-
 export default Chatbox;
+
+{
+  /* {msg ? (
+            msg.map((item, index) => {
+              return (
+                <div key={index} className={botMessage}>
+                  {item.msg}
+                </div>
+              );
+            })
+          ) : (
+             myArray.map((e, key) => (
+            <div className={chatMessage} key={key}>
+              {e}
+              <div ref={bottomRef}> </div>
+            </div>
+          ))
+          )}
+        </div> */
+}
+
+{
+  /* {msg.map((item, index) => {
+            return (
+              <div key={index} className={botMessage}>
+                {item.msg}
+                <div ref={bottomRef}> </div>
+              </div>
+            );
+          })} */
+}
