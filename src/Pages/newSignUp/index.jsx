@@ -5,17 +5,19 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from "../../Components/TextField";
 import InputDate from "../../Components/InputDate/";
 import RowRadioButtonsGroup from "../../Components/Radio";
-import {ref, uploadBytes, getDownloadURL} from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {v4} from 'uuid'
-import {notify, noImage} from '../../Components/alerts'
+import {testeAlert, noImage} from '../../Components/alerts'
 import Api from "../../Api/api";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import schemaValidation from "../../Validations/schemaUserValidation";
-import storage from '../../Api/api'
+import schemaValidation, {schemaValidation2} from "../../Validations/schemaUserValidation";
+import {storage} from '../../Api/api'
+
 
 
 const newSignUp = ({backToLogin}) => { 
 
+    const Inputs = document.querySelectorAll('input')
     const [date, setDate] = useState()
     const [user, setUser] = useState({
         firstName: '',
@@ -24,7 +26,7 @@ const newSignUp = ({backToLogin}) => {
         confirmPassword: '',
         username: '', 
         email: '',
-        gender: 'F',
+        gender: '',
         emergencyNumber: ''
 
     })
@@ -45,8 +47,23 @@ const newSignUp = ({backToLogin}) => {
         username: user.username,
         email: user.email,
         emergencyNumber: user.emergencyNumber,
+        gender: user.gender,
       };
 
+    const data2 = {
+        username: user.username,
+        email: user.email,
+        password: user.password,
+        confirmPassword: user.confirmPassword,
+    }
+
+      function classError() {
+        document.querySelector('input').classList.add('error')
+      }
+
+    useEffect(() => {
+        teste(false)
+    }, [])
     useEffect(() => {
         if (imageUpload){
             const reader = new FileReader();
@@ -58,23 +75,50 @@ const newSignUp = ({backToLogin}) => {
         [imageUpload]);
 
 
+        function validate2(){
+            const validation2 = async () => {
+                if(user.password !== user.confirmPassword){
+                    console.log('As senhas não coincidem')
+                }
+                let schema = schemaValidation2.validate(data2)
+                try {
+                    await schema
+                    teste(true)
+                } catch (error) {
+                    classError()
+                    setError({
+                        type: 'error',
+                        message: error.message,
+                    });
+                    teste()
+                }
+            
+        }
+        validation2()
+    }
 
-          useEffect(() => {
+        function validate(){
             const validation = async () => {
-              let schema = schemaValidation.validate(data);
-        
-              try {
-                await schema;
-                console.log('validou');
-            } catch (error) {
-                setError({
-                    type: 'error',
-                    message: error.message,
-                });
-            }
-        };
-        validation();
-    }, [user]);
+                let schema = schemaValidation.validate(data);
+          
+                try {
+                  await schema;
+                  console.log('validou');
+                  uploadImage();
+  
+              } catch (error) {
+                  classError()
+                  setError({
+                      type: 'error',
+                      message: error.message,
+                  });
+                  teste()
+              }
+          };
+          validation();
+        }
+
+    
     
     console.log(user.firstName)
           console.log(error);
@@ -104,16 +148,16 @@ const newSignUp = ({backToLogin}) => {
 
     const handleSubmit = (url) => {
         Api.post('/public/register', { 
-            username: user.username,
-            email: user.email,
-            password: user.password,
-            passwordConfirmation: user.confirmPassword,  
-            birthday: date,
-            emergencynumber: user.emergencyNumber,
-            helth_insurance: "Não informado no momento",
-            gender: user.gender,
             name: user.firstName,
             lastname:  user.lastName,
+            password: user.password,
+            passwordConfirmation: user.confirmPassword,  
+            username: user.username,
+            email: user.email,
+            birthday: date,
+            emergencynumber: user.emergencyNumber,
+            helth_insurance: "Nao",
+            gender: user.gender,
             avatar: url,
 
         }).then(resp => { 
@@ -123,6 +167,15 @@ const newSignUp = ({backToLogin}) => {
         })
 
     }
+
+    function teste() {
+        if (error.type == 'error') {
+            return true
+
+        } else {
+            false
+        }
+    } 
 
     console.log('Olá')
 
@@ -153,13 +206,13 @@ const newSignUp = ({backToLogin}) => {
                                 <button onClick={backToLogin}><img className="w-[80px] md:w-[120px]" src={logo} alt="" /></button>
                             </div>
 
-                            <Input label="Nome de usuário" type='text' info={user.username} handleChange={handleChange('username')} />
+                            <Input id='myh1' label="Nome de usuário" err={teste()} txt={teste() ? 'O nome de usuario é obrigatório' : ''}  type='text' info={user.username} handleChange={handleChange('username')} />
 
-                            <Input label="Insira seu email" type='email' info={user.email} handleChange={handleChange('email')} />
+                            <Input label="Insira seu email" err={teste()} txt={teste() ? 'Email Invalido' : ''} type='email' info={user.email} handleChange={handleChange('email')} />
                             
                             
-                            <Input label="Insira sua senha"  type='password' info={user.password} handleChange={handleChange('password')} />
-                            <Input label="Repita sua senha"  type='password' info={user.confirmPassword} handleChange={handleChange('confirmPassword')}  />
+                            <Input label="Insira sua senha" err={teste()} txt={teste() ? 'Insira uma senha' : ''}  type='password' info={user.password} handleChange={handleChange('password')} />
+                            <Input label="Repita sua senha" err={teste()} txt={teste() ? 'As senhas não coincidem' : ''}  type='password' info={user.confirmPassword} handleChange={handleChange('confirmPassword')}  />
                           
 
                           
@@ -169,7 +222,7 @@ const newSignUp = ({backToLogin}) => {
                             <a onClick={backToLogin} className="hover:underline hover:cursor-pointer text-sm" >Usuário já cadastrado? <strong>Volte para o login!</strong></a>
                                 
                             <a onClick={e => { 
-                                if(user.username === '' || user.password === '' || user.confirmPassword === '' || user.email === '') return setSuccess(false) 
+                                if(user.username === '' || user.password === '' || user.confirmPassword === '' || user.email === '' || user.password !== user.confirmPassword) validate2() 
                                 else return setSuccess(true)
                             }} className="hover:cursor-pointer text-sm flex items-center hover:text-navFontColor" >Próximo <ArrowRightIcon/></a>
                             </div>
@@ -219,7 +272,7 @@ const newSignUp = ({backToLogin}) => {
                       
                         <div className="">
                         
-                            <button onClick={next}  className="my-4 mt-[-10px] mb-5 w-[100%] px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border  hover:text-navFontColor hover:border ">Finalizar Cadastro</button>
+                            <button onClick={validate}  className="my-4 mt-[-10px] mb-5 w-[100%] px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border  hover:text-navFontColor hover:border ">Finalizar Cadastro</button>
                             <a onClick={e => setSuccess(false)} className=" flex items-center hover:cursor-pointer text-sm hover:text-navFontColor" > <ArrowLeftIcon />Voltar </a>
                           
                            
