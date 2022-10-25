@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Footer from '../../Components/Footer'
 import EditProfilePNG from '/images/editprofile.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -152,7 +151,7 @@ const editProfile = () => {
                   {openModal && <Modal confirmModal={'/myProfile'} closeModal={setOpenModal}/>}
                 </div>
 
-            <Footer/>
+         
         </div>
     )
 }

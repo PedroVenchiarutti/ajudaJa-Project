@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import Footer from '../../Components/Footer'
 import EditProfilePNG from '/images/editprofile.png'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Fade from 'react-reveal/Fade';
@@ -71,7 +70,7 @@ const MyProfile = () => {
                   </Fade>
                 </div>
 
-            <Footer/>
+         
         </div>
     )
 }

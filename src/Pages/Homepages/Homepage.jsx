@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
-
-
 import Information from '../Information/Information';
 import FAQ from '../FAQ/FAQ';
 import Cards from '../Cards/Cards';
-import Footer from '../../Components/Footer';
 import Chatbox from '../ChatBox'
 import Fade from 'react-reveal/Fade';
 
@@ -58,7 +54,7 @@ function Homepage() {
         
       </div>
       </div>
-      <Footer/>
+     
     </>
   );
 }
