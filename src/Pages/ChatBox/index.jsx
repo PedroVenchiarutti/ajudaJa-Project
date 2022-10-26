@@ -3,6 +3,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SendIcon from '@mui/icons-material/Send';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import io from 'socket.io-client';
+import Api from '../../Api/api';
 import { AuthContext } from '../../contexts/auth';
 import {
   chatPreview,
@@ -18,7 +19,8 @@ const socket = io('http://localhost:3333');
 const Chatbox = (props) => {
   // definindo a sala
   const { user } = useContext(AuthContext);
-  const room = `chat01#${user.username}`;
+  const room = `chat01#pedro`;
+  // const room = `chat01#${user.username}`;
 
   const [textMessage, setTextMessage] = useState('');
   const [closeWindow, setCloseWindow] = useState(true);
@@ -30,53 +32,56 @@ const Chatbox = (props) => {
       user: 'bot',
       timer: '14:20',
     },
-    {
-      id: 2,
-      message: 'Poderia me tirar uma duvida?',
-      user: 'user',
-      timer: '14:25',
-    },
-    {
-      id: 3,
-      message: 'Claro oque voce precisa?',
-      user: 'bot',
-      timer: '14:30',
-    },
-    {
-      id: 4,
-      message: 'Nao consigo fazer o login',
-      user: 'user',
-      timer: '14:40',
-    },
-    {
-      id: 5,
-      message: 'Vc precisa fazer o login com o seu email e senha',
-      user: 'bot',
-      timer: '15:20',
-    },
   ]);
   const [newData, setNewData] = useState({});
   const bottomRef = useRef(null);
 
   const onClick = () => {
-    // updateMyArray((arr) => [...arr, `${textMessage}`]);
-    setMsg([...msg, { message: textMessage, user: 'user' }]);
     const data = {
       room,
       message: textMessage,
-      username: user.username,
+      user: 'user',
+      username: 'pedro ta fixo mudar ',
     };
     socket.emit('message', data);
     setTextMessage('');
   };
 
   useEffect(() => {
+    Api.get('/public/webchat')
+      .then((response) => {
+        console.log(response.data);
+        const maps = response.data.map((item) => {
+          let obj = {
+            room: item.room,
+            username: item.username,
+            user: item.user,
+            message: item.message,
+            timer: item.createdAt,
+          };
+          return obj;
+        });
+        setMsg((msg) => [...msg, ...maps]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // return () => {
+    //   socket.off('message_client');
+    // };
+  }, []);
+
+  useEffect(() => {
+    socket.on('message_new', (newdata) => {
+      if (newdata == null) return;
+      setMsg((msg) => [...msg, newdata]);
+    });
     socket.on('message_bot', (data) => {
       if (data == null) return;
-      // updateMyArray((arr) => [...arr, `${data.message}`]);
-      setMsg([...msg, { message: data.message, user: 'bot' }]);
+      setMsg((msg) => [...msg, data]);
     });
-  }, [newData]);
+  }, [setMsg]);
 
   const keyHandler = (e) => {
     if (e.key === 'Enter') {
@@ -87,24 +92,8 @@ const Chatbox = (props) => {
   };
 
   useEffect(() => {
-    socket.on('message_new', (data) => {
-      console.log('data', data);
-    });
-  }, [newData]);
-
-  useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [textMessage]);
-
-  // useEffect(() => {
-  //   socket.emit('select_room', {
-  //     room,
-  //     user: user.username,
-  //     userID: user.id,
-  //   });
-  // }, [user, room]);
-
-  // console.log('msg', msg);
 
   return (
     <div className={chatPreview(closeWindow)}>
@@ -122,7 +111,7 @@ const Chatbox = (props) => {
               key={item.id}
               message={item.message}
               user={item.user}
-              timer={item.timer}
+              timer={item.time}
             />
           ))}
           <div ref={bottomRef} />
