@@ -18,7 +18,7 @@ function Homepage() {
   return (
     <>
     
-      <div className='w-[100%] m-auto '>
+      <div className='w-[100%] m-auto pb-20 '>
       <Fade top>
 
 <Header/>

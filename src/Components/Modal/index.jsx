@@ -1,12 +1,12 @@
 import React from "react";
 
-const Modal = ({closeModal, confirmModal}) => { 
+const Modal = ({closeModal, confirmModal, label, labelStrong}) => { 
     return(
         <div className=" w-[40%] fixed bg-[#eee] top-[25%] left-[50%] px-8 py-8 translate-x-[-50%] rounded-lg text-center shadow-md  ">
             <div className="modalContainer">
                
                 <div className="pb-8 text-xl ">
-                    <h1>Tem certeza que deseja alterar suas <strong>Informações</strong>?</h1>
+                    <h1>{label} <strong>{labelStrong}</strong>?</h1>
                 </div>
                 <div className="body">
                 </div>

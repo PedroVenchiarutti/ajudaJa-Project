@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import EditProfilePNG from '/images/editprofile.png'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import Modal from "../../Components/Modal/Modal";
+import Modal from "../../Components/Modal/";
 import Fade from 'react-reveal/Fade';
 
 
@@ -71,7 +71,7 @@ const editProfile = () => {
 
 
                     {/* Content */}
-                <div className="lg:w-[1080px] pt-32 grid m-auto">
+                <div className="lg:w-[1080px] pt-32 pb-32 grid m-auto">
                   <Fade bottom>
                       
                       <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-10 py-5 rounded-lg pb-10 px-4">
@@ -148,7 +148,7 @@ const editProfile = () => {
                       
                   </Fade>
 
-                  {openModal && <Modal confirmModal={'/myProfile'} closeModal={setOpenModal}/>}
+                  {openModal && <Modal label='Tem certeza que deseja alterar suas' labelStrong='Informações' confirmModal={'/myProfile'} closeModal={setOpenModal}/>}
                 </div>
 
          

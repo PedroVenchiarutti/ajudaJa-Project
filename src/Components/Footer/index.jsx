@@ -10,7 +10,7 @@ export default function Footer (){
       <div className='md:w-full '>
 
         <div className=" pb-20 bg-navBg md:w-full   ">
-        <div className='md:h-36 pt-14  py-6 px-8 md:pt-20 lg:max-w-[1270px] mt-44 m-auto md:px-24  flex md:justify-between  md:items-center md:flex-row flex-col  '>
+        <div className='md:h-36 pt-14  py-6 px-8 md:pt-20 lg:max-w-[1270px]  m-auto md:px-24  flex md:justify-between  md:items-center md:flex-row flex-col  '>
 
             <div className=''>
               <div className='w-[200px]'><img src={Logo}  alt="" /></div>
