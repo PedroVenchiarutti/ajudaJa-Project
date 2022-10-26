@@ -13,18 +13,21 @@ import '../../index.scss';
 
 function Homepage() {
 
+  
+
   return (
     <>
     
       <div className='w-[100%] m-auto '>
+      <Fade top>
+
+<Header/>
+
+</Fade>
      
       <div className='lg:max-w-[1280px] m-auto'>
-        <Fade top>
-
-        <Header/>
-      
-        </Fade>
-        <Information/>
+        
+        <Information id='about'/>
         <Cards/>
         <FAQ/>
         <Chatbox/>

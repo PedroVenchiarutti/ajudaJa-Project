@@ -1,10 +1,11 @@
-import { IconButton, Toolbar, AppBar, Drawer, Link, MenuItem, Button } from "@mui/material";
+import { IconButton, Toolbar, AppBar, Drawer, MenuItem, Button, Container } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { useEffect, useState, useContext } from "react";
 import logo from '/images/logo-v2.png'
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from '../../contexts/auth';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Link as Scroll } from 'react-scroll'
 
 
 
@@ -29,7 +30,7 @@ const headersData = [
     }, 
     {
         label: 'Sobre',
-        href: '/'
+        href: 'about'
     },
     {
         label: 'Meu perfil',
@@ -103,74 +104,99 @@ const displayMobile = () => {
 }
 
 const getMenuButtons = () => { 
-    return headersData.map(({label, href})=> { 
-        return(
-            <Button {...{
-                key:label,
-                color: 'inherit',
-                to: href,
-                component: RouterLink,
-                
 
-            }} sx={{ 
-                textTransform: 'capitalize',
-                size: '70px',
-                fontFamily: 'DM Sans',
-                fontWeight: 'bold',
-                fontSize: '18px',
-                marginLeft: '30px',
-                background: 'transparent',
-                '&:hover': { 
-                borderRadius: '0px',
-                background: 'transparent',
-                // backgroundColor: '#316B44',
-                padding: '14px 9px',
-                borderBottom: '3px solid #316B44 ',
-                color: '#316B44',
-                transition: 'none',
-              
-            }}}>
-                {label}
-            </Button>
-        )
-    })
+    return (
+        <>
+            <Link {...{component: Link, to: '/', color: 'inherit', style: {textDecoration: 'none', fontWeight: 'bold',  marginLeft: '30px'}, key: 'inicio'}} className='hover:text-[#1f721f] text-lg hover:border-b-2 hover:pb-4 hover:pt-3 hover:mb-[-5px] '>
+                Inicio
+            </Link>
+
+             <Scroll to={'about'} smooth={true} duration={1000}>
+                 <Link {...{component: Link,  color: 'inherit', style: {textDecoration: 'none', fontWeight: 'bold',  marginLeft: '30px'}, key: 'Sobre'}} className='hover:text-[#1f721f] text-lg hover:border-b-2 hover:pb-[17.5px] hover:pt-4 hover:mb-[-6px] '>
+                            Sobre
+                 </Link>
+             </Scroll>
+
+            <Link {...{component: Link, to: '/myprofile', color: 'inherit', style: {textDecoration: 'none', fontWeight: 'bold',  marginLeft: '30px'}, key: 'Meu perfil'}} className='hover:text-[#1f721f] text-lg hover:border-b-2 hover:pb-4 hover:pt-3 hover:mb-[-5px] '>
+            Meu perfil
+             </Link>
+
+        </>
+
+        
+    )
+
+  
 }
 
 const displayDesktop = () => { 
     return ( 
-        <Toolbar sx={{
-            backgroundColor:"#3DCC67",
-            paddingRight: "79px",
-            paddingLeft: "30px",
-            display: 'flex',
-            justifyContent: 'space-between',
-            textShadow: 'none   '
-            }}>
-            <div><img className="w-[100px]" src={logo} alt="" /></div>
-            <div className="flex items-center">{getMenuButtons()}
-            {buttonLogout()}
-            </div>
-        </Toolbar>
+        <AppBar position="static" sx={{backgroundColor: "#3DCC67", boxShadow:'rgba(0, 0, 0, 0.0) 1.95px 1.95px 2.6px'}}>
+            <Container maxWidth='lg' >
+                <Toolbar sx={{
+                 display:'flex',
+                 justifyContent: 'space-between',
+                 fontFamily: 'DM Sans',
+                    }}>
+            
+                        <div>
+                            <img className="w-[100px]" src={logo} alt="" />
+                            </div>
+                        <div className="flex items-center">{getMenuButtons()}
+                        {buttonLogout()}
+                        </div>
+            
+                </Toolbar>
+            </Container>
+        </AppBar>
     )
 }
 
 const getDrawerChoices = () => { 
-    return headersData.map(({label, href}) => { 
-        return(
+
+    return (
+        <>
             <Link
-            {...{
-                component: RouterLink, 
-                to:href,
-                color: 'inherit',
-                style: {textDecoration: 'none'},
-                key: label,
-                
-            }}
-            >
-                <MenuItem sx={{fontFamily: 'DM Sans', fontWeight: 500}}>{label}</MenuItem>
-            </Link>
-        )
-    })
+                {...{
+                    component: Link,
+                    to:'/',
+                    color: 'inherit',
+                    style: {textDecoration: 'none'},
+                    key: 'Inicio',
+            
+                }}
+                >
+                    <MenuItem sx={{fontFamily: 'DM Sans', fontWeight: 500}}>Inicio</MenuItem>
+                </Link>
+
+                <Scroll to={'about'} smooth={true} duration={1000}>
+                    <Link
+                    {...{
+                        component: Link,
+                        color: 'inherit',
+                        style: {textDecoration: 'none'},
+                        key: 'Sobre',
+                    }}
+                    >
+                        <MenuItem sx={{fontFamily: 'DM Sans', fontWeight: 500}}>Sobre</MenuItem>
+                    </Link>
+                </Scroll>
+
+                <Link
+                {...{
+                    component: Link,
+                    to:'/myprofile',
+                    color: 'inherit',
+                    style: {textDecoration: 'none'},
+                    key: 'Meu perfil',
+            
+                }}
+                >
+                    <MenuItem sx={{fontFamily: 'DM Sans', fontWeight: 500}}>Meu perfil</MenuItem>
+                </Link>
+        </>
+    )
+   
 }
 
 return (

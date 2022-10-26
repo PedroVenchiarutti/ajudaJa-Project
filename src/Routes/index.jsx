@@ -6,7 +6,6 @@ import UserInformation from '../Pages/UserInformation/userinformation'
 import MyProfile from '../Pages/MyProfile/Myprofile';
 import MyProfilePublic from '../Pages/MyProfilePublic'
 import EditProfile from '../Pages/EditProfile'
-import LoginAndSign from '../Pages/LoginAndSignUp';
 import PasswordRecuperation from '../Pages/passwordRecuperation';
 import { AuthContext, AuthProvider } from '../contexts/auth';
 import Login from '../Pages/Login'

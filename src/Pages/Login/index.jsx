@@ -51,20 +51,21 @@ const FormLogin = ({goToRegister}) => {
     <>
       <div className="w-[100w] h-[100vh] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
         <div className="grid grid-cols-1 md:grid-cols-2 h-[100vh]">
-          <div className="hidden md:block bg-gradient-to-t from-navFontColor to-firstSessionFontColor drop-shadow-lg pl-10 pt-20">
+          <div className="hidden md:flex justify-center  bg-gradient-to-t from-navFontColor to-firstSessionFontColor drop-shadow-lg pl-10 ">
             <Fade left>
-              <div className="mt-32 m-auto relative">
-                <h2 className="font-bold text-white text-6xl px-4 pb-3 drop-shadow-md">
-                  Saia de casa{' '}
-                </h2>
+             
+                
 
-                <h2 className="font-medium text-white px-4 pb-2 text-5xl drop-shadow-md">
-                  sem se preocupar com
-                </h2>
-                <h2 className="font-bold px-4 lg:pl-48  text-[#9EFFBB] drop-shadow-md text-7xl">
-                  o amanhã!
-                </h2>
-              </div>
+                  <div className='flex items-center justify-center'>
+                    <h2 className='font-bold lg:text-5xl drop-shadow-md text-5xl  text-white xl:text-7xl xl:leading-[80px] '>
+                      Saia de casa <br/>
+                      <span className='font-normal'>sem se <br/> preocupar com</span> <br/>
+                      <span className='xl:text-8xl font-bold  text-[#9EFFBB] '>o amanhã! </span>
+                    </h2>
+                  </div>
+                 
+                
+              
             </Fade>
           </div>
 

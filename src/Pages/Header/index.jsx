@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => { 
     return (
-        <header className='w-full before:content-[""] before:h-[550px]  md:before:h-[650px]  lg:before:h-[600px]  before:absolute before:z-[-1]  before:w-full  before:bg-[#dcfddd]'>
+        <header className='w-[100%] bg-[#dcfddd]'>
             <div className="max-w-[1200px] pr-5 pt-24 md:pt-32 m-auto pb-16 ">
 
             <div className="content grid md:grid-cols-2 items-center text-[#0f0f0f]">

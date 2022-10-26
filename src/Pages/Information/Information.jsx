@@ -4,7 +4,7 @@ import DoctorGirl from '/images/doctor-girl.svg'
 import DoctorMan from '/images/doctor-man.svg'
 import Fade from 'react-reveal/Fade';
 
-export default function Information() { 
+export default function Information({id}) { 
 
 
     const contentClass = ' m-2.5 flex flex-col sm:flex-row md:flex-row justify-center items-center gap-1 sm:gap-10 animation-toRight  '
@@ -16,7 +16,7 @@ export default function Information() {
     return ( 
 
         
-    <div className="w-[100%] pt-20">
+    <div id={id} className="w-[100%] pt-20">
 
             <Fade left>
             
