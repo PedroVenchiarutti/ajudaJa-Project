@@ -1,7 +1,8 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import Api from '../Api/api';
-import { testeAlert } from '../Components/alerts';
+import { loginHandler, loadingAlert } from '../Components/alerts';
+import Swal from 'sweetalert2';
 
 const USER_STORAGE_KEY = 'username';
 const TOKEN_STORAGE_KEY = 'token';
@@ -56,21 +57,21 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = (email, password, redirectTo = '/myprofile') => {
-    if (email && password)
-      Api.post('/public/login', { email, password })
-        .then((resp) => {
-          setLoggedUserState(resp.data.user, resp.data.user.token);
-          return <Navigate to="/" />;
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-          testeAlert({
-            icon: 'error',
-            title: 'Oops...',
-            text: err.response.data,
-          });
-
-            });
+    if (email && password) loadingAlert();
+    Api.post('/public/login', { email, password })
+      .then((resp) => {
+        setLoggedUserState(resp.data.user, resp.data.user.token);
+        Swal.close();
+        return <Navigate to="/" />;
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        loginHandler({
+          icon: 'error',
+          title: 'Oops...',
+          text: err.response.data,
+        });
+      });
   };
 
   const logout = () => {

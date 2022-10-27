@@ -4,10 +4,9 @@ import { storage } from '../../Api/api';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
 import Header from '../../Components/Header/Header';
-import { urlSignUp } from '../../Components/Axios/AxiosRoutes';
+import { urlSignUp } from '../../Api/api';
 import { IMaskInput } from 'react-imask';
 import { ToastContainer } from 'react-toastify';
-import { notify, noImage } from '../../Components/alerts';
 import schemaValidation from '../../Validations/schemaUserValidation';
 import { async } from '@firebase/util';
 
@@ -49,7 +48,6 @@ export default function SignUp() {
 
   const uploadImage = () => {
     if (preview == null) {
-      noImage();
       console.log('sajin');
     } else {
       if (imageUpload == null) return;
