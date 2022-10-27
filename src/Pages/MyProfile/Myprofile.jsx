@@ -14,12 +14,11 @@ const MyProfile = () => {
       cellphone: '',
       birthday: '',
       avatar: '',
-      helth_insurance: 'Não'
+      helth_insurance: ''
   })
   
   const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/')
   const [qrcode, setQrCode] = useState('')
-
 
   const id = localStorage.getItem('id')
 
@@ -45,14 +44,15 @@ const MyProfile = () => {
                   cellphone: response.data.user_informations.emergencynumber,
                   birthday: response.data.user_informations.birthday,
                   avatar: response.data.user_informations.avatar,
-                  helth_insurance: response.data.user_informations.helth_insurance,
+                  helth_insurance: response.data.user_informations.helth_insuranceo,
                   name: response.data.user_informations.name, 
                   lastname: response.data.user_informations.lastname, 
                   
               
               })
-      
-          }).then(() => {
+
+          }).catch((err) => {
+            console.log(err)
       })
       }, [])
 
@@ -85,7 +85,9 @@ const MyProfile = () => {
                                     
                                   <InputReadOnly value={client.cellphone} label="Número de Emergência" />  
 
-                                  <InputReadOnly value={client.birthday} label="Data de Nascimento" />  
+                                  <InputReadOnly value={client.birthday} label="Data de Nascimento" /> 
+
+                                  <InputReadOnly value={client.helth_insurance} label="Convênio Médico" /> 
                                      
                              
                         

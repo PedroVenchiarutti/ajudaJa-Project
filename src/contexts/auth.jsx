@@ -1,10 +1,12 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import Api from '../Api/api';
+import Modal from '../Components/Modal';
 
 const USER_STORAGE_KEY = 'username';
 const TOKEN_STORAGE_KEY = 'token'
 const ID_STORAGE_KEY = 'id';
+
 
 const saveUserInStorage = (user, token) => { 
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
@@ -24,6 +26,7 @@ const deleteStorageUser = () => {
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [openModal, setOpenModal] = useState(false)
   const [user, setUser] = useState({});
   const [authenticated, setAuthenticated] = useState(false);
   const [token, setToken] = useState('');
@@ -68,9 +71,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    confirm('Você realmente deseja sair?')
-    setUnloggedUserState();
-    return <Navigate to='/'/>
+    
+   
+    return (
+      <>
+      {openModal && <Modal label='Você deseja realmente' labelStrong='sair' confirmModal={'/'} closeModal={setOpenModal}/>}
+        {setUnloggedUserState()}
+      </>
+    )
   };
 
   const state = {

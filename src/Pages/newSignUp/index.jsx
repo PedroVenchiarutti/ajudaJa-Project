@@ -96,8 +96,6 @@ const newSignUp = ({backToLogin}) => {
 
     }
 
-    console.log('Olá')
-
     function next(){
         uploadImage();
 
@@ -170,6 +168,8 @@ const newSignUp = ({backToLogin}) => {
                       <img className="w-[120px]" src={logo} alt="" />
                         </div>
                         <input type="file" ref={fileInputRef} accept='image/*' id="fileImg" onChange={(e) => setImageUpload(e.target.files[0])} className="ml-36 absolute hidden placeholder-colorFontParagraph max-w-3xl w-80 mt-[362px] border-b bg-faqGrayBg p-1 "/>
+
+                        
                         <Input type="text" info={state.firstname} handleChange={handleChange('firstname')} label="Seu nome"/>
                         <Input type="text" info={state.lastname} handleChange={handleChange('lastname')} label="Seu sobrenome"/>
 
