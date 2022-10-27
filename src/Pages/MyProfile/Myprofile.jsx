@@ -3,7 +3,7 @@ import QRCode from 'qrcode'
 import Fade from 'react-reveal/Fade';
 import Api from "../../Api/api";
 import { notify } from "../../Components/alerts";
-import Input from '../../Components/TextField'
+import InputReadOnly from "../../Components/ReadOnly";
 import { Link } from "react-router-dom";
 
 const MyProfile = () => { 
@@ -77,28 +77,26 @@ const MyProfile = () => {
                                 <img src={qrcode} alt="" />
                             </div>
                             <div className="pt-4 formAndButtons flex flex-col lg:w-[500px] content-center gap-4 px-4 ">
+                                        
+                                        
+                                  <InputReadOnly value={client.name} label="Nome" />          
+                                
+                                  <InputReadOnly value={client.email} label="Email" />  
+                                    
+                                  <InputReadOnly value={client.cellphone} label="Número de Emergência" />  
 
-                                        <Input info={client.name} id="outlined-read-only-input"  label="Nome" readOnly={true}/>
-                                        <Input info={client.lastname} id="read-only-input" label="E-mail" readOnly={true}/>
-                                       
-                                        <Input info={client.email} id="read-only-input" label="Email" readOnly={true}/>
-                                        <Input info={client.cellphone} id="read-only-input" label="Telefone de Emergência" readOnly={true}/>
-                                        <Input info={client.birthday} id="read-only-input" label="Data de Nascimento" readOnly={true}/>
-                                
-                                  
-                                
-                        
-                        
+                                  <InputReadOnly value={client.birthday} label="Data de Nascimento" />  
+                                     
                              
                         
                                 <div className="buttons py-6 pt-14 flex gap-4 justify-center">
-                        
+                                 
                                     <button className="border px-8 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white "><Link to="/editprofile">Editar</Link></button>
 
-
+                                    <button className=" px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border "><a href={qrcode} download="qrcode.png">Baixar Código QR</a></button>
                              
                                 </div>
-                                <button className="mx-24 px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border "><a href={qrcode} download="qrcode.png">Baixar Código QR</a></button>
+                                
                             </div>
                         </div>
                     </Fade>
