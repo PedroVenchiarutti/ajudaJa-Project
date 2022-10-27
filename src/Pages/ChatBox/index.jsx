@@ -30,7 +30,7 @@ const Chatbox = (props) => {
       id: 1,
       message: 'Olá, como posso te ajudar?',
       user: 'bot',
-      timer: '14:20',
+      time: '14:20',
     },
   ]);
   const [newData, setNewData] = useState({});
@@ -57,8 +57,9 @@ const Chatbox = (props) => {
             username: item.username,
             user: item.user,
             message: item.message,
-            timer: item.createdAt,
+            time: item.createdAt,
           };
+          console.log(obj);
           return obj;
         });
         setMsg((msg) => [...msg, ...maps]);
