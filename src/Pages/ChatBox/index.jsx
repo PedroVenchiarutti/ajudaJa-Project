@@ -28,7 +28,7 @@ const Chatbox = (props) => {
   const [msg, setMsg] = useState([
     {
       id: 1,
-      message: 'Olá, como posso te ajudar?',
+      message: 'Digite "Iniciar" caso queira conversar com o bot?',
       user: 'bot',
       time: '14:20',
     },
@@ -41,17 +41,16 @@ const Chatbox = (props) => {
       room,
       message: textMessage,
       user: 'user',
-      username: 'pedro ta fixo mudar ',
+      username: 'pedros09',
     };
     socket.emit('message', data);
     setTextMessage('');
   };
 
   useEffect(() => {
-    Api.get('/public/webchat')
+    Api.post(`/public/webchat/pedros09`)
       .then((response) => {
-        console.log(response.data);
-        const maps = response.data.map((item) => {
+        let objs = response.data.map((item) => {
           let obj = {
             room: item.room,
             username: item.username,
@@ -59,10 +58,9 @@ const Chatbox = (props) => {
             message: item.message,
             time: item.createdAt,
           };
-          console.log(obj);
           return obj;
         });
-        setMsg((msg) => [...msg, ...maps]);
+        setMsg((msg) => [...msg, ...objs]);
       })
       .catch((error) => {
         console.log(error);
