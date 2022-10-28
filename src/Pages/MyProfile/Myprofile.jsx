@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../Components/Header/Header';
-import Footer from '../../Components/Footer/Footer';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import QRCode from 'qrcode';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
+import InputReadOnly from '../../Components/ReadOnly';
+import { Link } from 'react-router-dom';
 
 const MyProfile = () => {
-  const [state, setState] = useState([]);
-
   const [client, setClient] = useState({
     username: '',
     email: '',
     cellphone: '',
     birthday: '',
     avatar: '',
+    helth_insurance: '',
   });
+
   const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/');
   const [qrcode, setQrCode] = useState('');
+
+  const id = localStorage.getItem('id');
 
   const config = {
     headers: {
@@ -26,32 +26,11 @@ const MyProfile = () => {
     },
   };
 
-  const id = localStorage.getItem('id');
-
   const GenerateQRCode = (_) => {
     QRCode.toDataURL(url, (err, url) => {
       if (err) return console.error(err);
       setQrCode(url);
     });
-  };
-
-  const handleAdd = (e) => {
-    e.preventDefault();
-    const abc = [...state, []];
-    setState(abc);
-  };
-
-  const handleChange = (e, i) => {
-    let inputData = [...state];
-    inputData[i] = e.target.value;
-    setState(inputData);
-  };
-
-  const handleDelete = (e, i) => {
-    e.preventDefault();
-    let deleteVal = [...state];
-    deleteVal.splice(i, 1);
-    setState(deleteVal);
   };
 
   useEffect((e) => {
@@ -63,107 +42,70 @@ const MyProfile = () => {
           cellphone: response.data.user_informations.emergencynumber,
           birthday: response.data.user_informations.birthday,
           avatar: response.data.user_informations.avatar,
+          helth_insurance: response.data.user_informations.helth_insuranceo,
+          name: response.data.user_informations.name,
+          lastname: response.data.user_informations.lastname,
         });
       })
-      .then(() => {});
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    GenerateQRCode();
   }, []);
 
   return (
-    <div className="w-full   bg-white">
-      <Header />
-
-      {/* Content */}
-      <div className="lg:w-[1080px] pt-32 grid m-auto">
+    <div className="w-full  bg-white h-full ">
+      <div className="lg:w-[1080px]  pt-32  pb-32 grid m-auto">
+        {/* Content */}
         <Fade bottom>
           <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-10 py-5 rounded-lg pb-10 px-4">
             <div className="flex justify-center items-center ">
               <img
-                className="w-52 h-52 object-cover mr-7"
+                className="w-32 h-32 rounded-[50%] border border-[#E3E6E3] object-cover mr-7"
                 src={client.avatar}
                 alt=""
               />
-              <div className=" flex flex-col gap-2">
-                <button
-                  onClick={GenerateQRCode}
-                  className="border mr-5 px-6 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white "
-                >
-                  Gerar código QR
-                </button>
-              </div>
 
               <img src={qrcode} alt="" />
             </div>
-            <div className="pt-4 formAndButtons flex flex-col lg:w-[550px] content-center ">
-              <form className="flex flex-col gap-5 items-center ">
-                <input
-                  className="border-b-2 w-[400px] text-xl "
-                  value={client.username}
-                  type="text"
-                  readOnly
-                />
-                <input
-                  className="border-b-2 w-[400px] text-xl "
-                  value={client.email}
-                  type="email"
-                  readOnly
-                />
-                <input
-                  className="border-b-2 w-[400px] text-xl "
-                  value={client.cellphone}
-                  type="tel"
-                  readOnly
-                />
-                <div className="flex gap-2">
-                  <label className="text-xl mr-3" htmlFor="">
-                    Data de Nascimento
-                  </label>
-                  <input
-                    className="border-b-2 text-xl w-[200px]"
-                    value={client.birthday}
-                  />
-                </div>
-                <div className="self-start pl-1 lg:pl-[78px] font-bold text-xl">
-                  <label className="pr-6"> Contatos de emergência </label>
-                  <button onClick={handleAdd}>
-                    <AddCircleOutlineIcon />
-                  </button>
-                </div>
-                {state.map((data, i) => {
-                  return (
-                    <div key={i} className="flex gap-2">
-                      <input
-                        className=" border-b-2  text-xl "
-                        placeholder="Número de Emergência"
-                        type="tel"
-                        readOnly
-                      />
-                      <button onClick={(e) => handleDelete(e, i)}>
-                        <DeleteForeverIcon />
-                      </button>
-                    </div>
-                  );
-                })}
-              </form>
+            <div className="pt-4 formAndButtons flex flex-col lg:w-[500px] content-center gap-4 px-4 ">
+              <InputReadOnly value={client.name} label="Nome" />
+
+              <InputReadOnly value={client.email} label="Email" />
+
+              <InputReadOnly
+                value={client.cellphone}
+                label="Número de Emergência"
+              />
+
+              <InputReadOnly
+                value={client.birthday}
+                label="Data de Nascimento"
+              />
+
+              <InputReadOnly
+                value={client.helth_insurance}
+                label="Convênio Médico"
+              />
 
               <div className="buttons py-6 pt-14 flex gap-4 justify-center">
                 <button className="border px-8 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white ">
-                  <a href="/editprofile">Editar</a>
+                  <Link to="/editprofile">Editar</Link>
                 </button>
-                <button className="px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 hover:text-navFontColor hover:border ">
-                  Informações Adicionais
+
+                <button className=" px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border ">
+                  <a href={qrcode} download="qrcode.png">
+                    Baixar Código QR
+                  </a>
                 </button>
               </div>
-              <button className="mx-24 px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border ">
-                <a href={qrcode} download="qrcode.png">
-                  Baixar Código QR
-                </a>
-              </button>
             </div>
           </div>
         </Fade>
       </div>
-
-      <Footer />
     </div>
   );
 };

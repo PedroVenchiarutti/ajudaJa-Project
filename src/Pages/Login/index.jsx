@@ -4,7 +4,8 @@ import logo from '/images/logo-v2.png';
 import Fade from 'react-reveal/Fade';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from '../../Components/TextField';
-import { testeAlert } from '../../Components/alerts';
+import Api from '../../Api/api';
+import { Link } from 'react-router-dom';
 
 const FormLogin = ({ goToRegister }) => {
   const [email, setEmail] = useState('');
@@ -14,7 +15,6 @@ const FormLogin = ({ goToRegister }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     login(email, password);
   };
 
@@ -33,6 +33,9 @@ const FormLogin = ({ goToRegister }) => {
   };
 
   const newPassword = (e) => {
+    Api.post('/public/recovery', { email: email }).then((response) => {
+      console.log(response);
+    });
     alert('Veja sua caixa de entrada');
     setSuccess(false);
     setEmail('');
@@ -48,18 +51,18 @@ const FormLogin = ({ goToRegister }) => {
     <>
       <div className="w-[100w] h-[100vh] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
         <div className="grid grid-cols-1 md:grid-cols-2 h-[100vh]">
-          <div className="hidden md:block bg-gradient-to-t from-navFontColor to-firstSessionFontColor drop-shadow-lg  ">
+          <div className="hidden md:flex justify-center  bg-gradient-to-t from-navFontColor to-firstSessionFontColor drop-shadow-lg pl-10 ">
             <Fade left>
-              <div className="flex flex-col items-center justify-center h-[100vh] ">
-                <h2 className="font-bold text-white text-6xl pr-[160px] pb-3 drop-shadow-md">
-                  Saia de casa{' '}
-                </h2>
-
-                <h2 className="font-medium text-white px-4 pb-2 text-5xl drop-shadow-md">
-                  sem se preocupar com
-                </h2>
-                <h2 className="font-bold px-4 lg:pl-48  text-[#9EFFBB] drop-shadow-md text-7xl">
-                  o amanhã!
+              <div className="flex items-center justify-center">
+                <h2 className="font-bold lg:text-5xl drop-shadow-md text-5xl  text-white xl:text-7xl xl:leading-[80px] ">
+                  Saia de casa <br />
+                  <span className="font-normal">
+                    sem se <br /> preocupar com
+                  </span>{' '}
+                  <br />
+                  <span className="xl:text-8xl font-bold  text-[#9EFFBB] ">
+                    o amanhã!{' '}
+                  </span>
                 </h2>
               </div>
             </Fade>
@@ -72,7 +75,9 @@ const FormLogin = ({ goToRegister }) => {
                   <h1 className="text-lg font-bold">
                     Bem-vindo, faça seu login!
                   </h1>
-                  <img className="w-[120px]" src={logo} alt="" />
+                  <Link to="/">
+                    <img className="w-[120px]" src={logo} alt="" />
+                  </Link>
                 </div>
 
                 <Input
@@ -104,9 +109,9 @@ const FormLogin = ({ goToRegister }) => {
                     Entrar
                   </button>
 
-                  <a onClick={goToRegister} className="hover:underline">
+                  <Link className="hover:underline" to="/register">
                     Não tem cadastro? <strong>Cadastre-se agora!</strong>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </Fade>

@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
 import { Button, FormHelperText } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { Link, redirect } from 'react-router-dom';
 
 const newSignUp = ({ backToLogin }) => {
   const [date, setDate] = useState();
@@ -140,6 +141,7 @@ const newSignUp = ({ backToLogin }) => {
                         message: 'Mínimo de 3 caracteres',
                       },
                     })}
+                    color="success"
                     helperText={errors.userName?.message}
                     variant="standard"
                     fullWidth
@@ -147,6 +149,7 @@ const newSignUp = ({ backToLogin }) => {
                     label="Nome de usuario"
                   />
                   <TextField
+                    color="success"
                     label="Email"
                     aria-describedby="outlined-weight-helper-text"
                     fullWidth
@@ -161,6 +164,7 @@ const newSignUp = ({ backToLogin }) => {
                     })}
                   />
                   <TextField
+                    color="success"
                     id="standard-basic"
                     type="password"
                     label="Senha"
@@ -182,6 +186,7 @@ const newSignUp = ({ backToLogin }) => {
                   />
                   <TextField
                     id="standard-basic"
+                    color="success"
                     label="Confirme sua senha"
                     variant="standard"
                     type="password"
@@ -258,6 +263,7 @@ const newSignUp = ({ backToLogin }) => {
                   className="ml-36 absolute hidden placeholder-colorFontParagraph max-w-3xl w-80 mt-[362px] border-b bg-faqGrayBg p-1 "
                 />
                 <TextField
+                  color="success"
                   aria-describedby="outlined-weight-helper-text"
                   error={Boolean(errors.firstName)}
                   {...register('firstName', {
@@ -277,6 +283,7 @@ const newSignUp = ({ backToLogin }) => {
                   label="Insira seu primeiro nome"
                 />
                 <TextField
+                  color="success"
                   label="Insira seu sobrenome"
                   aria-describedby="outlined-weight-helper-text"
                   fullWidth
@@ -301,11 +308,13 @@ const newSignUp = ({ backToLogin }) => {
                         }`,
                       );
                   }}
+                  color="success"
                   err={errDate}
                   txt={errMsgDate}
                 />
 
                 <TextField
+                  color="success"
                   label="Insira um numero de emergência"
                   aria-describedby="outlined-weight-helper-text"
                   fullWidth
