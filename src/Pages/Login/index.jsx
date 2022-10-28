@@ -5,6 +5,7 @@ import Fade from 'react-reveal/Fade';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from '../../Components/TextField';
 import Api from '../../Api/api';
+import { loadingAlert } from '../../Components/alerts';
 import { Link } from 'react-router-dom';
 
 const FormLogin = ({ goToRegister }) => {
@@ -16,6 +17,7 @@ const FormLogin = ({ goToRegister }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password);
+    loadingAlert();
   };
 
   const keyHandler = (e) => {

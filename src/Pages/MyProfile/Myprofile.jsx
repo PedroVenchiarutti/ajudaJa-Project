@@ -4,6 +4,7 @@ import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
 import InputReadOnly from '../../Components/ReadOnly';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const MyProfile = () => {
   const [client, setClient] = useState({
@@ -33,24 +34,28 @@ const MyProfile = () => {
     });
   };
 
-  useEffect((e) => {
-    Api.get(`/private/client/${id}`, config)
-      .then((response) => {
-        setClient({
-          username: response.data.user.username,
-          email: response.data.user.email,
-          cellphone: response.data.user_informations.emergencynumber,
-          birthday: response.data.user_informations.birthday,
-          avatar: response.data.user_informations.avatar,
-          helth_insurance: response.data.user_informations.helth_insuranceo,
-          name: response.data.user_informations.name,
-          lastname: response.data.user_informations.lastname,
+  useEffect(
+    (e) => {
+      Api.get(`/private/client/${id}`, config)
+        .then((response) => {
+          Swal.close();
+          setClient({
+            username: response.data.user.username,
+            email: response.data.user.email,
+            cellphone: response.data.user_informations.emergencynumber,
+            birthday: response.data.user_informations.birthday,
+            avatar: response.data.user_informations.avatar,
+            helth_insurance: response.data.user_informations.helth_insuranceo,
+            name: response.data.user_informations.name,
+            lastname: response.data.user_informations.lastname,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    },
+    [client],
+  );
 
   useEffect(() => {
     GenerateQRCode();
@@ -92,15 +97,18 @@ const MyProfile = () => {
               />
 
               <div className="buttons py-6 pt-14 flex gap-4 justify-center">
-                <button className="border px-8 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white ">
-                  <Link to="/editprofile">Editar</Link>
-                </button>
+                <Link
+                  to="/editprofile"
+                  className="border px-8 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white "
+                >
+                  Editar
+                </Link>
 
-                <button className=" px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border ">
-                  <a href={qrcode} download="qrcode.png">
+                <a href={qrcode} download="qrcode.png">
+                  <button className=" px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border ">
                     Baixar Código QR
-                  </a>
-                </button>
+                  </button>
+                </a>
               </div>
             </div>
           </div>

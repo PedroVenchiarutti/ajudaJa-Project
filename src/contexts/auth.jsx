@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Navigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Api from '../Api/api';
 import Modal from '../Components/Modal';
 
@@ -60,7 +61,7 @@ export const AuthProvider = ({ children }) => {
       Api.post('/public/login', { email, password })
         .then((resp) => {
           setLoggedUserState(resp.data.user, resp.data.user.token);
-
+          Swal.close();
           return <Navigate to="/" />;
         })
         .catch((err) => {

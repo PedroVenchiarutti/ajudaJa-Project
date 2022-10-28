@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Modal from '../../Components/Modal/';
+import Modal from '../../Components/Modal';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
 import Input from '../../Components/TextField';
 import { storage } from '../../Api/api';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { UTurnLeftSharp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { loadingAlert } from '../../Components/alerts';
 
 const editProfile = () => {
   const [imageUpload, setImageUpload] = useState(null);
@@ -51,7 +51,8 @@ const editProfile = () => {
 
   const uploadImage = () => {
     if (preview == null) {
-      noImage();
+      loadingAlert();
+      handleSubmit(client.avatar);
     } else {
       if (imageUpload == null) return;
       const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
@@ -111,13 +112,15 @@ const editProfile = () => {
       },
       config,
     )
-      .then((resp) => {})
+      .then((resp) => {
+        console.log(resp);
+      })
       .catch((err) => console.log(err));
 
     Api.put(
       `/private/client/update/${id}`,
       {
-        birthday,
+        birthday: '2005-06-23',
         emergencynumber,
         helth_insurance,
         gender,
@@ -188,17 +191,19 @@ const editProfile = () => {
               </form>
 
               <div className="buttons py-6 pt-14 flex flex-col gap-2 justify-center">
-                <button
-                  className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white"
+                <Link
+                  to="/myprofile"
+                  className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white text-center"
                   onClick={uploadImage}
                 >
-                  {' '}
                   Salvar
-                </button>
-                <button className="px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border ">
-                  {' '}
-                  <Link to="/myprofile">Voltar</Link>
-                </button>
+                </Link>
+                <Link
+                  to="/myprofile"
+                  className="px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border text-center "
+                >
+                  Voltar{' '}
+                </Link>
               </div>
             </div>
           </div>

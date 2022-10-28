@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import logo from '/images/logo-v2.png';
 import Fade from 'react-reveal/Fade';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-import Input from '../../Components/TextField';
 import InputDate from '../../Components/InputDate';
 import RowRadioButtonsGroup from '../../Components/Radio';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -13,9 +12,9 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { storage } from '../../Api/api';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
-import { Button, FormHelperText } from '@mui/material';
+import { FormHelperText } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Link, redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const newSignUp = ({ backToLogin }) => {
   const [date, setDate] = useState();
@@ -84,8 +83,9 @@ const newSignUp = ({ backToLogin }) => {
       avatar: url,
     })
       .then((resp) => {
-        console.log(resp);
         Swal.close();
+        console.log(resp);
+        return <Navigate to="/userinformation"></Navigate>;
       })
       .catch((err) => {
         console.log(err);
@@ -117,7 +117,7 @@ const newSignUp = ({ backToLogin }) => {
         <div className="grid grid-cols-1  md:p-0 md:grid-cols-2 h-[100vh]">
           {success ? null : (
             <Fade left>
-              <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:h-[470px] h-[500px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
+              <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:h-[500px] h-[500px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
                 <div className="flex justify-between items-center">
                   <h1 className="text-md md:text-lg font-bold">
                     Cadastre-se agora!
@@ -146,6 +146,12 @@ const newSignUp = ({ backToLogin }) => {
                     variant="standard"
                     fullWidth
                     margin=""
+                    sx={{
+                      fontFamily: 'DM Sans',
+                    }}
+                    InputLabelProps={{
+                      style: { fontFamily: 'DM Sans', color: '#495057' },
+                    }}
                     label="Nome de usuario"
                   />
                   <TextField
@@ -162,6 +168,13 @@ const newSignUp = ({ backToLogin }) => {
                         setUser({ ...user, email: e.target.value });
                       },
                     })}
+                    sx={{
+                      fontFamily: 'DM Sans',
+                      marginTop: '10px',
+                    }}
+                    InputLabelProps={{
+                      style: { fontFamily: 'DM Sans', color: '#495057' },
+                    }}
                   />
                   <TextField
                     color="success"
@@ -183,6 +196,10 @@ const newSignUp = ({ backToLogin }) => {
                     })}
                     error={Boolean(errors.password)}
                     helperText={errors.password?.message}
+                    sx={{
+                      fontFamily: 'DM Sans',
+                      marginTop: '10px',
+                    }}
                   />
                   <TextField
                     id="standard-basic"
@@ -198,6 +215,13 @@ const newSignUp = ({ backToLogin }) => {
                         setUser({ ...user, confirmPassword: e.target.value });
                       },
                     })}
+                    sx={{
+                      fontFamily: 'DM Sans',
+                      marginTop: '10px',
+                    }}
+                    InputLabelProps={{
+                      style: { fontFamily: 'DM Sans', color: '#495057' },
+                    }}
                     error={Boolean(errors.confirmPassword)}
                     helperText={errors.confirmPassword?.message}
                   />
@@ -208,13 +232,13 @@ const newSignUp = ({ backToLogin }) => {
                   <div className="clearfix"></div>
 
                   <div className="pt-10 flex justify-between md:flex-row flex-col gap-5  content-center ">
-                    <a
-                      onClick={backToLogin}
+                    <Link
+                      to="/login"
                       className="hover:underline hover:cursor-pointer text-sm"
                     >
                       Usuário já cadastrado?{' '}
                       <strong>Volte para o login!</strong>
-                    </a>
+                    </Link>
 
                     <button className="hover:cursor-pointer text-sm flex items-center hover:text-navFontColor">
                       Próximo <ArrowRightIcon />
