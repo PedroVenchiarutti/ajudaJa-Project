@@ -9,10 +9,14 @@ export const inputText = ({
   onKeyUp,
   placeholder,
   id,
+  error,
+  helperText
 }) => {
   return (
     <TextField
       type={type}
+      error={error}
+      helperText={helperText}
       value={info}
       onChange={handleChange}
       id={'standard-basic'}
