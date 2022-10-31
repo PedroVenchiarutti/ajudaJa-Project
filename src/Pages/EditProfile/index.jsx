@@ -6,8 +6,9 @@ import Input from '../../Components/TextField';
 import { storage } from '../../Api/api';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { Link } from 'react-router-dom';
 import { loadingAlert } from '../../Components/alerts';
+import { UTurnLeftSharp } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const editProfile = () => {
   const [imageUpload, setImageUpload] = useState(null);
