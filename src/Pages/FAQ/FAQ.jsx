@@ -82,16 +82,17 @@ export default function FAQ() {
         <Fade left>
           <div className={cardFAQ()}>
             <div className={cardTitleFAQ(FAQ3)} onClick={(e) => setFAQ4(!FAQ4)}>
-              <h2 className="font-medium">Lorem ipsum</h2>
+              <h2 className="font-medium">O Ajuda.JÁ é gratuito mesmo?</h2>
               {FAQ4 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
             </div>
             <div className={cardContentFAQ(FAQ4)}>
               <SubdirectoryArrowRightIcon />
               <p className="text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-                facilis aperiam velit enim rem ratione, possimus, quos aut sint
-                pariatur, voluptatum eligendi perferendis modi commodi officiis!
-                Molestiae sit molestias voluptate.
+                Diferente de programas de assinatura, Sim!, o Ajuda.Já é
+                totalmente gratuito, não iremos cobrar nada de você, nem agora
+                nem posteriormente. Aqui não existe teste de 1 mês, ou 7 dias
+                grátis, aqui você terá acesso a todas as funcionalidades do
+                nosso sistema.
               </p>
             </div>
           </div>
@@ -103,16 +104,19 @@ export default function FAQ() {
               className={FAQ5ToUp(FAQ4, FAQ5)}
               onClick={(e) => setFAQ5(!FAQ5)}
             >
-              <h2 className="font-medium">Lorem ipsum</h2>
+              <h2 className="font-medium">
+                Existe alguma estação do Ajuda.já?
+              </h2>
               {FAQ5 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
             </div>
             <div className={cardContentFAQ(FAQ5)}>
               <SubdirectoryArrowRightIcon />
               <p className="text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-                facilis aperiam velit enim rem ratione, possimus, quos aut sint
-                pariatur, voluptatum eligendi perferendis modi commodi officiis!
-                Molestiae sit molestias voluptate.
+                Não, o Ajuda.JÁ é inteiramnete online, e até o presente momento
+                não possue nenhuma estação fisica. Optamos por não construir uma
+                estação, pois quase todos os cidadões atualmente possuem um
+                celular com acesso a internet então gostariamos de aproveitar
+                isso para que todos possam ter acesso a nossos serviços.
               </p>
             </div>
           </div>

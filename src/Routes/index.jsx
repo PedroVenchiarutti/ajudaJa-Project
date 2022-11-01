@@ -6,7 +6,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 import Layout from './Layout';
-import HomePage from '../Pages/Homepages/Homepage';
+import HomePage from '../Pages/Homepages';
 import UserInformation from '../Pages/UserInformation/userinformation';
 import MyProfile from '../Pages/MyProfile/Myprofile';
 import MyProfilePublic from '../Pages/MyProfilePublic';

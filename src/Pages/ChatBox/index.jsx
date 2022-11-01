@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useContext } from 'react';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SendIcon from '@mui/icons-material/Send';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import io from 'socket.io-client';
+//import io from 'socket.io-client';
 import Api from '../../Api/api';
 import Input from '../../Components/TextField';
 import { AuthContext } from '../../contexts/auth';
@@ -14,8 +14,6 @@ import {
   titleChat,
 } from './classTailwind';
 import Message from '../../Components/Message';
-
-const socket = io('http://localhost:3333');
 
 const Chatbox = (props) => {
   // definindo a sala
@@ -50,7 +48,7 @@ const Chatbox = (props) => {
     },
   ]);
 
-  const onClick = () => {
+  /*   const onClick = () => {
     const data = {
       room,
       message: textMessage,
@@ -59,7 +57,7 @@ const Chatbox = (props) => {
     };
     socket.emit('message', data);
     setTextMessage('');
-  };
+  }; */
 
   useEffect(() => {
     Api.get('/public/webchat')
@@ -87,7 +85,7 @@ const Chatbox = (props) => {
     // };
   }, []);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     socket.on('message_new', (newdata) => {
       if (newdata == null) return;
       setMsg((msg) => [...msg, newdata]);
@@ -96,7 +94,7 @@ const Chatbox = (props) => {
       if (data == null) return;
       setMsg((msg) => [...msg, data]);
     });
-  }, [setMsg]);
+  }, [setMsg]); */
 
   const keyHandler = (e) => {
     if (e.key === 'Enter') {

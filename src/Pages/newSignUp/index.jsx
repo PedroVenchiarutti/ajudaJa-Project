@@ -15,6 +15,8 @@ import TextField from '@mui/material/TextField';
 import { FormHelperText, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
+import { NativeSelect } from '@mui/material';
+import { InputLabel } from '@mui/material';
 
 const newSignUp = ({ backToLogin }) => {
   const [date, setDate] = useState();
@@ -25,6 +27,7 @@ const newSignUp = ({ backToLogin }) => {
   const [errDate, setErrDate] = useState(false);
   const fileInputRef = useRef(null);
   const [imgUrl, setImgUrl] = useState('');
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (imageUpload) {
@@ -33,6 +36,7 @@ const newSignUp = ({ backToLogin }) => {
         setPreview(reader.result);
       };
       reader.readAsDataURL(imageUpload);
+      NativeSelect;
     } else {
     }
   }, [imageUpload]);
@@ -62,6 +66,7 @@ const newSignUp = ({ backToLogin }) => {
     firstName: '',
     lastName: '',
     emergencyNumber: '',
+    helth_insurance: '',
   });
 
   const handleChange = (prop) => (event) => {
@@ -78,7 +83,7 @@ const newSignUp = ({ backToLogin }) => {
       email: user.email,
       birthday: date,
       emergencynumber: user.emergencyNumber,
-      helth_insurance: 'Nao',
+      helth_insurance: user.helth_insurance,
       gender: user.gender,
       avatar: url,
     })
@@ -110,14 +115,21 @@ const newSignUp = ({ backToLogin }) => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => setSuccess(true);
-  const onSubmit2 = (data) => uploadImage();
+  const onSubmit2 = (data) => {
+    if (user.helth_insurance === 'false') {
+      setUser({ ...user, helth_insurance: 'não' });
+      uploadImage();
+    } else {
+      uploadImage();
+    }
+  };
   return (
     <>
-      <div className="w-[100w] h-[100%] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
-        <div className="grid grid-cols-1  md:p-0 md:grid-cols-2 h-[100vh]">
+      <div className="w-[100%] h-[100vh] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
+        <div className="grid grid-cols-1  md:p-0 md:grid-cols-2 h-[100%]">
           {success ? null : (
             <Fade left>
-              <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:h-[500px] h-[500px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
+              <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:max-h-[900px]  m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
                 <div className="flex justify-between items-center">
                   <h1 className="text-md md:text-lg font-bold">
                     Cadastre-se agora!
@@ -145,7 +157,6 @@ const newSignUp = ({ backToLogin }) => {
                     helperText={errors.userName?.message}
                     variant="standard"
                     fullWidth
-                    margin=""
                     sx={{
                       fontFamily: 'DM Sans',
                     }}
@@ -182,7 +193,6 @@ const newSignUp = ({ backToLogin }) => {
                     type="password"
                     label="Senha"
                     variant="standard"
-                    margin="densed"
                     fullWidth
                     {...register('password', {
                       required: 'A senha é obrigatória.',
@@ -207,7 +217,6 @@ const newSignUp = ({ backToLogin }) => {
                     label="Confirme sua senha"
                     variant="standard"
                     type="password"
-                    margin="densed"
                     fullWidth
                     {...register('confirmPassword', {
                       required: 'A confirmação de senha é obrigatória.',
@@ -251,7 +260,7 @@ const newSignUp = ({ backToLogin }) => {
 
           {success ? (
             <Fade left>
-              <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:h-[610px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
+              <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:max-h-[830px] m-auto flex flex-col gap-5 mb-8 mt-8 rounded-lg shadow-md p-10">
                 <div className="flex justify-between items-center">
                   {preview ? (
                     <img
@@ -303,7 +312,6 @@ const newSignUp = ({ backToLogin }) => {
                   helperText={errors.firstName?.message}
                   variant="standard"
                   fullWidth
-                  margin=""
                   label="Insira seu primeiro nome"
                 />
                 <TextField
@@ -353,8 +361,41 @@ const newSignUp = ({ backToLogin }) => {
                   })}
                 />
 
+                <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                  Age
+                </InputLabel>
+                <NativeSelect
+                  defaultValue={visible}
+                  inputProps={{
+                    name: 'age',
+                    id: 'uncontrolled-native',
+                  }}
+                  onChange={(e) => {
+                    setVisible(e.target.value);
+                  }}
+                >
+                  <option value={false}>Não</option>
+                  <option value={true}>Sim</option>
+                </NativeSelect>
                 <RowRadioButtonsGroup handleChange={handleChange('gender')} />
 
+                {visible === 'true' && (
+                  <TextField
+                    color="success"
+                    label="Insira o nome do seu convenio"
+                    aria-describedby="outlined-weight-helper-text"
+                    fullWidth
+                    variant="standard"
+                    error={Boolean(errors.helthInsurance)}
+                    helperText={errors.helthInsurance?.message}
+                    {...register('helthInsurance', {
+                      required: 'O nome do convenio é obrigatório',
+                      onChange: (e) => {
+                        setUser({ ...user, helth_insurance: e.target.value });
+                      },
+                    })}
+                  />
+                )}
                 <div className="">
                   <button
                     onClick={handleSubmit(onSubmit2)}

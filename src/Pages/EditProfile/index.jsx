@@ -75,7 +75,7 @@ const editProfile = () => {
           email: resp.data.user.email,
           emergencynumber: resp.data.user_informations.emergencynumber,
           avatar: resp.data.user_informations.avatar,
-          helth_insurance: resp.data.user_informations.helth_insuranceo,
+          helth_insurance: resp.data.user_informations.helth_insurance,
           birthday: resp.data.user_informations.birthday,
           gender: resp.data.user_informations.gender,
           name: resp.data.user_informations.name,
@@ -87,17 +87,7 @@ const editProfile = () => {
       });
   }, []);
 
-  const {
-    username,
-    email,
-    emergencynumber,
-    avatar,
-    helth_insurance,
-    birthday,
-    gender,
-    name,
-    lastname,
-  } = client;
+  const { emergencynumber, helth_insurance } = client;
 
   const handleChange = (props) => (e) => {
     let newClient = { ...client, [props]: e.target.value };
@@ -105,33 +95,19 @@ const editProfile = () => {
   };
 
   const handleSubmit = (url) => {
+    console.log(client);
     Api.put(
-      `/private/update/users/${id}`,
+      `/private/client/update/${id}`,
       {
-        username,
-        email,
+        emergencynumber,
+        helth_insurance,
+        avatar: url,
       },
       config,
     )
       .then((resp) => {
         console.log(resp);
       })
-      .catch((err) => console.log(err));
-
-    Api.put(
-      `/private/client/update/${id}`,
-      {
-        birthday: '2005-06-23',
-        emergencynumber,
-        helth_insurance,
-        gender,
-        name,
-        lastname,
-        avatar: url,
-      },
-      config,
-    )
-      .then((resp) => {})
       .catch((err) => console.log(err));
   };
 
@@ -174,11 +150,6 @@ const editProfile = () => {
             </div>
             <div className="pt-4 formAndButtons flex flex-col  content-center ">
               <form className="flex flex-col gap-5 items-center ">
-                <Input
-                  info={client.email}
-                  label="Email"
-                  handleChange={handleChange('email')}
-                />
                 <Input
                   info={emergencynumber}
                   label="Telefone de emergência"
