@@ -13,13 +13,14 @@ import MyProfilePublic from '../Pages/MyProfilePublic';
 import EditProfile from '../Pages/EditProfile';
 import PasswordRecuperation from '../Pages/passwordRecuperation';
 import { AuthContext, AuthProvider } from '../contexts/auth';
+import EditPassword from '../Pages/EditPassword';
 import Login from '../Pages/Login';
 import Register from '../Pages/newSignUp';
 
 const RouterApp = () => {
   const Private = ({ children }) => {
     const { authenticated } = useContext(AuthContext);
-    console.log(authenticated);
+
     if (authenticated) {
       return children;
     } else {
@@ -71,7 +72,25 @@ const RouterApp = () => {
                 </Private>
               }
             />
+
+            <Route
+              path="/editpassword"
+              element={
+                <Private>
+                  <EditPassword />
+                </Private>
+              }
+            />
           </Route>
+
+          <Route
+            path="/login"
+            element={
+              <PrivateLogin>
+                <Login />
+              </PrivateLogin>
+            }
+          />
 
           <Route
             path="/login"

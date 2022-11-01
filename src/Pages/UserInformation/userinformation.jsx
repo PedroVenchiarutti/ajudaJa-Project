@@ -22,7 +22,7 @@ const UserInformation = () => {
             let newFormValues = [...formValues];
             let abc = [...formValues, {id: '' , description: ''}]
                 setFormsValues(abc)
-            console.log(newFormValues)
+            
 
         }
 

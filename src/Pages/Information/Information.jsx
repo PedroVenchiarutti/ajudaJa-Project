@@ -44,8 +44,9 @@ export default function Information({ id }) {
           <div className={secondBox}>
             <p>
               Profissionais de saúde poderão prosseguir com o atendimento e com
-              o procedimento de rua sem se preocupar com o que o paciente pode
-              ou não pode ter inserido em seu corpo
+              o procedimento de rua sem se preocupar com o alguma alergia,
+              sindrome ou algo relacionado que o paciente pode ou não ter em seu
+              corpo
             </p>
           </div>
         </div>

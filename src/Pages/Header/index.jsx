@@ -15,16 +15,16 @@ const Header = () => {
                     o amanhã</span></h1>
                 
                 <div className="text-lg flex md:justify-end  gap-3 pt-9">
-
+                <Link to="/register">
                     <button className='text-lg font-bold bg-[#3DCC67] w-[220px] text-white rounded-2xl py-2 hover:bg-white hover:text-[#000] hover:border transform hover:scale-90 transition duration-300 '>
-                        <Link to="/register">
+                        
                         Cadastrar
-                        </Link>
-                        </button>
+                       
+                        </button> </Link>
 
-                    <button className='text-lg font-bold bg-white border  w-[150px] rounded-2xl py-2 hover:bg-buttonColor hover:border-white hover:text-white transform hover:scale-90 transition duration-300  '>
-                        <Link to="/login">Login</Link>
-                    </button>
+                        <Link to="/login"><button className='text-lg font-bold bg-white border  w-[150px] rounded-2xl py-2 hover:bg-buttonColor hover:border-white hover:text-white transform hover:scale-90 transition duration-300  '>
+                        Login
+                    </button></Link>
 
                 </div>
             </div>

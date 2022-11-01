@@ -9,6 +9,7 @@ import { v4 } from 'uuid';
 import { loadingAlert } from '../../Components/alerts';
 import { UTurnLeftSharp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const editProfile = () => {
   const [imageUpload, setImageUpload] = useState(null);
@@ -17,19 +18,10 @@ const editProfile = () => {
   const fileInputRef = useRef(null);
 
   const [client, setClient] = useState({
-    email: '',
     emergencynumber: '',
     avatar: '',
     helth_insurance: '',
-    username: '',
-    gender: '',
-    name: '',
-    lastname: '',
-    birthday: '',
   });
-
-  const [openModal, setOpenModal] = useState(false);
-  const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/');
 
   const id = localStorage.getItem('id');
 
@@ -51,6 +43,7 @@ const editProfile = () => {
   }, [imageUpload]);
 
   const uploadImage = () => {
+    loadingAlert();
     if (preview == null) {
       loadingAlert();
       handleSubmit(client.avatar);
@@ -59,7 +52,6 @@ const editProfile = () => {
       const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
       uploadBytes(imageRef, imageUpload).then((snapshot) => {
         getDownloadURL(imageRef).then((url) => {
-          setOpenModal(true);
           setImgUrl(url);
           handleSubmit(url);
         });
@@ -71,16 +63,11 @@ const editProfile = () => {
     Api.get(`/private/client/${id}`, config)
       .then((resp) => {
         setClient({
-          username: resp.data.user.username,
-          email: resp.data.user.email,
           emergencynumber: resp.data.user_informations.emergencynumber,
           avatar: resp.data.user_informations.avatar,
-          helth_insurance: resp.data.user_informations.helth_insurance,
-          birthday: resp.data.user_informations.birthday,
-          gender: resp.data.user_informations.gender,
-          name: resp.data.user_informations.name,
-          lastname: resp.data.user_informations.lastname,
+          helth_insurance: resp.data.user_informations.helth_insuranceo,
         });
+        Swal.close();
       })
       .catch((err) => {
         console.log(err);
@@ -163,32 +150,31 @@ const editProfile = () => {
               </form>
 
               <div className="buttons py-6 pt-14 flex flex-col gap-2 justify-center">
-                <Link
-                  to="/myprofile"
-                  className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white text-center"
-                  onClick={uploadImage}
-                >
-                  Salvar
+                <Link to="/myprofile">
+                  {' '}
+                  <button
+                    className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white"
+                    onClick={uploadImage}
+                  >
+                    Salvar
+                  </button>
                 </Link>
-                <Link
-                  to="/myprofile"
-                  className="px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border text-center "
-                >
-                  Voltar{' '}
+                <Link to="/editpassword">
+                  {' '}
+                  <button className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white">
+                    Editar senha
+                  </button>
+                </Link>
+                <Link to="/myprofile">
+                  {' '}
+                  <button className="px-6 py-2 w-[100%] rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border ">
+                    Voltar
+                  </button>
                 </Link>
               </div>
             </div>
           </div>
         </Fade>
-
-        {openModal && (
-          <Modal
-            label="Tem certeza que deseja alterar suas"
-            labelStrong="Informações"
-            confirmModal={'/myProfile'}
-            closeModal={setOpenModal}
-          />
-        )}
       </div>
     </div>
   );
