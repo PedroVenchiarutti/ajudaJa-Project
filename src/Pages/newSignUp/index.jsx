@@ -109,7 +109,11 @@ const newSignUp = ({ backToLogin }) => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => setSuccess(true);
+  const onSubmit = (data) => {
+    if(user.password === user.confirmPassword) { 
+      setSuccess(true)
+    }
+  };
   const onSubmit2 = (data) => uploadImage();
   return (
     <>

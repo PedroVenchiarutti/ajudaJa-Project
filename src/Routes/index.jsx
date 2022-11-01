@@ -66,15 +66,19 @@ const RouterApp = () => {
     } />
 
     <Route path='/editprofile' element={
-    
-         <EditProfile/> 
+    <Private>
+
+      <EditProfile/> 
+    </Private>
       
    
     } />
 
 <Route path='/editpassword' element={
-    
-    <EditPassword/> 
+    <Private>
+
+      <EditPassword/> 
+    </Private>
  
 
 } />

@@ -8,9 +8,9 @@ import InputPassword from '../../Components/inputPassword'
 const editPassword = () => {
 
   const [client, setClient] = useState({
-    oldPassword: '',
+    password: '',
     newPassword: '',
-    repeatNewPassword: '',
+    confirmPassword: '',
     showOldPassword: false,
     showNewPassword: false,
     showRepeatPassword: false
@@ -50,17 +50,13 @@ const editPassword = () => {
   };
 
   const handleButton = (e) => {
-    if (values.password != values.newPassword) {
-      setFail(true);
-      setSuccess(false);
-      return;
-    }
 
-    Api.post(
-      '/private/recovery',
+    Api.patch(
+      `/private/update/users/password/${id}`,
       {
-        password: values.newPassword,
-        passwordConfirmation: values.repeatNewPassword,
+        password: client.password,
+        newPassword: client.newPassword,
+        confirmPassword: client.confirmPassword
       },
       config
     )
@@ -87,8 +83,8 @@ const editPassword = () => {
                 <InputPassword 
                 titleLabel='Senha atual'
                 type={client.showOldPassword ? 'text' : 'password'}
-                value={client.oldPassword}
-                onChange={handleChange('oldPassword')}
+                value={client.password}
+                onChange={handleChange('password')}
                 onClick={handleClickShowPassword('showOldPassword')}
                 onMouseDown={handleMouseDownPassword}
                 visibility={client.showOldPassword}
@@ -107,8 +103,8 @@ const editPassword = () => {
                 <InputPassword
                 titleLabel='Repita senha nova'
                 type={client.showRepeatPassword ? 'text' : 'password'}
-                value={client.repeatNewPassword}
-                onChange={handleChange('repeatNewPassword')}
+                value={client.confirmPassword}
+                onChange={handleChange('confirmPassword')}
                 onClick={handleClickShowPassword('showRepeatPassword')}
                 onMouseDown={handleMouseDownPassword}
                 visibility={client.showRepeatPassword}
@@ -119,9 +115,9 @@ const editPassword = () => {
               </form>
 
               <div className="buttons py-6 pt-14 flex flex-col gap-2 justify-center">
-              <Link to="/myprofile"> <button
+              <Link to=""> <button
                   className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white"
-                
+                onClick={e => handleButton()}
                 >
                   Salvar
                 </button></Link>
