@@ -14,14 +14,14 @@ function Homepage() {
     <>
       <div className="w-[100%] m-auto pb-20 ">
         <Fade top>
-          <Header />
+        <Header />
         </Fade>
 
         <div className="lg:max-w-[1280px] m-auto">
-          <Information id="about" />
+        <Information id="about" />
           <Cards />
           <FAQ />
-          <Chatbox />
+        
         </div>
       </div>
     </>

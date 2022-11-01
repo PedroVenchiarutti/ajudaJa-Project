@@ -20,7 +20,7 @@ const RouterApp = () => {
 
   const Private = ({children}) => { 
     const {authenticated} = useContext(AuthContext);
-    console.log(authenticated)
+   
     if(authenticated) { 
       return children
     } else { 

@@ -17,7 +17,7 @@ const passwordRecuperation = () => {
 
   const location = useLocation();
   const token = location.search.split('=')[1];
-  console.log(token);
+  
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });

@@ -70,7 +70,7 @@ const Chatbox = (props) => {
     } else if(data.message.length > 40) {
       return 
     } else { 
-      console.log(data.message.length)
+      
       socket.emit('message', data);
       setDisableMsg(true)
       setTextMessage('');
@@ -129,7 +129,7 @@ const Chatbox = (props) => {
       setTextMessage('');
     }
 
-    console.log()
+    
   };
 
   useEffect(() => {

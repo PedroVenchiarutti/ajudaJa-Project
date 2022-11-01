@@ -98,9 +98,9 @@ const Header = ({ children }) => {
             <div>{getDrawerChoices()}</div>
           </Drawer>
           <div className="flex justify-between items-center w-[100%]">
-            <a href="/">
+            <Link to="/">
               <img className="w-[100px]" src={logo} alt="" />
-            </a>
+            </Link>
             <div className="">{buttonLogout()}</div>
           </div>
         </Toolbar>
@@ -128,22 +128,10 @@ const Header = ({ children }) => {
           Inicio
         </Link>
 
-        <Scroll to={'about'} smooth={true} duration={1000}>
-          <Link
-            {...{
-              component: Link,
-              color: 'inherit',
-              style: {
-                textDecoration: 'none',
-                fontWeight: 'bold',
-                marginLeft: '30px',
-              },
-              key: 'Sobre',
-            }}
-            className="hover:text-[#1f721f] text-lg hover:border-b-2 hover:pb-[17.5px] hover:pt-4 hover:mb-[-6px] "
-          >
+        <Scroll to={'about'} className='hover:text-[#1f721f] text-lg hover:border-b-2 hover:pb-[17.5px] hover:pt-3 hover:mb-[-6px] font-bold ml-8 hover:cursor-pointer' smooth={true} duration={1000}>
+          
             Sobre
-          </Link>
+          
         </Scroll>
 
         <Link
@@ -214,18 +202,11 @@ const Header = ({ children }) => {
         </Link>
 
         <Scroll to={'about'} smooth={true} duration={1000}>
-          <Link
-            {...{
-              component: Link,
-              color: 'inherit',
-              style: { textDecoration: 'none' },
-              key: 'Sobre',
-            }}
-          >
+          
             <MenuItem sx={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
               Sobre
             </MenuItem>
-          </Link>
+        
         </Scroll>
 
         <Link

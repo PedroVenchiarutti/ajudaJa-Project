@@ -40,16 +40,16 @@ const newSignUp = ({ backToLogin }) => {
 
   const uploadImage = () => {
     if (preview == null) {
-      console.log('sajin');
+     
     } else {
       if (imageUpload == null) return;
       loadingAlert();
       const imageRef = ref(storage, `images/${imageUpload.name + v4()}`);
       uploadBytes(imageRef, imageUpload).then((snapshot) => {
-        console.log('Uploaded a blob or file!');
+       
         getDownloadURL(imageRef).then((url) => {
           setImgUrl(url);
-          console.log(url);
+          
           submita(url);
         });
       });
