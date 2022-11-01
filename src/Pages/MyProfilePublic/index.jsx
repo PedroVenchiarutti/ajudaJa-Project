@@ -3,12 +3,9 @@ import EditProfilePNG from '/images/editprofile.png';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
+import { useLocation } from "react-router-dom";
 
 const MyProfile = () => {
-  const [username, setUsername] = useState('Demerson Oliveira');
-  const [email, setEmail] = useState('demersontorres520@gmail.com');
-  const [cellphone, setCellphone] = useState('+55 (13) 9742-67835');
-  const [birthday, setBirthday] = useState('1997-06-10');
 
   const [client, setClient] = useState({
     username: '',
@@ -20,6 +17,8 @@ const MyProfile = () => {
   });
 
   const id = localStorage.getItem('id');
+  const search = useLocation().search;
+  const newId = new URLSearchParams(search).get('id')
 
   const config = {
     headers: {
@@ -28,7 +27,7 @@ const MyProfile = () => {
   };
 
   useEffect((e) => {
-    Api.get(`/private/client/${id}`, config)
+    Api.get(`/private/client/${newId}`, config)
       .then((response) => {
         setClient({
           username: response.data.user.username,

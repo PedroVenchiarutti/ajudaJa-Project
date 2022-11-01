@@ -16,10 +16,12 @@ const MyProfile = () => {
     helth_insurance: '',
   });
 
-  const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/');
+  
   const [qrcode, setQrCode] = useState('');
 
   const id = localStorage.getItem('id');
+
+  const [url, setUrl] = useState(`http://localhost:5173/myprofilepublic?id=${id}`);
 
   const config = {
     headers: {
