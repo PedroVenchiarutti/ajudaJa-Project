@@ -35,9 +35,7 @@ const FormLogin = ({ goToRegister }) => {
   };
 
   const newPassword = (e) => {
-    Api.post('/public/recovery', { email: email }).then((response) => {
-      
-    });
+    Api.post('/public/recovery', { email: email }).then((response) => {});
     alert('Veja sua caixa de entrada');
     setSuccess(false);
     setEmail('');

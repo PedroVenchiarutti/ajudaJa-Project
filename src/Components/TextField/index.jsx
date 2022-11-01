@@ -10,7 +10,7 @@ export const inputText = ({
   placeholder,
   id,
   error,
-  helperText
+  helperText,
 }) => {
   return (
     <TextField
