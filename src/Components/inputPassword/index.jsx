@@ -11,7 +11,7 @@ import { fontFamily, style } from "@mui/system";
 const Password = ({titleLabel, type, value, onChange, onClick, onMouseDown, visibility, onKeyUp}) => { 
 
     return (
-      <FormControl   variant="standard">
+      <FormControl variant="standard">
   
       <InputLabel sx={{fontFamily: 'DM Sans'}}  htmlFor="standard-adornment-password">{titleLabel}</InputLabel>
       <Input

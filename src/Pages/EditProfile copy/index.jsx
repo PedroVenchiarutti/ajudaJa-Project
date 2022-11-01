@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Modal from '../../Components/Modal/';
+import Modal from '../../Components/Modal';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
 import Input from '../../Components/TextField';

@@ -8,6 +8,7 @@ import MyProfilePublic from '../Pages/MyProfilePublic'
 import EditProfile from '../Pages/EditProfile'
 import PasswordRecuperation from '../Pages/passwordRecuperation';
 import { AuthContext, AuthProvider } from '../contexts/auth';
+import EditPassword from '../Pages/EditPassword';
 import Login from '../Pages/Login'
 import Register from '../Pages/newSignUp'
 
@@ -65,11 +66,18 @@ const RouterApp = () => {
     } />
 
     <Route path='/editprofile' element={
-      <Private>
+    
          <EditProfile/> 
-      </Private>
+      
    
     } />
+
+<Route path='/editpassword' element={
+    
+    <EditPassword/> 
+ 
+
+} />
         </Route>
     
         
