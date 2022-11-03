@@ -1,4 +1,3 @@
-
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/auth';
 import logo from '/images/logo-v2.png';
@@ -6,17 +5,19 @@ import Fade from 'react-reveal/Fade';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from '../../Components/TextField';
 import Api from '../../Api/api';
+import { loadingAlert } from '../../Components/alerts';
+import { Link } from 'react-router-dom';
 
-const FormLogin = ({goToRegister}) => {
+const FormLogin = ({ goToRegister }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { authenticated, login } = useContext(AuthContext);
   const [success, setSuccess] = useState(false);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password);
+    loadingAlert();
   };
 
   const keyHandler = (e) => {
@@ -34,9 +35,7 @@ const FormLogin = ({goToRegister}) => {
   };
 
   const newPassword = (e) => {
-    Api.post('/public/recovery', { email: email }).then((response) => {
-      console.log(response);
-    });
+    Api.post('/public/recovery', { email: email }).then((response) => {});
     alert('Veja sua caixa de entrada');
     setSuccess(false);
     setEmail('');
@@ -45,7 +44,6 @@ const FormLogin = ({goToRegister}) => {
   const newPasswordKey = (e) => {
     if (e.key === 'Enter') {
       return newPassword(e);
-
     }
   };
 
@@ -53,23 +51,22 @@ const FormLogin = ({goToRegister}) => {
     <>
       <div className="w-[100w] h-[100vh] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
         <div className="grid grid-cols-1 md:grid-cols-2 h-[100vh]">
-          <div className="hidden md:block bg-gradient-to-t from-navFontColor to-firstSessionFontColor drop-shadow-lg pl-10 pt-20">
+          <div className="hidden md:flex justify-center  bg-gradient-to-t from-navFontColor to-firstSessionFontColor drop-shadow-lg pl-10 ">
             <Fade left>
-              <div className="mt-32 m-auto relative">
-                <h2 className="font-bold text-white text-6xl px-4 pb-3 drop-shadow-md">
-                  Saia de casa{' '}
-                </h2>
-
-                <h2 className="font-medium text-white px-4 pb-2 text-5xl drop-shadow-md">
-                  sem se preocupar com
-                </h2>
-                <h2 className="font-bold px-4 lg:pl-48  text-[#9EFFBB] drop-shadow-md text-7xl">
-                  o amanhã!
+              <div className="flex items-center justify-center">
+                <h2 className="font-bold lg:text-5xl drop-shadow-md text-5xl  text-white xl:text-7xl xl:leading-[80px] ">
+                  Saia de casa <br />
+                  <span className="font-normal">
+                    sem se <br /> preocupar com
+                  </span>{' '}
+                  <br />
+                  <span className="xl:text-8xl font-bold  text-[#9EFFBB] ">
+                    o amanhã!{' '}
+                  </span>
                 </h2>
               </div>
             </Fade>
           </div>
-
 
           {success ? null : (
             <Fade right>
@@ -78,8 +75,9 @@ const FormLogin = ({goToRegister}) => {
                   <h1 className="text-lg font-bold">
                     Bem-vindo, faça seu login!
                   </h1>
-                  <img className="w-[120px]" src={logo} alt="" />
-
+                  <Link to="/">
+                    <img className="w-[120px]" src={logo} alt="" />
+                  </Link>
                 </div>
 
                 <Input
@@ -111,9 +109,9 @@ const FormLogin = ({goToRegister}) => {
                     Entrar
                   </button>
 
-                  <a className="hover:underline" onClick={goToRegister}>
+                  <Link className="hover:underline" to="/register">
                     Não tem cadastro? <strong>Cadastre-se agora!</strong>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </Fade>

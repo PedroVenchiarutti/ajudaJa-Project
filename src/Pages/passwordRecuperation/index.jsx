@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import InputPassword from '../../Components/inputPassword';
 import { useLocation } from 'react-router-dom';
@@ -18,7 +17,6 @@ const passwordRecuperation = () => {
 
   const location = useLocation();
   const token = location.search.split('=')[1];
-  console.log(token);
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -135,4 +133,3 @@ const passwordRecuperation = () => {
 };
 
 export default passwordRecuperation;
-

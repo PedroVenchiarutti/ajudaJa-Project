@@ -1,16 +1,19 @@
 import React, { useState, useEffect, createContext } from 'react';
 import { Navigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Api from '../Api/api';
+import { loginHandler } from '../Components/alerts';
+import Modal from '../Components/Modal';
 
 const USER_STORAGE_KEY = 'username';
-const TOKEN_STORAGE_KEY = 'token'
+const TOKEN_STORAGE_KEY = 'token';
 const ID_STORAGE_KEY = 'id';
 
-const saveUserInStorage = (user, token) => { 
-    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
-    localStorage.setItem(TOKEN_STORAGE_KEY, token)
-    localStorage.setItem(ID_STORAGE_KEY, user.id)
-}
+const saveUserInStorage = (user, token) => {
+  localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+  localStorage.setItem(TOKEN_STORAGE_KEY, token);
+  localStorage.setItem(ID_STORAGE_KEY, user.id);
+};
 
 const getUserFromStorage = () =>
   JSON.parse(localStorage.getItem(USER_STORAGE_KEY));
@@ -24,21 +27,21 @@ const deleteStorageUser = () => {
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const [openModal, setOpenModal] = useState(false);
   const [user, setUser] = useState({});
   const [authenticated, setAuthenticated] = useState(false);
   const [token, setToken] = useState('');
 
   useEffect(() => {
-      const storageUser = getUserFromStorage();
-      const storageToken = localStorage.getItem(TOKEN_STORAGE_KEY)
+    const storageUser = getUserFromStorage();
+    const storageToken = localStorage.getItem(TOKEN_STORAGE_KEY);
 
-      if(storageToken)
-      storageUser ? setLoggedUserState(storageUser, storageToken) : ''
-      else {
-          setUnloggedUserState();
-      }
-
-  }, [])
+    if (storageToken)
+      storageUser ? setLoggedUserState(storageUser, storageToken) : '';
+    else {
+      setUnloggedUserState();
+    }
+  }, []);
 
   const setLoggedUserState = (user, token) => {
     saveUserInStorage(user, token);
@@ -59,16 +62,33 @@ export const AuthProvider = ({ children }) => {
       Api.post('/public/login', { email, password })
         .then((resp) => {
           setLoggedUserState(resp.data.user, resp.data.user.token);
-
+          Swal.close();
           return <Navigate to="/" />;
         })
         .catch((err) => {
           console.log(err);
+          loginHandler({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data,
+          });
         });
   };
 
   const logout = () => {
-    setUnloggedUserState();
+    return (
+      <>
+        {openModal && (
+          <Modal
+            label="Você deseja realmente"
+            labelStrong="sair"
+            confirmModal={'/'}
+            closeModal={setOpenModal}
+          />
+        )}
+        {setUnloggedUserState()}
+      </>
+    );
   };
 
   const state = {

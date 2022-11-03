@@ -11,13 +11,13 @@ export const downFAQ = (family, money, lifeSecurity) => {
     }
 }
 
-export const FAQCards = 'animate-CardInformationToDown max-w-[1080px] grid grid-cols-1 md:grid-cols-3 auto-rows-auto p-10 justify-items-center md:gap-2  md:pb-[200px] m-auto'
+export const FAQCards = 'animate-CardInformationToDown max-w-[1080px] grid grid-cols-1 md:grid-cols-3 auto-rows-auto p-10 justify-items-center md:gap-2  md:pb-[250px] m-auto'
 
 export const testMoneyToggle = (moneyToggle, family) => { 
     if(moneyToggle) { 
         return 'animate-CardInformationToDown2 md:animate-none  transform hover:scale-105 transition duration-300 justify-center content-center text-center drop-shadow-lg mt-[180px] mb-[70px] sm:mt-[130px] md:mt-[0px]'
     } else if(!moneyToggle && family) { 
-        return 'transform hover:scale-105 transition duration-300 justify-center content-center text-center drop-shadow-lg mb-[240px] sm:mb-[140px] md:mb-[120px]'
+        return 'transform hover:scale-105 transition duration-300 justify-center content-center text-center drop-shadow-lg mb-[240px] sm:mb-[140px] md:mb-[0px]'
     } else { 
         return 'transform hover:scale-105 transition duration-300 justify-center content-center text-center drop-shadow-lg mb-[30px]'
     }
