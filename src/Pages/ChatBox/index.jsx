@@ -17,7 +17,7 @@ import CircleIcon from '@mui/icons-material/Circle';
 import Message from '../../Components/Message';
 
 const Chatbox = (props) => {
-  // definindo a sala
+  // definindo a sala de 
   const { user } = useContext(AuthContext);
   const room = `chat01#pedro`;
   // const room = `chat01#${user.username}`;
