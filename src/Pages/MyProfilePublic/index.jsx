@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import EditProfilePNG from '/images/editprofile.png';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
 
 const MyProfile = () => {
-  const [username, setUsername] = useState('Demerson Oliveira');
-  const [email, setEmail] = useState('demersontorres520@gmail.com');
-  const [cellphone, setCellphone] = useState('+55 (13) 9742-67835');
-  const [birthday, setBirthday] = useState('1997-06-10');
-
   const [client, setClient] = useState({
     username: '',
     email: '',
@@ -46,7 +40,6 @@ const MyProfile = () => {
 
   return (
     <div className="w-full   bg-white">
-      {/* Content */}
       <div className="lg:w-[1080px] pt-32 grid m-auto">
         <Fade bottom>
           <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-16 py-5 rounded-lg pb-5 px-14">
@@ -64,7 +57,7 @@ const MyProfile = () => {
                   <div>
                     <strong className="text-sm">
                       Nome: <br />
-                    </strong>{' '}
+                    </strong>
                     {client.name}
                   </div>
                 </div>
@@ -73,7 +66,7 @@ const MyProfile = () => {
                   <div>
                     <strong className="text-sm">
                       Tel: <br />
-                    </strong>{' '}
+                    </strong>
                     {client.cellphone}
                   </div>
                 </div>
@@ -82,7 +75,7 @@ const MyProfile = () => {
                   <div>
                     <strong className="text-sm">
                       Data de Nascimento: <br />
-                    </strong>{' '}
+                    </strong>
                     {client.birthday}
                   </div>
                 </div>
@@ -91,7 +84,7 @@ const MyProfile = () => {
                   <div>
                     <strong className="text-sm">
                       Tel Emergência: <br />
-                    </strong>{' '}
+                    </strong>
                     {client.cellphone}
                   </div>
                 </div>
@@ -102,15 +95,12 @@ const MyProfile = () => {
                   </h3>
                   <ul className="text-left ml-2 pt-1 text-sm">
                     <li>
-                      {' '}
                       <ArrowRightIcon /> Asma
                     </li>
                     <li>
-                      {' '}
                       <ArrowRightIcon /> Bronquite
                     </li>
                     <li>
-                      {' '}
                       <ArrowRightIcon /> Rinite
                     </li>
                   </ul>

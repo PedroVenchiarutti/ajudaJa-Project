@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Information from '../Information/Information';
 import FAQ from '../FAQ/FAQ';
 import Cards from '../Cards/Cards';

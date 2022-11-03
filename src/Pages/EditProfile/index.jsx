@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Modal from '../../Components/Modal';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
 import Input from '../../Components/TextField';
 import { storage } from '../../Api/api';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { loadingAlert } from '../../Components/alerts';
-import { UTurnLeftSharp } from '@mui/icons-material';
+import { loadingAlert } from '../../Components/Alerts';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -82,7 +80,6 @@ const editProfile = () => {
   };
 
   const handleSubmit = (url) => {
-    console.log(client);
     Api.put(
       `/private/client/update/${id}`,
       {
@@ -91,16 +88,11 @@ const editProfile = () => {
         avatar: url,
       },
       config,
-    )
-      .then((resp) => {
-        console.log(resp);
-      })
-      .catch((err) => console.log(err));
+    ).catch((err) => console.log(err));
   };
 
   return (
     <div className="w-full   bg-white">
-      {/* Content */}
       <div className="lg:w-[1080px] pt-32 pb-32 grid m-auto">
         <Fade bottom>
           <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-16 py-5 rounded-lg pb-10 px-4">
@@ -151,7 +143,6 @@ const editProfile = () => {
 
               <div className="buttons py-6 pt-14 flex flex-col gap-2 justify-center">
                 <Link to="/myprofile">
-                  {' '}
                   <button
                     className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white"
                     onClick={uploadImage}
@@ -160,13 +151,11 @@ const editProfile = () => {
                   </button>
                 </Link>
                 <Link to="/editpassword">
-                  {' '}
                   <button className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white">
                     Editar senha
                   </button>
                 </Link>
                 <Link to="/myprofile">
-                  {' '}
                   <button className="px-6 py-2 w-[100%] rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border ">
                     Voltar
                   </button>

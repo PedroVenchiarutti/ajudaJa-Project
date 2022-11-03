@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PersonSVG from '/images/image-firs-seasson.png';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { LteMobiledata } from '@mui/icons-material';
 
 const UserInformation = () => {
   const [formValues, setFormsValues] = useState([{ id: 1, description: '' }]);

@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Api from '../Api/api';
-import { loginHandler } from '../Components/alerts';
+import { loginHandler } from '../Components/Alerts';
 import Modal from '../Components/Modal';
 
 const USER_STORAGE_KEY = 'username';
@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }) => {
           return <Navigate to="/" />;
         })
         .catch((err) => {
-          console.log(err);
           loginHandler({
             icon: 'error',
             title: 'Oops...',
