@@ -63,7 +63,7 @@ const editProfile = () => {
         setClient({
           emergencynumber: resp.data.user_informations.emergencynumber,
           avatar: resp.data.user_informations.avatar,
-          helth_insurance: resp.data.user_informations.helth_insuranceo,
+          helth_insurance: resp.data.user_informations.helth_insurance,
         });
         Swal.close();
       })

@@ -118,7 +118,9 @@ const FormLogin = ({ goToRegister }) => {
               <div className="box bg-[#fff] w-[370px]  md:w-[370px] md:mx-auto lg:w-[500px]  h-[340px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
                 <div className="flex justify-between items-center">
                   <h1 className="text-lg font-bold">Recupere sua senha</h1>
-                  <img className="w-[120px]" src={logo} alt="" />
+                  <Link to="/">
+                    <img className="w-[120px]" src={logo} alt="" />
+                  </Link>
                 </div>
                 <p>Coloque seu e-mail cadastrado</p>
                 <Input

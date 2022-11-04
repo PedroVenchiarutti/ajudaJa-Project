@@ -12,9 +12,9 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { storage } from '../../Api/api';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
-import { FormHelperText, Button } from '@mui/material';
+import { FormHelperText } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { NativeSelect } from '@mui/material';
 import { InputLabel } from '@mui/material';
 
@@ -87,7 +87,7 @@ const newSignUp = ({ backToLogin }) => {
     })
       .then((resp) => {
         Swal.close();
-        return <Navigate to="/userinformation"></Navigate>;
+        navigate('/userinformation');
       })
       .catch((err) => {
         console.log(err);
@@ -95,10 +95,12 @@ const newSignUp = ({ backToLogin }) => {
         loginHandler({
           icon: 'error',
           title: 'Oops...',
-          text: err.response.data,
+          text: err.response.data.message,
         });
       });
   };
+
+  const navigate = useNavigate();
 
   const keyHandler = (e) => {
     if (e.key === 'Enter') {
@@ -130,9 +132,9 @@ const newSignUp = ({ backToLogin }) => {
                   <h1 className="text-md md:text-lg font-bold">
                     Cadastre-se agora!
                   </h1>
-                  <button onClick={backToLogin}>
-                    <img className="w-[80px] md:w-[120px]" src={logo} alt="" />
-                  </button>
+                  <Link to="/">
+                    <img className="w-[120px]" src={logo} alt="" />
+                  </Link>
                 </div>
 
                 <form onSubmit={handleSubmit(nextStep)}>

@@ -4,7 +4,11 @@ import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
 import { Link } from 'react-router-dom';
 import InputPassword from '../../Components/inputPassword';
-import { loadingAlert, loginHandler } from '../../Components/Alerts';
+import {
+  loadingAlert,
+  loginHandler,
+  redirectAlert,
+} from '../../Components/Alerts';
 
 const editPassword = () => {
   const [client, setClient] = useState({
@@ -59,12 +63,15 @@ const editPassword = () => {
       config,
     )
       .then((response) => {
-        loginHandler({
+        redirectAlert({
           icon: 'success',
-          title: 'Senha alterada com sucesso!',
+          title: response.message,
+          text: 'Você será redirecionado para a página do seu perfil',
+          redirect: '/myprofile',
         });
       })
       .catch((error) => {
+        console.log(error);
         loginHandler({
           icon: 'error',
           title: error.response.data.message,
