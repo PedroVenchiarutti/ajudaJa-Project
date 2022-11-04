@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Modal from '../../Components/Modal';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
 import Input from '../../Components/TextField';
 import { storage } from '../../Api/api';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { loadingAlert } from '../../Components/alerts';
+import { loadingAlert } from '../../Components/Alerts';
 import { UTurnLeftSharp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import FormattedInputs from '../../Components/InputCellphone'
 
 const editProfile = () => {
   const [imageUpload, setImageUpload] = useState(null);
@@ -137,11 +137,8 @@ const editProfile = () => {
             </div>
             <div className="pt-4 formAndButtons flex flex-col  content-center ">
               <form className="flex flex-col gap-5 items-center ">
-                <Input
-                  info={emergencynumber}
-                  label="Telefone de emergência"
-                  handleChange={handleChange('emergencynumber')}
-                />
+                
+                <FormattedInputs label="Telefone de emergência" value={emergencynumber} onChange={handleChange('emergencynumber')}/>
                 <Input
                   info={client.helth_insurance}
                   label="Convênio Médico"

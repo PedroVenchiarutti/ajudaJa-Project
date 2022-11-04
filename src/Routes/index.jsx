@@ -62,7 +62,7 @@ const RouterApp = () => {
                 </Private>
               }
             />
-            <Route path="/myprofilepublic" element={<MyProfilePublic />} />
+            <Route path="/myprofilepublic/:id" element={<MyProfilePublic />} />
 
             <Route
               path="/editprofile"

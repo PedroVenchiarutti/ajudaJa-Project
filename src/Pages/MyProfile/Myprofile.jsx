@@ -21,7 +21,7 @@ const MyProfile = () => {
 
   const id = localStorage.getItem('id');
 
-  const [url, setUrl] = useState(`http://localhost:5173/myprofilepublic?id=${id}`);
+  const [url, setUrl] = useState(`http://localhost:5173/myprofilepublic/${id}`);
 
   const config = {
     headers: {

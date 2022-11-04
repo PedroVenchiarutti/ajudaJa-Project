@@ -4,7 +4,7 @@ import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
 import { Link } from 'react-router-dom';
 import InputPassword from '../../Components/inputPassword';
-import { loadingAlert, loginHandler } from '../../Components/alerts';
+import { loadingAlert, loginHandler } from '../../Components/Alerts';
 
 const editPassword = () => {
   const [client, setClient] = useState({

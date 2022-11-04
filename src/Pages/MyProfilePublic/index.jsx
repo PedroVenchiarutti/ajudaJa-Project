@@ -3,7 +3,7 @@ import EditProfilePNG from '/images/editprofile.png';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const MyProfile = () => {
 
@@ -16,9 +16,7 @@ const MyProfile = () => {
     helth_insurance: '',
   });
 
-  const id = localStorage.getItem('id');
-  const search = useLocation().search;
-  const newId = new URLSearchParams(search).get('id')
+  const {id} = useParams()
 
   const config = {
     headers: {
@@ -27,7 +25,7 @@ const MyProfile = () => {
   };
 
   useEffect((e) => {
-    Api.get(`/private/client/${newId}`, config)
+    Api.get(`/private/client/${id}`, config)
       .then((response) => {
         setClient({
           username: response.data.user.username,

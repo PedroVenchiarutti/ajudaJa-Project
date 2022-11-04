@@ -5,7 +5,7 @@ import Fade from 'react-reveal/Fade';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import Input from '../../Components/TextField';
 import Api from '../../Api/api';
-import { loadingAlert } from '../../Components/alerts';
+import { loadingAlert } from '../../Components/Alerts';
 import { Link } from 'react-router-dom';
 
 const FormLogin = ({ goToRegister }) => {

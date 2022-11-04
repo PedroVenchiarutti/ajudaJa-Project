@@ -6,7 +6,7 @@ import InputDate from '../../Components/InputDate';
 import RowRadioButtonsGroup from '../../Components/Radio';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { loadingAlert, loginHandler } from '../../Components/alerts';
+import { loadingAlert, loginHandler } from '../../Components/Alerts';
 import Api from '../../Api/api';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { storage } from '../../Api/api';
@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form';
 import { Link, Navigate } from 'react-router-dom';
 import { NativeSelect } from '@mui/material';
 import { InputLabel } from '@mui/material';
+import InputMUI from '../../Components/InputMUI';
 
 const newSignUp = ({ backToLogin }) => {
   const [date, setDate] = useState();
@@ -138,7 +139,7 @@ const newSignUp = ({ backToLogin }) => {
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <TextField
+                <TextField
                     aria-describedby="outlined-weight-helper-text"
                     error={Boolean(errors.userName)}
                     {...register('userName', {
@@ -163,6 +164,21 @@ const newSignUp = ({ backToLogin }) => {
                     }}
                     label="Nome de usuario"
                   />
+
+                  <InputMUI label='Teste' error={ errors.userName} helperText='' 
+                  {...register('userName', {
+                    required: 'Esse campo é obrigatório',
+                    onChange: (e) => {
+                      setUser({ ...user, userName: e.target.value });
+                    },
+                    minLength: {
+                      value: 3,
+                      message: 'Mínimo de 3 caracteres',
+                    },
+                  })}
+                   />
+
+               
                   <TextField
                     color="success"
                     label="Email"
