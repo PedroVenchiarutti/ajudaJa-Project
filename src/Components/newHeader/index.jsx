@@ -14,12 +14,16 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link as Scroll } from 'react-scroll';
+import { exitConfirmation } from '../Alerts';
 
 const Header = ({ children }) => {
   const buttonLogout = () => {
     const { authenticated, logout } = useContext(AuthContext);
     return authenticated ? (
-      <LogoutIcon className="ml-5 hover:cursor-pointer" onClick={logout} />
+      <LogoutIcon
+        className="ml-5 hover:cursor-pointer"
+        onClick={exitConfirmation}
+      />
     ) : null;
   };
 
@@ -128,10 +132,13 @@ const Header = ({ children }) => {
           Inicio
         </Link>
 
-        <Scroll to={'about'} className='hover:text-[#1f721f] text-lg hover:border-b-2 hover:pb-[17.5px] hover:pt-3 hover:mb-[-6px] font-bold ml-8 hover:cursor-pointer' smooth={true} duration={1000}>
-          
-            Sobre
-          
+        <Scroll
+          to={'about'}
+          className="hover:text-[#1f721f] text-lg hover:border-b-2 hover:pb-[17.5px] hover:pt-3 hover:mb-[-6px] font-bold ml-8 hover:cursor-pointer"
+          smooth={true}
+          duration={1000}
+        >
+          Sobre
         </Scroll>
 
         <Link
@@ -202,11 +209,9 @@ const Header = ({ children }) => {
         </Link>
 
         <Scroll to={'about'} smooth={true} duration={1000}>
-          
-            <MenuItem sx={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
-              Sobre
-            </MenuItem>
-        
+          <MenuItem sx={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
+            Sobre
+          </MenuItem>
         </Scroll>
 
         <Link

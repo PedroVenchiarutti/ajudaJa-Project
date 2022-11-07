@@ -44,4 +44,27 @@ const loadingAlert = () => {
   });
 };
 
-export { loginHandler, loadingAlert, testeAlert, redirectAlert };
+const exitConfirmation = (props) => {
+  Swal.fire({
+    title: 'Tem certeza que deseja sair?',
+    text: 'Você será redirecionado para a página Principal',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3DCC67',
+    cancelButtonColor: '#E62822',
+    confirmButtonText: 'Sim, sair!',
+    cancelButtonText: 'Cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = props.redirect;
+    }
+  });
+};
+
+export {
+  loginHandler,
+  loadingAlert,
+  testeAlert,
+  redirectAlert,
+  exitConfirmation,
+};

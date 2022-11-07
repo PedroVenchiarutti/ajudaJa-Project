@@ -11,6 +11,7 @@ const MyProfile = () => {
     birthday: '',
     avatar: '',
     helth_insurance: '',
+    allergy: '',
   });
 
   const id = localStorage.getItem('id');
@@ -22,21 +23,22 @@ const MyProfile = () => {
   };
 
   useEffect((e) => {
-    Api.get(`/private/client/${id}`, config)
+    Api.get(`/public/client/${id}`, config)
       .then((response) => {
         setClient({
-          username: response.data.user.username,
-          email: response.data.user.email,
-          cellphone: response.data.user_informations.emergencynumber,
-          birthday: response.data.user_informations.birthday,
-          avatar: response.data.user_informations.avatar,
-          helth_insurance: response.data.user_informations.helth_insurance,
-          name: response.data.user_informations.name,
-          lastname: response.data.user_informations.lastname,
+          cellphone: response.data.client.emergencynumber,
+          birthday: response.data.client.birthday,
+          avatar: response.data.client.avatar,
+          helth_insurance: response.data.client.helth_insurance,
+          name: response.data.client.name,
+          lastname: response.data.client.lastname,
+          allergy: response.data.client.allergy[0].description,
         });
       })
       .then(() => {});
   }, []);
+
+  const teste = client.allergy.split(',');
 
   return (
     <div className="w-full   bg-white">
@@ -95,13 +97,12 @@ const MyProfile = () => {
                   </h3>
                   <ul className="text-left ml-2 pt-1 text-sm">
                     <li>
-                      <ArrowRightIcon /> Asma
-                    </li>
-                    <li>
-                      <ArrowRightIcon /> Bronquite
-                    </li>
-                    <li>
-                      <ArrowRightIcon /> Rinite
+                      {teste.map((item) => (
+                        <li>
+                          <ArrowRightIcon />
+                          {item}
+                        </li>
+                      ))}
                     </li>
                   </ul>
                 </div>

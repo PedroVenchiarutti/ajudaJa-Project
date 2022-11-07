@@ -5,6 +5,7 @@ import Api from '../../Api/api';
 import InputReadOnly from '../../Components/ReadOnly';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { loadingAlert } from '../../Components/Alerts';
 
 const MyProfile = () => {
   const [client, setClient] = useState({
@@ -38,7 +39,7 @@ const MyProfile = () => {
     (e) => {
       Api.get(`/private/client/${id}`, config)
         .then((response) => {
-          Swal.close();
+          loadingAlert.close();
           setClient({
             username: response.data.user.username,
             email: response.data.user.email,

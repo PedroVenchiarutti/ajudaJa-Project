@@ -5,26 +5,17 @@ import Api from '../../Api/api';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const UserInformation = () => {
-  const [formValues, setFormsValues] = useState([{ id: 1, description: '' }]);
-  const [teste, setTeste] = useState(['teste']);
-
-  const bodyFormData = new FormData();
-
-  formValues.forEach((value) => {
-    bodyFormData.append('description', value.description);
-  });
+  const [formValues, setFormsValues] = useState(['']);
 
   const handleChange = (i, e) => {
     let newFormValues = [...formValues];
-    let add = i + 1;
-    newFormValues[i].id = add++;
-    newFormValues[i].description = e.target.value;
+    newFormValues[i] = e.target.value;
     setFormsValues(newFormValues);
   };
 
   const addFormFields = () => {
     let newFormValues = [...formValues];
-    let abc = [...formValues, { id: '', description: '' }];
+    let abc = [...formValues, { description: '' }];
     setFormsValues(abc);
   };
 
@@ -35,17 +26,13 @@ const UserInformation = () => {
   };
 
   const addAllergy = () => {
-    console.log(teste);
+    console.log(formValues.join(', '));
     Api.post('/public/client/allergy/add', {
-      info_id: '172',
-      description: bodyFormData,
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      info_id: 170,
+      description: formValues.join(', '),
+    }).then((resp) => {
+      console.log(resp);
+    });
   };
 
   return (
