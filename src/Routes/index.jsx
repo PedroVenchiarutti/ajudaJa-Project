@@ -54,6 +54,7 @@ const RouterApp = () => {
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/userInformation" element={<UserInformation />} />
+
             <Route
               path="/myprofile"
               element={
@@ -62,7 +63,7 @@ const RouterApp = () => {
                 </Private>
               }
             />
-            <Route path="/myprofilepublic" element={<MyProfilePublic />} />
+            <Route path="/myprofilepublic/:id" element={<MyProfilePublic />} />
 
             <Route
               path="/editprofile"
@@ -82,7 +83,6 @@ const RouterApp = () => {
               }
             />
           </Route>
-
           <Route
             path="/login"
             element={

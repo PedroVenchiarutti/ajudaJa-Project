@@ -5,6 +5,7 @@ import Api from '../../Api/api';
 import InputReadOnly from '../../Components/ReadOnly';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { loadingAlert } from '../../Components/Alerts';
 
 const MyProfile = () => {
   const [client, setClient] = useState({
@@ -16,10 +17,11 @@ const MyProfile = () => {
     helth_insurance: '',
   });
 
-  const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/');
   const [qrcode, setQrCode] = useState('');
 
   const id = localStorage.getItem('id');
+
+  const [url, setUrl] = useState(`http://localhost:5173/myprofilepublic/${id}`);
 
   const config = {
     headers: {
@@ -38,14 +40,13 @@ const MyProfile = () => {
     (e) => {
       Api.get(`/private/client/${id}`, config)
         .then((response) => {
-          Swal.close();
           setClient({
             username: response.data.user.username,
             email: response.data.user.email,
             cellphone: response.data.user_informations.emergencynumber,
             birthday: response.data.user_informations.birthday,
             avatar: response.data.user_informations.avatar,
-            helth_insurance: response.data.user_informations.helth_insuranceo,
+            helth_insurance: response.data.user_informations.helth_insurance,
             name: response.data.user_informations.name,
             lastname: response.data.user_informations.lastname,
           });

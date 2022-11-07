@@ -4,7 +4,12 @@ import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
 import { Link } from 'react-router-dom';
 import InputPassword from '../../Components/inputPassword';
-import { loadingAlert, loginHandler } from '../../Components/alerts';
+import {
+  loadingAlert,
+  loginHandler,
+  redirectAlert,
+} from '../../Components/Alerts';
+
 
 const editPassword = () => {
   const [client, setClient] = useState({
@@ -15,10 +20,7 @@ const editPassword = () => {
     showNewPassword: false,
     showRepeatPassword: false,
   });
-
   const [openModal, setOpenModal] = useState(false);
-  const [url, setUrl] = useState('https://ajudajaapi.herokuapp.com/docs/#/');
-
   const id = localStorage.getItem('id');
 
   const config = {
@@ -62,24 +64,24 @@ const editPassword = () => {
       config,
     )
       .then((response) => {
-        console.log(response);
-        loginHandler({
+        redirectAlert({
           icon: 'success',
-          title: 'Senha alterada com sucesso!',
+          title: response.message,
+          text: 'Você será redirecionado para a página do seu perfil',
+          redirect: '/myprofile',
         });
       })
       .catch((error) => {
+        console.log(error);
         loginHandler({
           icon: 'error',
           title: error.response.data.message,
         });
-        console.log(error);
       });
   };
 
   return (
     <div className="w-full   bg-white">
-      {/* Content */}
       <div className="lg:w-[1080px] pt-32 pb-32 grid m-auto">
         <Fade bottom>
           <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-16 py-5 rounded-lg pb-10 px-4">
@@ -122,7 +124,6 @@ const editPassword = () => {
 
               <div className="buttons py-6 pt-14 flex flex-col gap-2 justify-center">
                 <Link to="">
-                  {' '}
                   <button
                     className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white"
                     onClick={(e) => handleButton()}
@@ -132,7 +133,6 @@ const editPassword = () => {
                 </Link>
 
                 <Link to="/editprofile">
-                  {' '}
                   <button className="px-6 py-2 w-[100%] rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border hover:text-navFontColor hover:border ">
                     Voltar
                   </button>

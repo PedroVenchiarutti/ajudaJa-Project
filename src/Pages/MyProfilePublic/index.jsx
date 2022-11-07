@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import EditProfilePNG from '/images/editprofile.png';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
+import { useParams } from "react-router-dom";
 
 const MyProfile = () => {
-  const [username, setUsername] = useState('Demerson Oliveira');
-  const [email, setEmail] = useState('demersontorres520@gmail.com');
-  const [cellphone, setCellphone] = useState('+55 (13) 9742-67835');
-  const [birthday, setBirthday] = useState('1997-06-10');
 
   const [client, setClient] = useState({
     username: '',
@@ -17,9 +13,10 @@ const MyProfile = () => {
     birthday: '',
     avatar: '',
     helth_insurance: '',
+    allergy: '',
   });
 
-  const id = localStorage.getItem('id');
+  const {id} = useParams()
 
   const config = {
     headers: {
@@ -28,25 +25,25 @@ const MyProfile = () => {
   };
 
   useEffect((e) => {
-    Api.get(`/private/client/${id}`, config)
+    Api.get(`/public/client/${id}`, config)
       .then((response) => {
         setClient({
-          username: response.data.user.username,
-          email: response.data.user.email,
-          cellphone: response.data.user_informations.emergencynumber,
-          birthday: response.data.user_informations.birthday,
-          avatar: response.data.user_informations.avatar,
-          helth_insurance: response.data.user_informations.helth_insurance,
-          name: response.data.user_informations.name,
-          lastname: response.data.user_informations.lastname,
+          cellphone: response.data.client.emergencynumber,
+          birthday: response.data.client.birthday,
+          avatar: response.data.client.avatar,
+          helth_insurance: response.data.client.helth_insurance,
+          name: response.data.client.name,
+          lastname: response.data.client.lastname,
+          allergy: response.data.client.allergy[0].description,
         });
       })
       .then(() => {});
   }, []);
 
+  const teste = client.allergy.split(',');
+
   return (
     <div className="w-full   bg-white">
-      {/* Content */}
       <div className="lg:w-[1080px] pt-32 grid m-auto">
         <Fade bottom>
           <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-16 py-5 rounded-lg pb-5 px-14">
@@ -64,7 +61,7 @@ const MyProfile = () => {
                   <div>
                     <strong className="text-sm">
                       Nome: <br />
-                    </strong>{' '}
+                    </strong>
                     {client.name}
                   </div>
                 </div>
@@ -73,7 +70,7 @@ const MyProfile = () => {
                   <div>
                     <strong className="text-sm">
                       Tel: <br />
-                    </strong>{' '}
+                    </strong>
                     {client.cellphone}
                   </div>
                 </div>
@@ -82,7 +79,7 @@ const MyProfile = () => {
                   <div>
                     <strong className="text-sm">
                       Data de Nascimento: <br />
-                    </strong>{' '}
+                    </strong>
                     {client.birthday}
                   </div>
                 </div>
@@ -91,7 +88,7 @@ const MyProfile = () => {
                   <div>
                     <strong className="text-sm">
                       Tel Emergência: <br />
-                    </strong>{' '}
+                    </strong>
                     {client.cellphone}
                   </div>
                 </div>
@@ -102,16 +99,12 @@ const MyProfile = () => {
                   </h3>
                   <ul className="text-left ml-2 pt-1 text-sm">
                     <li>
-                      {' '}
-                      <ArrowRightIcon /> Asma
-                    </li>
-                    <li>
-                      {' '}
-                      <ArrowRightIcon /> Bronquite
-                    </li>
-                    <li>
-                      {' '}
-                      <ArrowRightIcon /> Rinite
+                      {teste.map((item) => (
+                        <li>
+                          <ArrowRightIcon />
+                          {item}
+                        </li>
+                      ))}
                     </li>
                   </ul>
                 </div>
