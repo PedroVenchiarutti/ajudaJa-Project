@@ -20,10 +20,7 @@ const Header = ({ children }) => {
   const buttonLogout = () => {
     const { authenticated, logout } = useContext(AuthContext);
     return authenticated ? (
-      <LogoutIcon
-        className="ml-5 hover:cursor-pointer"
-        onClick={exitConfirmation}
-      />
+      <LogoutIcon className="ml-5 hover:cursor-pointer" onClick={logout} />
     ) : null;
   };
 

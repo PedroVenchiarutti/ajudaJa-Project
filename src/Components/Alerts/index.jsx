@@ -25,7 +25,6 @@ const redirectAlert = (props) => {
     }
   });
 };
-
 const testeAlert = () => {
   Swal.fire({
     icon: 'success',

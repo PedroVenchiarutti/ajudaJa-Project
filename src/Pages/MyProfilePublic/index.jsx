@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
+import { useParams } from "react-router-dom";
 
 const MyProfile = () => {
+
   const [client, setClient] = useState({
     username: '',
     email: '',
@@ -14,7 +16,7 @@ const MyProfile = () => {
     allergy: '',
   });
 
-  const id = localStorage.getItem('id');
+  const {id} = useParams()
 
   const config = {
     headers: {
