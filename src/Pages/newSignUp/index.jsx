@@ -17,6 +17,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { NativeSelect } from '@mui/material';
 import { InputLabel } from '@mui/material';
+import InputMUI from '../../Components/InputMUI';
 
 const newSignUp = ({ backToLogin }) => {
   const [date, setDate] = useState();
@@ -136,7 +137,6 @@ const newSignUp = ({ backToLogin }) => {
                     <img className="w-[120px]" src={logo} alt="" />
                   </Link>
                 </div>
-
                 <form onSubmit={handleSubmit(nextStep)}>
                   <TextField
                     aria-describedby="outlined-weight-helper-text"
@@ -163,6 +163,21 @@ const newSignUp = ({ backToLogin }) => {
                     }}
                     label="Nome de usuario"
                   />
+
+                  <InputMUI label='Teste' error={ errors.userName} helperText='' 
+                  {...register('userName', {
+                    required: 'Esse campo é obrigatório',
+                    onChange: (e) => {
+                      setUser({ ...user, userName: e.target.value });
+                    },
+                    minLength: {
+                      value: 3,
+                      message: 'Mínimo de 3 caracteres',
+                    },
+                  })}
+                   />
+
+               
                   <TextField
                     color="success"
                     label="Email"

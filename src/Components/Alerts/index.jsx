@@ -12,6 +12,7 @@ const loginHandler = (props) => {
   });
 };
 
+
 const redirectAlert = (props) => {
   Swal.fire({
     icon: props.icon,
@@ -25,7 +26,6 @@ const redirectAlert = (props) => {
     }
   });
 };
-
 const testeAlert = () => {
   Swal.fire({
     icon: 'success',
@@ -43,5 +43,6 @@ const loadingAlert = () => {
     },
   });
 };
+
 
 export { loginHandler, loadingAlert, testeAlert, redirectAlert };

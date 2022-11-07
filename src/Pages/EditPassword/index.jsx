@@ -10,6 +10,7 @@ import {
   redirectAlert,
 } from '../../Components/Alerts';
 
+
 const editPassword = () => {
   const [client, setClient] = useState({
     password: '',
