@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -20,8 +21,6 @@ const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 
 export const urlSignUp = '/public/register';
-
-import axios from 'axios';
 
 const Api = axios.create({
   // baseURL: import.meta.env.VITE_URL_API
