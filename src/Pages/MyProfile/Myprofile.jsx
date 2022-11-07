@@ -47,7 +47,7 @@ const MyProfile = () => {
             cellphone: response.data.user_informations.emergencynumber,
             birthday: response.data.user_informations.birthday,
             avatar: response.data.user_informations.avatar,
-            helth_insurance: response.data.user_informations.helth_insuranceo,
+            helth_insurance: response.data.user_informations.helth_insurance,
             name: response.data.user_informations.name,
             lastname: response.data.user_informations.lastname,
           });

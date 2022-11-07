@@ -88,7 +88,6 @@ const Chatbox = (props) => {
   useEffect(() => {
     Api.get('/public/webchat')
       .then((response) => {
-        console.log(response.data);
         const maps = response.data.map((item) => {
           let obj = {
             room: item.room,
@@ -97,7 +96,6 @@ const Chatbox = (props) => {
             message: item.message,
             time: item.createdAt,
           };
-          console.log(obj);
           return obj;
         });
         setMsg((msg) => [...msg, ...maps]);

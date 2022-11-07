@@ -12,9 +12,9 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { storage } from '../../Api/api';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
-import { FormHelperText, Button } from '@mui/material';
+import { FormHelperText } from '@mui/material';
 import { useForm } from 'react-hook-form';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { NativeSelect } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import InputMUI from '../../Components/InputMUI';
@@ -88,8 +88,7 @@ const newSignUp = ({ backToLogin }) => {
     })
       .then((resp) => {
         Swal.close();
-        console.log(resp);
-        return <Navigate to="/userinformation"></Navigate>;
+        navigate('/userinformation');
       })
       .catch((err) => {
         console.log(err);
@@ -97,10 +96,12 @@ const newSignUp = ({ backToLogin }) => {
         loginHandler({
           icon: 'error',
           title: 'Oops...',
-          text: err.response.data,
+          text: err.response.data.message,
         });
       });
   };
+
+  const navigate = useNavigate();
 
   const keyHandler = (e) => {
     if (e.key === 'Enter') {
@@ -110,11 +111,10 @@ const newSignUp = ({ backToLogin }) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => setSuccess(true);
-  const onSubmit2 = (data) => {
+  const nextStep = (data) => setSuccess(true);
+  const onSubmit = (data) => {
     if (user.helth_insurance === 'false') {
       setUser({ ...user, helth_insurance: 'não' });
       uploadImage();
@@ -133,13 +133,12 @@ const newSignUp = ({ backToLogin }) => {
                   <h1 className="text-md md:text-lg font-bold">
                     Cadastre-se agora!
                   </h1>
-                  <button onClick={backToLogin}>
-                    <img className="w-[80px] md:w-[120px]" src={logo} alt="" />
-                  </button>
+                  <Link to="/">
+                    <img className="w-[120px]" src={logo} alt="" />
+                  </Link>
                 </div>
-
-                <form onSubmit={handleSubmit(onSubmit)}>
-                <TextField
+                <form onSubmit={handleSubmit(nextStep)}>
+                  <TextField
                     aria-describedby="outlined-weight-helper-text"
                     error={Boolean(errors.userName)}
                     {...register('userName', {
@@ -259,7 +258,7 @@ const newSignUp = ({ backToLogin }) => {
                       to="/login"
                       className="hover:underline hover:cursor-pointer text-sm"
                     >
-                      Usuário já cadastrado?{' '}
+                      Usuário já cadastrado?
                       <strong>Volte para o login!</strong>
                     </Link>
 
@@ -376,12 +375,12 @@ const newSignUp = ({ backToLogin }) => {
                 />
 
                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                  Age
+                  Você possue convenio médico?
                 </InputLabel>
                 <NativeSelect
                   defaultValue={visible}
                   inputProps={{
-                    name: 'age',
+                    name: 'convenio',
                     id: 'uncontrolled-native',
                   }}
                   onChange={(e) => {
@@ -391,8 +390,6 @@ const newSignUp = ({ backToLogin }) => {
                   <option value={false}>Não</option>
                   <option value={true}>Sim</option>
                 </NativeSelect>
-                <RowRadioButtonsGroup handleChange={handleChange('gender')} />
-
                 {visible === 'true' && (
                   <TextField
                     color="success"
@@ -410,9 +407,11 @@ const newSignUp = ({ backToLogin }) => {
                     })}
                   />
                 )}
+                <RowRadioButtonsGroup handleChange={handleChange('gender')} />
+
                 <div className="">
                   <button
-                    onClick={handleSubmit(onSubmit2)}
+                    onClick={handleSubmit(onSubmit)}
                     className="my-4 mt-[-10px] mb-5 w-[100%] px-6 py-2 rounded-lg text-white font-bold  bg-navBg hover:bg-opacity-0 border  hover:text-navFontColor hover:border "
                   >
                     Finalizar Cadastro
@@ -421,9 +420,8 @@ const newSignUp = ({ backToLogin }) => {
                     onClick={(e) => setSuccess(false)}
                     className=" flex items-center hover:cursor-pointer text-sm hover:text-navFontColor"
                   >
-                    {' '}
                     <ArrowLeftIcon />
-                    Voltar{' '}
+                    Voltar
                   </a>
                 </div>
               </div>

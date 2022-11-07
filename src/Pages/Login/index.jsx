@@ -67,7 +67,6 @@ const FormLogin = ({ goToRegister }) => {
               </div>
             </Fade>
           </div>
-
           {success ? null : (
             <Fade right>
               <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:h-[390px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
@@ -79,7 +78,6 @@ const FormLogin = ({ goToRegister }) => {
                     <img className="w-[120px]" src={logo} alt="" />
                   </Link>
                 </div>
-
                 <Input
                   label="Insira seu email"
                   type="email"
@@ -94,7 +92,6 @@ const FormLogin = ({ goToRegister }) => {
                   onKeyUp={keyHandler}
                   handleChange={handleChangePassword}
                 />
-
                 <div className="">
                   <a
                     onClick={(e) => setSuccess(true)}
@@ -108,7 +105,6 @@ const FormLogin = ({ goToRegister }) => {
                   >
                     Entrar
                   </button>
-
                   <Link className="hover:underline" to="/register">
                     Não tem cadastro? <strong>Cadastre-se agora!</strong>
                   </Link>
@@ -122,7 +118,9 @@ const FormLogin = ({ goToRegister }) => {
               <div className="box bg-[#fff] w-[370px]  md:w-[370px] md:mx-auto lg:w-[500px]  h-[340px] m-auto flex flex-col gap-5 rounded-lg shadow-md p-10">
                 <div className="flex justify-between items-center">
                   <h1 className="text-lg font-bold">Recupere sua senha</h1>
-                  <img className="w-[120px]" src={logo} alt="" />
+                  <Link to="/">
+                    <img className="w-[120px]" src={logo} alt="" />
+                  </Link>
                 </div>
                 <p>Coloque seu e-mail cadastrado</p>
                 <Input
@@ -144,9 +142,8 @@ const FormLogin = ({ goToRegister }) => {
                     onClick={(e) => setSuccess(false)}
                     className=" hover:underline text-md"
                   >
-                    {' '}
                     <ArrowLeftIcon />
-                    Voltar{' '}
+                    Voltar
                   </a>
                 </div>
               </div>

@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }) => {
           return <Navigate to="/" />;
         })
         .catch((err) => {
-          console.log(err);
           loginHandler({
             icon: 'error',
             title: 'Oops...',

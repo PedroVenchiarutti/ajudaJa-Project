@@ -12,6 +12,20 @@ const loginHandler = (props) => {
   });
 };
 
+
+const redirectAlert = (props) => {
+  Swal.fire({
+    icon: props.icon,
+    title: props.title,
+    text: props.text,
+    confirmButtonText: 'Ok',
+    confirmButtonColor: '#3DCC67',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = props.redirect;
+    }
+  });
+};
 const testeAlert = () => {
   Swal.fire({
     icon: 'success',
@@ -30,4 +44,5 @@ const loadingAlert = () => {
   });
 };
 
-export { loginHandler, loadingAlert, testeAlert };
+
+export { loginHandler, loadingAlert, testeAlert, redirectAlert };
