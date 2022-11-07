@@ -15,12 +15,31 @@ import { AuthContext } from '../../contexts/auth';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link as Scroll } from 'react-scroll';
 import { exitConfirmation } from '../Alerts';
+import Swal from 'sweetalert2';
 
 const Header = ({ children }) => {
   const buttonLogout = () => {
     const { authenticated, logout } = useContext(AuthContext);
     return authenticated ? (
-      <LogoutIcon className="ml-5 hover:cursor-pointer" onClick={logout} />
+      <LogoutIcon
+        className="ml-5 hover:cursor-pointer"
+        onClick={(props) => {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Deseja sair?',
+            text: 'Você será redirecionado para a página de login',
+            showCancelButton: true,
+            confirmButtonColor: '#3DCC67',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              logout();
+            }
+          });
+        }}
+      />
     ) : null;
   };
 

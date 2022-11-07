@@ -10,13 +10,16 @@ import { Link } from 'react-router-dom';
 
 const FormLogin = ({ goToRegister }) => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
   const { authenticated, login } = useContext(AuthContext);
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password);
+    login(user.email, user.password);
     loadingAlert();
   };
 
@@ -27,18 +30,18 @@ const FormLogin = ({ goToRegister }) => {
   };
 
   const handleChangeEmail = (e) => {
-    setEmail(e.target.value);
+    setUser({ ...user, email: e.target.value });
   };
 
   const handleChangePassword = (e) => {
-    setPassword(e.target.value);
+    setUser({ ...user, password: e.target.value });
   };
 
   const newPassword = (e) => {
     Api.post('/public/recovery', { email: email }).then((response) => {});
     alert('Veja sua caixa de entrada');
     setSuccess(false);
-    setEmail('');
+    setUser({ email: '' });
   };
 
   const newPasswordKey = (e) => {
@@ -81,14 +84,14 @@ const FormLogin = ({ goToRegister }) => {
                 <Input
                   label="Insira seu email"
                   type="email"
-                  info={email}
+                  info={user.email}
                   onKeyUp={keyHandler}
                   handleChange={handleChangeEmail}
                 />
                 <Input
                   label="Insira sua senha"
                   type="password"
-                  info={password}
+                  info={user.password}
                   onKeyUp={keyHandler}
                   handleChange={handleChangePassword}
                 />

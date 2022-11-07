@@ -164,20 +164,22 @@ const newSignUp = ({ backToLogin }) => {
                     label="Nome de usuario"
                   />
 
-                  <InputMUI label='Teste' error={ errors.userName} helperText='' 
-                  {...register('userName', {
-                    required: 'Esse campo é obrigatório',
-                    onChange: (e) => {
-                      setUser({ ...user, userName: e.target.value });
-                    },
-                    minLength: {
-                      value: 3,
-                      message: 'Mínimo de 3 caracteres',
-                    },
-                  })}
-                   />
+                  <InputMUI
+                    label="Teste"
+                    error={errors.userName}
+                    helperText=""
+                    {...register('userName', {
+                      required: 'Esse campo é obrigatório',
+                      onChange: (e) => {
+                        setUser({ ...user, userName: e.target.value });
+                      },
+                      minLength: {
+                        value: 3,
+                        message: 'Mínimo de 3 caracteres',
+                      },
+                    })}
+                  />
 
-               
                   <TextField
                     color="success"
                     label="Email"

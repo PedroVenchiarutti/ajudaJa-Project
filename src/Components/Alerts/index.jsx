@@ -1,7 +1,5 @@
-import React from 'react';
 import Swal from 'sweetalert2';
 import 'react-toastify/dist/ReactToastify.css';
-
 const loginHandler = (props) => {
   Swal.fire({
     icon: props.icon,
@@ -45,21 +43,16 @@ const loadingAlert = () => {
 
 const exitConfirmation = (props) => {
   Swal.fire({
-    title: 'Tem certeza que deseja sair?',
-    text: 'Você será redirecionado para a página Principal',
     icon: 'warning',
+    title: 'Deseja sair?',
+    text: 'Você será redirecionado para a página de login',
     showCancelButton: true,
     confirmButtonColor: '#3DCC67',
-    cancelButtonColor: '#E62822',
-    confirmButtonText: 'Sim, sair!',
-    cancelButtonText: 'Cancelar',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.location.href = props.redirect;
-    }
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sim',
+    cancelButtonText: 'Não',
   });
 };
-
 export {
   loginHandler,
   loadingAlert,
