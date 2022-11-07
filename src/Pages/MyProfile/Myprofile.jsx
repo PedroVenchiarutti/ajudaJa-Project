@@ -17,7 +17,6 @@ const MyProfile = () => {
     helth_insurance: '',
   });
 
-  
   const [qrcode, setQrCode] = useState('');
 
   const id = localStorage.getItem('id');
@@ -41,7 +40,6 @@ const MyProfile = () => {
     (e) => {
       Api.get(`/private/client/${id}`, config)
         .then((response) => {
-          loadingAlert.close();
           setClient({
             username: response.data.user.username,
             email: response.data.user.email,
