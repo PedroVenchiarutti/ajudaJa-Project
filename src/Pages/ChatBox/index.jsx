@@ -16,7 +16,7 @@ import {
 import CircleIcon from '@mui/icons-material/Circle';
 import Message from '../../Components/Message';
 
-// const socket = io('http://localhost:3333');
+const socket = io('http://localhost:3333');
 
 const Chatbox = (props) => {
   // definindo a sala
@@ -85,29 +85,29 @@ const Chatbox = (props) => {
    
 
 
-  // useEffect(() => {
-  //   Api.get('/public/webchat')
-  //     .then((response) => {
-  //       const maps = response.data.map((item) => {
-  //         let obj = {
-  //           room: item.room,
-  //           username: item.username,
-  //           user: item.user,
-  //           message: item.message,
-  //           time: item.createdAt,
-  //         };
-  //         return obj;
-  //       });
-  //       setMsg((msg) => [...msg, ...maps]);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
+  useEffect(() => {
+    Api.get('/public/webchat')
+      .then((response) => {
+        const maps = response.data.map((item) => {
+          let obj = {
+            room: item.room,
+            username: item.username,
+            user: item.user,
+            message: item.message,
+            time: item.createdAt,
+          };
+          return obj;
+        });
+        setMsg((msg) => [...msg, ...maps]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-  //   // return () => {
-  //   //   socket.off('message_client');
-  //   // };
-  // }, []);
+    // return () => {
+    //   socket.off('message_client');
+    // };
+  }, []);
 
   useEffect(() => {
     socket.on('message_new', (newdata) => {

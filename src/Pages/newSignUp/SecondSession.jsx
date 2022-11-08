@@ -30,6 +30,12 @@ const SecondSession = ({onChangeFirstName, onChangeLastName, children, methodHan
                   variant="standard"
                   fullWidth
                   label="Insira seu primeiro nome"
+                  sx={{
+                    fontFamily: 'DM Sans',
+                  }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'DM Sans', color: '#495057' },
+                  }}
                 />
 
                 <TextField
@@ -44,13 +50,21 @@ const SecondSession = ({onChangeFirstName, onChangeLastName, children, methodHan
                     required: 'sobrenome é obrigatório',
                     onChange: onChangeLastName,
                   })}
+                  sx={{
+                    fontFamily: 'DM Sans',
+                  }}
+                  InputLabelProps={{
+                    style: { fontFamily: 'DM Sans', color: '#495057' },
+                  }}
                 />
 
                   {children}
 
                   <RowRadioButtonsGroup handleChange={changeGender} /> 
 
-                  <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                  <InputLabel sx={{
+              fontFamily: 'DM Sans',
+            }} variant="standard" htmlFor="uncontrolled-native">
                   Você possue convenio médico?
                 </InputLabel>
                 <NativeSelect
@@ -63,8 +77,8 @@ const SecondSession = ({onChangeFirstName, onChangeLastName, children, methodHan
                     setVisible(e.target.value);
                   }}
                 >
-                  <option value={false}>Não</option>
-                  <option value={true}>Sim</option>
+                  <option className="font-primary" value={false}>Não</option>
+                  <option className="font-primary" value={true}>Sim</option>
                 </NativeSelect>
                 {visible === 'true' && (
                   <TextField
@@ -79,6 +93,12 @@ const SecondSession = ({onChangeFirstName, onChangeLastName, children, methodHan
                       required: 'O nome do convenio é obrigatório',
                       onChange: onChangeHelthInsurance,
                     })}
+                    sx={{
+                      fontFamily: 'DM Sans',
+                    }}
+                    InputLabelProps={{
+                      style: { fontFamily: 'DM Sans', color: '#495057' },
+                    }}
                   />
                 )}
 
