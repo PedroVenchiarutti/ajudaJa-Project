@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Api from '../Api/api';
 import { loginHandler } from '../Components/Alerts';
@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [authenticated, setAuthenticated] = useState(false);
   const [token, setToken] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storageUser = getUserFromStorage();
@@ -63,7 +64,7 @@ export const AuthProvider = ({ children }) => {
         .then((resp) => {
           setLoggedUserState(resp.data.user, resp.data.user.token);
           Swal.close();
-          return <Navigate to="/" />;
+          return navigate('/myprofile');
         })
         .catch((err) => {
           loginHandler({
@@ -72,6 +73,52 @@ export const AuthProvider = ({ children }) => {
             text: err.response.data,
           });
         });
+  };
+
+  const register = (
+    name,
+    lastname,
+    password,
+    passwordConfirmation,
+    username,
+    email,
+    birthday,
+    emergencynumber,
+    helth_insurance,
+    gender,
+    avatar,
+  ) => {
+    if (username && password && emergencynumber && birthday) {
+      Api.post('/public/register', {
+        name,
+        lastname,
+        password,
+        passwordConfirmation,
+        username,
+        email,
+        birthday,
+        emergencynumber,
+        helth_insurance,
+        gender,
+        avatar,
+      })
+        .then((resp) => {
+          // Swal.close();
+          // navigate('/userinformation');
+          console.log(resp.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.close();
+          loginHandler({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message,
+          });
+        });
+    } else {
+      alert('Preencha todos os campos');
+    }
   };
 
   const logout = () => {
@@ -95,6 +142,7 @@ export const AuthProvider = ({ children }) => {
     user,
     login,
     logout,
+    register,
   };
 
   return <AuthContext.Provider value={state} children={children} />;

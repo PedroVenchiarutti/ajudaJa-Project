@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2';
-import 'react-toastify/dist/ReactToastify.css';
 const loginHandler = (props) => {
   Swal.fire({
     icon: props.icon,

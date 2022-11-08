@@ -13,11 +13,10 @@ export default function Options(props) {
           value={props.value}
           label="Age"
           onChange={props.onChange}
-          defaultValue={10}
         >
-          <MenuItem value={10}>Nenhum</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value="Nenhum">Nenhum</MenuItem>
+          <MenuItem value="">Alergia a camarão</MenuItem>
+          <MenuItem value={30}>Amnézia</MenuItem>
         </Select>
       </FormControl>
     </>
