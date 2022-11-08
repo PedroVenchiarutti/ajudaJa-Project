@@ -27,7 +27,7 @@ const Header = ({ children }) => {
           Swal.fire({
             icon: 'warning',
             title: 'Deseja sair?',
-            text: 'Você será redirecionado para a página de login',
+            text: 'Você será desconectado do sistema',
             showCancelButton: true,
             confirmButtonColor: '#3DCC67',
             cancelButtonColor: '#d33',

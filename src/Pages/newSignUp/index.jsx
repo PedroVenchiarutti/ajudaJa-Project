@@ -158,38 +158,20 @@ const newSignUp = ({ backToLogin }) => {
                     sx={{
                       fontFamily: 'DM Sans',
                     }}
-                    InputLabelProps={{
-                      style: { fontFamily: 'DM Sans', color: '#495057' },
-                    }}
                     label="Nome de usuario"
-                  />
-
-                  <InputMUI
-                    label="Teste"
-                    error={errors.userName}
-                    helperText=""
-                    {...register('userName', {
-                      required: 'Esse campo é obrigatório',
-                      onChange: (e) => {
-                        setUser({ ...user, userName: e.target.value });
-                      },
-                      minLength: {
-                        value: 3,
-                        message: 'Mínimo de 3 caracteres',
-                      },
-                    })}
                   />
 
                   <TextField
                     color="success"
                     label="Email"
-                    aria-describedby="outlined-weight-helper-text"
+                    id="standard-basic"
+                    type="email"
                     fullWidth
                     variant="standard"
                     error={Boolean(errors.email)}
                     helperText={errors.email?.message}
                     {...register('email', {
-                      required: 'Email is required',
+                      required: 'O email é obrigatório',
                       onChange: (e) => {
                         setUser({ ...user, email: e.target.value });
                       },
@@ -197,9 +179,6 @@ const newSignUp = ({ backToLogin }) => {
                     sx={{
                       fontFamily: 'DM Sans',
                       marginTop: '10px',
-                    }}
-                    InputLabelProps={{
-                      style: { fontFamily: 'DM Sans', color: '#495057' },
                     }}
                   />
                   <TextField
@@ -227,27 +206,28 @@ const newSignUp = ({ backToLogin }) => {
                     }}
                   />
                   <TextField
-                    id="standard-basic"
                     color="success"
+                    id="standard-basic"
+                    type="password"
                     label="Confirme sua senha"
                     variant="standard"
-                    type="password"
                     fullWidth
                     {...register('confirmPassword', {
-                      required: 'A confirmação de senha é obrigatória.',
+                      required: 'A senha é obrigatória.',
+                      minLength: {
+                        value: 6,
+                        message: 'Mínimo de 6 caracteres',
+                      },
                       onChange: (e) => {
                         setUser({ ...user, confirmPassword: e.target.value });
                       },
                     })}
+                    error={Boolean(errors.confirmPassword)}
+                    helperText={errors.confirmPassword?.message}
                     sx={{
                       fontFamily: 'DM Sans',
                       marginTop: '10px',
                     }}
-                    InputLabelProps={{
-                      style: { fontFamily: 'DM Sans', color: '#495057' },
-                    }}
-                    error={Boolean(errors.confirmPassword)}
-                    helperText={errors.confirmPassword?.message}
                   />
                   <div className="clearfix"></div>
                   <FormHelperText style={{ color: '#d32f2f' }}>

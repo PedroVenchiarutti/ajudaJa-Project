@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PersonSVG from '/images/image-firs-seasson.png';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Api from '../../Api/api';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Select from '@mui/material/Select';
+import Options from '../../Components/Options/';
+import { FormControl, InputLabel, MenuItem } from '@mui/material';
 
 const UserInformation = () => {
   const [formValues, setFormsValues] = useState(['']);
@@ -35,6 +38,12 @@ const UserInformation = () => {
     });
   };
 
+  const [age, setAge] = React.useState('');
+
+  useEffect(() => {
+    console.log(formValues);
+  }, [formValues]);
+
   return (
     <div className="bg-white ">
       <div className="w-full pt-28">
@@ -47,30 +56,33 @@ const UserInformation = () => {
 
           <div className="flex flex-col lg:flex-row justify-between">
             <div className="flex lg:mt-[33px] flex-col gap-2 ">
+              <InputLabel>
+                Insira alguma vulnarabilidade que você possua:
+              </InputLabel>
               {formValues.map((element, index) => (
-                <div
-                  key={index}
-                  className="flex justify-center lg:justify-start  gap-1 items-center px-2"
-                >
-                  <input
-                    className="border w-[300px] p-1 rounded-md"
-                    type="text"
-                    placeholder="Insira sua doença ou alergia aqui"
-                    onChange={(e) => handleChange(index, e)}
-                  />
-                  <button onClick={() => addFormFields()}>
-                    <AddCircleOutlineIcon />{' '}
-                  </button>
-                  {index ? (
-                    <button onClick={() => removeFormFields(index)}>
-                      <DeleteForeverIcon />
+                <>
+                  <div
+                    key={index}
+                    className="flex justify-center lg:justify-start  gap-1 items-center px-2"
+                  >
+                    <Options
+                      value={formValues[index]}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <button onClick={() => addFormFields()}>
+                      <AddCircleOutlineIcon />{' '}
                     </button>
-                  ) : (
-                    <div className="invisible">
-                      <DeleteForeverIcon />
-                    </div>
-                  )}
-                </div>
+                    {index ? (
+                      <button onClick={() => removeFormFields(index)}>
+                        <DeleteForeverIcon />
+                      </button>
+                    ) : (
+                      <div className="invisible">
+                        <DeleteForeverIcon />
+                      </div>
+                    )}
+                  </div>
+                </>
               ))}
 
               <div className="buttons flex lg:justify-start lg:pl-2 justify-center gap-4 pt-10">

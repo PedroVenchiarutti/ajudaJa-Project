@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import Fade from 'react-reveal/Fade';
 import Api from '../../Api/api';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 const MyProfile = () => {
-
   const [client, setClient] = useState({
     username: '',
     email: '',
@@ -16,7 +15,7 @@ const MyProfile = () => {
     allergy: '',
   });
 
-  const {id} = useParams()
+  const { id } = useParams();
 
   const config = {
     headers: {
@@ -37,7 +36,9 @@ const MyProfile = () => {
           allergy: response.data.client.allergy[0].description,
         });
       })
-      .then(() => {});
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const teste = client.allergy.split(',');
