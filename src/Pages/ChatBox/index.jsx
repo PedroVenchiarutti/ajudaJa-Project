@@ -4,6 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import io from 'socket.io-client';
 import Api from '../../Api/api';
+import { v4 as uuidv4 } from 'uuid';
 import Input from '../../Components/TextField';
 import { AuthContext } from '../../contexts/auth';
 import {
@@ -17,18 +18,9 @@ import CircleIcon from '@mui/icons-material/Circle';
 import Message from '../../Components/Message';
 
 const socket = io('http://localhost:3333');
+// const socket = io(import.meta.env.VITE_URL_CONNECTION);
 
 const Chatbox = (props) => {
-  // definindo a sala
-  const { user } = useContext(AuthContext);
-  const room = `chat01#pedro`;
-  // const room = `chat01#${user.username}`;
-
-  const [clientChat, setClientChat] = useState({
-    name: '',
-    email: '',
-    uuid: '',
-  });
   const [emailVerific, setEmailVerific] = useState(false);
   const [userVerific, setUserVerific] = useState(false);
   const [initChat, setInitChat] = useState(true);
@@ -37,30 +29,84 @@ const Chatbox = (props) => {
   const [closeWindow, setCloseWindow] = useState(false);
   const [myArray, updateMyArray] = useState([]);
   const [newData, setNewData] = useState({});
+  const [clientChat, setClientChat] = useState({
+    name: '',
+    email: '',
+    room: '',
+    timeStart: '',
+  });
   const bottomRef = useRef(null);
 
+  const [msg, setMsg] = useState([]);
+
+  // definindo a sala
+  const { user } = useContext(AuthContext);
   const { name, email } = clientChat;
+
+  const uidRoom = uuidv4();
+
+  const startChat = () => {
+    const newDate = new Date();
+    const convertNewDate = newDate.toLocaleString('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
+    });
+
+    const day = convertNewDate.split(' ')[0];
+    const time = convertNewDate.split(' ')[1];
+
+    const newUid = uidRoom.split('-')[0];
+
+    const emailConvert =
+      email.split('@')[0] + email.split('@')[1].split('.')[1];
+
+    const room = `${emailConvert}${newUid}${day.split('/').join('')}`;
+
+    const data = {
+      name: clientChat.name,
+      email: clientChat.email,
+      room: room,
+      timeStart: time.split(':')[0] + ':' + time.split(':')[1],
+    };
+
+    setClientChat(data);
+
+    socket.emit('message', {
+      id: uidRoom,
+      message: `Olá ${data.name}, como posso te ajudar? caso queira sair do chat, digite "sair" e aguarde!`,
+      user: 'bot',
+      username: 'bot',
+      date: time.split(':')[0] + ':' + time.split(':')[1],
+      room: room,
+      initial: true,
+    });
+
+    const localStore = localStorage.setItem('clientChat', JSON.stringify(data));
+  };
 
   const handleChange = (props) => (e) => {
     let newClientChat = { ...clientChat, [props]: e.target.value };
     setClientChat(newClientChat);
   };
 
-  const [msg, setMsg] = useState([
-    {
-      id: 1,
-      message: `Olá, como posso te ajudar?`,
-      user: 'bot',
-      time: '14:20',
-    },
-  ]);
-
+  // Enviando para backend
   const onClick = () => {
+    if (textMessage === '') {
+      return;
+    } else if (textMessage == 'sair') {
+      localStorage.removeItem('clientChat');
+      setTimeout(() => {
+        setCloseWindow(true);
+        setInitChat(true);
+        setClientChat('');
+        setMsg([]);
+      }, 3000);
+    }
+
     const data = {
-      room,
+      room: clientChat.room,
       message: textMessage,
       user: 'user',
-      username: 'pedro ta fixo mudar ',
+      username: clientChat.name,
     };
 
     if (data.message.length < 3) {
@@ -77,30 +123,35 @@ const Chatbox = (props) => {
     }
   };
 
+  // Hook para verificar se o usuário já está no chat
   useEffect(() => {
-    Api.get('/public/webchat')
-      .then((response) => {
-        const maps = response.data.map((item) => {
-          let obj = {
-            room: item.room,
-            username: item.username,
-            user: item.user,
-            message: item.message,
-            time: item.createdAt,
-          };
-          return obj;
+    if (localStorage.getItem('clientChat') !== null) {
+      setInitChat(false);
+      const data = JSON.parse(localStorage.getItem('clientChat'));
+      Api.post(`/public/webchat/${data.room}`)
+        .then((response) => {
+          console.log(response.data);
+          const maps = response.data.map((item) => {
+            let obj = {
+              room: item.room,
+              username: item.username,
+              user: item.user,
+              message: item.message,
+              time: item.createdAt,
+            };
+            return obj;
+          });
+          setMsg((msg) => [...msg, ...maps]);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        setMsg((msg) => [...msg, ...maps]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    // return () => {
-    //   socket.off('message_client');
-    // };
+    } else {
+      setInitChat(true);
+    }
   }, []);
 
+  // Para atualiszar as msg
   useEffect(() => {
     socket.on('message_new', (newdata) => {
       if (newdata == null) return;
@@ -128,13 +179,17 @@ const Chatbox = (props) => {
     if (!/^[A-Za-z0-9]{4,255}$/.test(name)) {
       setInitChat(true);
       setUserVerific(true);
+      console.log('if');
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       setInitChat(true);
       setEmailVerific(true);
+      console.log('if 2');
     } else {
       setInitChat(false);
       setUserVerific(false);
       setEmailVerific(false);
+      socket.connect();
+      startChat();
     }
   };
 
@@ -183,7 +238,6 @@ const Chatbox = (props) => {
               </div>
             </>
           ) : null}
-
           <button
             className={
               initChat
