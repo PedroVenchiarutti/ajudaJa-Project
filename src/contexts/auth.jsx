@@ -56,6 +56,7 @@ export const AuthProvider = ({ children }) => {
     setUser({});
     setToken('');
     setAuthenticated(false);
+    return navigate('/');
   };
 
   const login = (email, password, redirectTo = '/myprofile') => {
@@ -103,8 +104,8 @@ export const AuthProvider = ({ children }) => {
         avatar,
       })
         .then((resp) => {
-          // Swal.close();
-          // navigate('/userinformation');
+          Swal.close();
+          navigate('/userinformation');
           console.log(resp.data);
         })
         .catch((err) => {

@@ -3,12 +3,16 @@ import PersonSVG from '/images/image-firs-seasson.png';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Api from '../../Api/api';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import Select from '@mui/material/Select';
 import Options from '../../Components/Options/';
-import { FormControl, InputLabel, MenuItem } from '@mui/material';
+import { InputLabel } from '@mui/material';
+import { loginHandler } from '../../Components/Alerts';
 
 const UserInformation = () => {
   const [formValues, setFormsValues] = useState(['']);
+  const title = 'Algum dos campos adicionados não estão preenchidos';
+  const text =
+    'Preencha-o ou apague para que possamos prosseguir com o seu cadastro!';
+  const icon = 'error';
 
   const handleChange = (i, e) => {
     let newFormValues = [...formValues];
@@ -38,7 +42,15 @@ const UserInformation = () => {
     });
   };
 
-  const [age, setAge] = React.useState('');
+  function validaForm() {
+    formValues.forEach((element) => {
+      if (element === '') {
+        loginHandler(title, text, icon);
+      } else {
+        addAllergy();
+      }
+    });
+  }
 
   useEffect(() => {
     console.log(formValues);
@@ -90,7 +102,7 @@ const UserInformation = () => {
                   Voltar
                 </button>
                 <button
-                  onClick={addAllergy}
+                  onClick={validaForm}
                   className="border px-6 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white "
                 >
                   Avançar

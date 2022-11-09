@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
+import axios from 'axios';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,11 +22,8 @@ export const storage = getStorage(app);
 
 export const urlSignUp = '/public/register';
 
-import axios from 'axios';
-
 const Api = axios.create({
-  // baseURL: import.meta.env.VITE_URL_API
-  baseURL: 'http://localhost:3333/api',
+  baseURL: import.meta.env.VITE_URL_API,
 });
 
 export default Api;
