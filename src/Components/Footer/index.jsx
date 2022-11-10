@@ -7,30 +7,38 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 export default function Footer() {
   return (
     <div className="md:w-full ">
-      <div className=" pb-20 lg:h-[180px] bg-navBg md:w-full   ">
-        <div className="md:h-36 pt-14  py-6 px-8 md:pt-20 lg:max-w-[1270px]  m-auto md:px-24  flex md:justify-between  md:items-center md:flex-row flex-col  ">
-          <div className="">
-            <div className="w-[200px]">
+      <div className=" pb-6  h-full  bg-navBg md:w-full   ">
+        <div className="flex flex-col gap-3 md:gap-0 md:flex-row md:justify-around items-center  pt-6   lg:max-w-[1270px]  m-auto  ">
+      
+        
+          
+            <div className="w-[110px]">
               <img src={Logo} alt="" />
             </div>
-            <h1 className="pl-2 pt-1 text-sm  text-[#0a0a0a]">
-              ©2022 Ajuda.já
+            
+           
+         
+
+      
+          <h1 className="text-[13px]  text-[#0a0a0a]">
+              ©2022 Ajuda.já | Todos os direitos reservados.
             </h1>
-            <h3 className="pl-2 pt-1  text-[#0a0a0a] text-sm pb-6 md:pb-0">
-              Todos os direitos reservados.
-            </h3>
+          
+
+          <div className=" text-[#0a0a0a] flex justify-between  gap-4 ">
+          
+            <button>
+              <LocalPhoneIcon fontSize="medium" />
+            </button>
+            <button>
+              <EmailIcon fontSize="medium" />
+            </button>
+            <button>
+              <InstagramIcon fontSize="medium" />
+            </button>
+          
           </div>
-          <div className=" text-[#0a0a0a] flex pl-2 md:pl-0  gap-7 ">
-            <button>
-              <LocalPhoneIcon fontSize="large" />
-            </button>
-            <button>
-              <EmailIcon fontSize="large" />
-            </button>
-            <button>
-              <InstagramIcon fontSize="large" />
-            </button>
-          </div>
+          
         </div>
       </div>
     </div>

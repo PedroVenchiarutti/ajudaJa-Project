@@ -8,6 +8,7 @@ import Api from '../../Api/api';
 import { loadingAlert } from '../../Components/Alerts';
 import { Link } from 'react-router-dom';
 
+
 const FormLogin = ({ goToRegister }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,10 +59,10 @@ const FormLogin = ({ goToRegister }) => {
                   Saia de casa <br />
                   <span className="font-normal">
                     sem se <br /> preocupar com
-                  </span>{' '}
+                  </span>
                   <br />
                   <span className="xl:text-8xl font-bold  text-[#9EFFBB] ">
-                    o amanhã!{' '}
+                    o amanhã!
                   </span>
                 </h2>
               </div>

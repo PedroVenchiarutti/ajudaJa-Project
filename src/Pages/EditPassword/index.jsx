@@ -51,33 +51,25 @@ const editPassword = () => {
     }
   };
 
-  const handleButton = (e) => {
+  const handleButton = async (e) => {
     loadingAlert();
 
-    Api.patch(
-      `/private/update/users/password/${id}`,
-      {
+    try { 
+      const res = await Api.patch(`/private/update/users/password/${id}`, {
         password: client.password,
         newPassword: client.newPassword,
         confirmPassword: client.confirmPassword,
-      },
-      config,
-    )
-      .then((response) => {
-        redirectAlert({
-          icon: 'success',
-          title: response.message,
-          text: 'Você será redirecionado para a página do seu perfil',
-          redirect: '/myprofile',
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+      }, config)
+
+     
+    } catch(error) { 
+      console.log(error);
         loginHandler({
           icon: 'error',
           title: error.response.data.message,
         });
-      });
+    }
+
   };
 
   return (
@@ -123,7 +115,7 @@ const editPassword = () => {
               </form>
 
               <div className="buttons py-6 pt-14 flex flex-col gap-2 justify-center">
-                <Link to="">
+                <Link to="/myprofile">
                   <button
                     className="border px-8 py-2 rounded-lg w-[100%] text-navFontColor font-bold  hover:bg-navBg hover:text-white"
                     onClick={(e) => handleButton()}

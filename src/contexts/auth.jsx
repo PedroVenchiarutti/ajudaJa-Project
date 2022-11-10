@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Api from '../Api/api';
@@ -7,12 +7,13 @@ import Modal from '../Components/Modal';
 
 const USER_STORAGE_KEY = 'username';
 const TOKEN_STORAGE_KEY = 'token';
+const REFRESHTOKEN_STORAGE_KEY = 'refreshToken';
 const ID_STORAGE_KEY = 'id';
 
 
-
-const saveUserInStorage = (user, token) => {
+const saveUserInStorage = (user, token, refreshToken) => {
   localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+  localStorage.setItem(REFRESHTOKEN_STORAGE_KEY, refreshToken)
   localStorage.setItem(TOKEN_STORAGE_KEY, token);
   localStorage.setItem(ID_STORAGE_KEY, user.id);
 };
@@ -38,19 +39,25 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storageUser = getUserFromStorage();
     const storageToken = localStorage.getItem(TOKEN_STORAGE_KEY);
-
-    if (storageToken)
-      storageUser ? setLoggedUserState(storageUser, storageToken) : '';
-    else {
+    const storageRefreshToken = localStorage.getItem(REFRESHTOKEN_STORAGE_KEY)
+        if (storageToken)
+      storageUser ? setLoggedUserState(storageUser, storageToken, storageRefreshToken): '';
+       else {
       setUnloggedUserState();
     }
+
+   
   }, []);
 
-  const setLoggedUserState = (user, token) => {
-    saveUserInStorage(user, token);
+  
+
+  const setLoggedUserState = (user, token, refreshToken) => {
+    
+    saveUserInStorage(user, token, refreshToken);
     setUser(user);
-    setToken(token);
+    setToken(token)
     setAuthenticated(true);
+    
   };
 
   const setUnloggedUserState = () => {
@@ -64,9 +71,11 @@ export const AuthProvider = ({ children }) => {
     if (email && password)
       Api.post('/public/login', { email, password })
         .then((resp) => {
-          setLoggedUserState(resp.data.user, resp.data.user.token);
+          setLoggedUserState(resp.data.user, resp.data.user.token, resp.data.user.refreshToken);
+        
           Swal.close();
           return navigate('/');
+        
         })
         .catch((err) => {
           loginHandler({
@@ -74,6 +83,8 @@ export const AuthProvider = ({ children }) => {
             title: 'Oops...',
             text: err.response.data,
           });
+
+          console.log(err)
         });
   };
 
@@ -93,9 +104,9 @@ export const AuthProvider = ({ children }) => {
           avatar
         })
         .then((resp) => {
-          // Swal.close();
-          // navigate('/userinformation');
-          console.log(resp.data)
+          Swal.close();
+          navigate('/userinformation');
+          
         })
         .catch((err) => {
           console.log(err);
@@ -133,7 +144,7 @@ export const AuthProvider = ({ children }) => {
     user,
     login,
     logout,
-    register
+    register,
   };
 
   return <AuthContext.Provider value={state} children={children} />;

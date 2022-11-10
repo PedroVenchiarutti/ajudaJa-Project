@@ -43,7 +43,7 @@ const MyProfile = () => {
   const teste = client.allergy.split(',');
 
   return (
-    <div className="w-full   bg-white">
+    <div className="w-full   bg-white pb-20">
       <div className="lg:w-[1080px] pt-32 grid m-auto">
         <Fade bottom>
           <div className=" bg-[#fff] drop-shadow-lg  grid-cols-2 m-auto lg:px-16 py-5 rounded-lg pb-5 px-14">

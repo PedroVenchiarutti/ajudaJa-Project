@@ -37,31 +37,26 @@ const MyProfile = () => {
     });
   };
 
-  useEffect(
-    (e) => {
-      Api.get(`/private/client/${id}`, config)
-        .then((response) => {
-         
-          setClient({
-            username: response.data.user.username,
-            email: response.data.user.email,
-            cellphone: response.data.user_informations.emergencynumber,
-            birthday: response.data.user_informations.birthday,
-            avatar: response.data.user_informations.avatar,
-            helth_insurance: response.data.user_informations.helth_insurance,
-            name: response.data.user_informations.name,
-            lastname: response.data.user_informations.lastname,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    [client],
-  );
+  const getData = async () => { 
+    try { 
+      const res = await Api.get(`/private/client/${id}`, config)
+      setClient({
+            username: res.data.user.username,
+            email: res.data.user.email,
+            cellphone: res.data.user_informations.emergencynumber,
+            birthday: res.data.user_informations.birthday , 
+            helth_insurance: res.data.user_informations.helth_insurance,
+            name: res.data.user_informations.name,
+            avatar: res.data.user_informations.avatar
+           })
+    } catch(err) { 
+      console.log(err)
+    }
+  }
 
   useEffect(() => {
     GenerateQRCode();
+    getData()
   }, []);
 
   return (

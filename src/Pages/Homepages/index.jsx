@@ -12,7 +12,7 @@ function Homepage() {
   return (
     <>
       <div className="w-[100%] m-auto pb-20 ">
-        <Fade top>
+      <Fade top>
           <Header />
         </Fade>
 
@@ -20,7 +20,7 @@ function Homepage() {
           <Information id="about" />
           <Cards />
           <FAQ />
-          <Chatbox/>
+          {/* <Chatbox/> */}
         </div>
       </div>
     </>
