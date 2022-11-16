@@ -16,8 +16,10 @@ import {
 import CircleIcon from '@mui/icons-material/Circle';
 import Message from '../../Components/Message';
 
+
 /* const socket = io('http://localhost:3333'); */
 // const socket = io(import.meta.env.VITE_URL_CONNECTION);
+
 
 const Chatbox = (props) => {
   const [emailVerific, setEmailVerific] = useState(false);
@@ -122,7 +124,6 @@ const Chatbox = (props) => {
     }
   };
 
-  // Hook para verificar se o usuário já está no chat
   useEffect(() => {
     if (localStorage.getItem('clientChat') !== null) {
       setInitChat(false);
@@ -145,11 +146,6 @@ const Chatbox = (props) => {
         .catch((error) => {
           console.log(error);
         });
-    } else {
-      setInitChat(true);
-    }
-  }, []);
-
   // Para atualiszar as msg
   useEffect(() => {
     socket.on('message_new', (newdata) => {
