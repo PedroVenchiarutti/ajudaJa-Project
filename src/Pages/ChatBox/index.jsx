@@ -285,4 +285,6 @@ const Chatbox = (props) => {
     </div>
   );
 };
+});
+};
 export default Chatbox;
