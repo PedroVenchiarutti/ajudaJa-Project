@@ -10,36 +10,17 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { useEffect, useState, useContext } from 'react';
 import logo from '/images/logo-v2.png';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link as Scroll } from 'react-scroll';
 import { exitConfirmation } from '../Alerts';
-import Swal from 'sweetalert2';
 
 const Header = ({ children }) => {
   const buttonLogout = () => {
     const { authenticated, logout } = useContext(AuthContext);
     return authenticated ? (
-      <LogoutIcon
-        className="ml-5 hover:cursor-pointer"
-        onClick={(props) => {
-          Swal.fire({
-            icon: 'warning',
-            title: 'Deseja sair?',
-            text: 'Você será desconectado do sistema',
-            showCancelButton: true,
-            confirmButtonColor: '#3DCC67',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Não',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              logout();
-            }
-          });
-        }}
-      />
+      <LogoutIcon className="ml-5 hover:cursor-pointer" onClick={logout} />
     ) : null;
   };
 
@@ -48,7 +29,6 @@ const Header = ({ children }) => {
     drawerOpen: false,
   });
 
-  const navigate = useNavigate();
   const headersData = [
     {
       label: 'Inicio',
@@ -94,7 +74,7 @@ const Header = ({ children }) => {
         <Toolbar
           sx={{
             backgroundColor: '#3DCC67',
-            paddingRight: '79px',
+            paddingRight: '30px',
             paddingLeft: '30px',
           }}
         >
@@ -224,25 +204,12 @@ const Header = ({ children }) => {
             Inicio
           </MenuItem>
         </Link>
-        {authenticated ? (
-          <Scroll to={'about'} smooth={true} duration={1000}>
-            <MenuItem sx={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
-              Sobre
-            </MenuItem>
-          </Scroll>
-        ) : (
-          <Link
-            {...{
-              component: Link,
-              to: '/',
-              color: 'inherit',
-              style: { textDecoration: 'none' },
-              key: 'Inicio',
-            }}
-          >
+
+        <Scroll to={'about'} smooth={true} duration={1000}>
+          <MenuItem sx={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
             Sobre
-          </Link>
-        )}
+          </MenuItem>
+        </Scroll>
 
         <Link
           {...{
