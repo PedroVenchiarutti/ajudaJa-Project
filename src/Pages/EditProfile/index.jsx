@@ -60,19 +60,22 @@ const editProfile = () => {
     }
   };
 
+  const getData = async () => { 
+    try { 
+      const res = await Api.get(`/private/client/${id}`, config)
+      setClient({
+            emergencynumber: res.data.user_informations.emergencynumber,
+            avatar: res.data.user_informations.avatar,
+            helth_insurance: res.data.user_informations.helth_insurance,
+           });
+           Swal.close();
+    } catch(err) { 
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
-    Api.get(`/private/client/${id}`, config)
-      .then((resp) => {
-        setClient({
-          emergencynumber: resp.data.user_informations.emergencynumber,
-          avatar: resp.data.user_informations.avatar,
-          helth_insurance: resp.data.user_informations.helth_insurance,
-        });
-        Swal.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    getData();
   }, []);
 
   const { emergencynumber, helth_insurance } = client;
@@ -82,16 +85,19 @@ const editProfile = () => {
     setClient(newClient);
   };
 
-  const handleSubmit = (url) => {
-    Api.put(
-      `/private/client/update/${id}`,
-      {
+  const handleSubmit = async (url) => {
+    try { 
+      const res = await Api.put(`/private/client/update/${id}`, {
         emergencynumber,
         helth_insurance,
         avatar: url,
       },
-      config,
-    ).catch((err) => console.log(err));
+      config)
+    
+    } catch(err) { 
+      console.log(err)
+    }
+   
   };
 
   return (

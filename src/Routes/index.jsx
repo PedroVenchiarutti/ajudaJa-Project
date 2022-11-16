@@ -16,17 +16,22 @@ import { AuthContext, AuthProvider } from '../contexts/auth';
 import EditPassword from '../Pages/EditPassword';
 import Login from '../Pages/Login';
 import Register from '../Pages/newSignUp';
+import { useEffect } from 'react';
 
 const RouterApp = () => {
   const Private = ({ children }) => {
     const { authenticated } = useContext(AuthContext);
 
     if (authenticated) {
+      
+
       return children;
     } else {
       return <Navigate to="/login" />;
     }
   };
+
+
 
   const PrivateCard = ({ children }) => {
     const { authenticated } = useContext(AuthContext);
@@ -51,9 +56,21 @@ const RouterApp = () => {
     <Router>
       <AuthProvider>
         <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/userInformation" element={<UserInformation />} />
+          <Route element={
+          <Layout />
+          }>
+            <Route path="/" element={
+              
+                <HomePage />
+              
+          
+            } />
+            <Route path="/userInformation" element={
+          
+                <UserInformation />
+           
+            
+            } />
 
             <Route
               path="/myprofile"
