@@ -4,11 +4,11 @@ import Swal from 'sweetalert2';
 import Api from '../Api/api';
 import { loginHandler } from '../Components/Alerts';
 import Modal from '../Components/Modal';
-
+import axios from 'axios';
 const USER_STORAGE_KEY = 'username';
 const TOKEN_STORAGE_KEY = 'token';
 const ID_STORAGE_KEY = 'id';
-
+const INFO_ID = 'infoId';
 const saveUserInStorage = (user, token) => {
   localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
   localStorage.setItem(TOKEN_STORAGE_KEY, token);
@@ -61,13 +61,17 @@ export const AuthProvider = ({ children }) => {
 
   const login = (email, password, redirectTo = '/myprofile') => {
     if (email && password)
-      Api.post('/public/login', { email, password })
+      Api.post('/public/login', {
+        email,
+        password,
+      })
         .then((resp) => {
           setLoggedUserState(resp.data.user, resp.data.user.token);
           Swal.close();
           return navigate('/myprofile');
         })
         .catch((err) => {
+          console.log(err);
           loginHandler({
             icon: 'error',
             title: 'Oops...',
@@ -104,9 +108,14 @@ export const AuthProvider = ({ children }) => {
         avatar,
       })
         .then((resp) => {
+          console.log(resp);
           Swal.close();
+          localStorage.setItem(ID_STORAGE_KEY, resp.data.data.user.id);
+          localStorage.setItem(
+            INFO_ID,
+            resp.data.data.user_informations.idinfo,
+          );
           navigate('/userinformation');
-          console.log(resp.data);
         })
         .catch((err) => {
           console.log(err);

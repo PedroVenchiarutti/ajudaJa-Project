@@ -10,7 +10,7 @@ import { UTurnLeftSharp } from '@mui/icons-material';
 
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import FormattedInputs from '../../Components/InputCellphone'
+import FormattedInputs from '../../Components/InputCellphone';
 
 const editProfile = () => {
   const [imageUpload, setImageUpload] = useState(null);
@@ -132,8 +132,11 @@ const editProfile = () => {
             </div>
             <div className="pt-4 formAndButtons flex flex-col  content-center ">
               <form className="flex flex-col gap-5 items-center ">
-                
-                <FormattedInputs label="Telefone de emergência" value={emergencynumber} onChange={handleChange('emergencynumber')}/>
+                <FormattedInputs
+                  label="Telefone de emergência"
+                  value={emergencynumber}
+                  onChange={handleChange('emergencynumber')}
+                />
                 <Input
                   info={client.helth_insurance}
                   label="Convênio Médico"

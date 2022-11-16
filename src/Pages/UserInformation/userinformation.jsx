@@ -5,14 +5,20 @@ import Api from '../../Api/api';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Options from '../../Components/Options/';
 import { InputLabel } from '@mui/material';
-import { loginHandler } from '../../Components/Alerts';
+import { loadingAlert, loginHandler } from '../../Components/Alerts';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const UserInformation = () => {
+  const INFO_ID = localStorage.getItem('infoId');
   const [formValues, setFormsValues] = useState(['']);
   const title = 'Algum dos campos adicionados não estão preenchidos';
   const text =
     'Preencha-o ou apague para que possamos prosseguir com o seu cadastro!';
   const icon = 'error';
+
+  const [info, setInfo] = useState();
+  const navigate = useNavigate();
 
   const handleChange = (i, e) => {
     let newFormValues = [...formValues];
@@ -32,29 +38,24 @@ const UserInformation = () => {
     setFormsValues(newFormValues);
   };
 
-  const addAllergy = () => {
-    console.log(formValues.join(', '));
-    Api.post('/public/client/allergy/add', {
-      info_id: 170,
-      description: formValues.join(', '),
-    }).then((resp) => {
-      console.log(resp);
-    });
+  const validaForm = () => {
+    formValues.map((i) => {
+      if (i == '[object Object]' || i == '' || i == ' ') {
+        loginHandler({ title, text, icon });
+        stop();
+      }
+    }, addAllergy());
   };
 
-  function validaForm() {
-    formValues.forEach((element) => {
-      if (element === '') {
-        loginHandler(title, text, icon);
-      } else {
-        addAllergy();
-      }
+  const addAllergy = () => {
+    Api.post('/public/client/allergy/add', {
+      info_id: INFO_ID,
+      description: Object.values(formValues).toString(),
+    }).then((resp) => {
+      console.log(resp);
+      navigate('/myprofile');
     });
-  }
-
-  useEffect(() => {
-    console.log(formValues);
-  }, [formValues]);
+  };
 
   return (
     <div className="bg-white ">

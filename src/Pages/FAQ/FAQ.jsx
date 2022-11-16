@@ -28,12 +28,14 @@ export default function FAQ() {
               className={cardTitleFAQOne(FAQ1)}
               onClick={(e) => setFAQ1(!FAQ1)}
             >
-              <h2 className="font-medium">O que é o Ajuda.Já?</h2>
+              <h2 className="font-medium cursor-pointer">
+                O que é o Ajuda.Já?
+              </h2>
               {FAQ1 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
             </div>
             <div className={cardContentFAQ(FAQ1)}>
               <SubdirectoryArrowRightIcon />
-              <p className="text-sm">
+              <p className="text-sm ">
                 O Ajuda já é um site que tem como objetivo ajudar pessoas que
                 possuem alguma(s) condição(ões) de saúde, e correm algum risco
                 no dia-a-dia.
@@ -45,7 +47,9 @@ export default function FAQ() {
         <Fade left>
           <div className={cardFAQ()}>
             <div className={cardTitleFAQ(FAQ1)} onClick={(e) => setFAQ2(!FAQ2)}>
-              <h2 className="font-medium">Como o Ajuda.Já funciona?</h2>
+              <h2 className="font-medium cursor-pointer">
+                Como o Ajuda.Já funciona?
+              </h2>
               {FAQ2 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
             </div>
             <div className={cardContentFAQ(FAQ2)}>
@@ -63,12 +67,14 @@ export default function FAQ() {
         <Fade left>
           <div className={cardFAQ()}>
             <div className={cardTitleFAQ(FAQ2)} onClick={(e) => setFAQ3(!FAQ3)}>
-              <h2 className="font-medium">Por que eu usaria o Ajuda.Já? </h2>
+              <h2 className="font-medium cursor-pointer">
+                Por que eu usaria o Ajuda.Já?{' '}
+              </h2>
               {FAQ3 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
             </div>
             <div className={cardContentFAQ(FAQ3)}>
               <SubdirectoryArrowRightIcon />
-              <p className="text-sm">
+              <p className="text-sm cursor-pointer">
                 Caso você ou alguém de sua familia se encaixe nesse perfil de
                 usuario, e eventualmente essa pessoa sofra algum acidente por
                 exemplo, esse alguém não irá correr o risco de receber uma
@@ -82,7 +88,9 @@ export default function FAQ() {
         <Fade left>
           <div className={cardFAQ()}>
             <div className={cardTitleFAQ(FAQ3)} onClick={(e) => setFAQ4(!FAQ4)}>
-              <h2 className="font-medium">O Ajuda.JÁ é gratuito mesmo?</h2>
+              <h2 className="font-medium cursor-pointer">
+                O Ajuda.JÁ é gratuito mesmo?
+              </h2>
               {FAQ4 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
             </div>
             <div className={cardContentFAQ(FAQ4)}>
@@ -104,7 +112,7 @@ export default function FAQ() {
               className={FAQ5ToUp(FAQ4, FAQ5)}
               onClick={(e) => setFAQ5(!FAQ5)}
             >
-              <h2 className="font-medium">
+              <h2 className="font-medium cursor-pointer">
                 Existe alguma estação do Ajuda.já?
               </h2>
               {FAQ5 ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}

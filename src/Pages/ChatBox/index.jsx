@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState, useContext } from 'react';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import SendIcon from '@mui/icons-material/Send';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import io from 'socket.io-client';
 import Api from '../../Api/api';
 import { v4 as uuidv4 } from 'uuid';
 import Input from '../../Components/TextField';
@@ -17,7 +16,7 @@ import {
 import CircleIcon from '@mui/icons-material/Circle';
 import Message from '../../Components/Message';
 
-const socket = io('http://localhost:3333');
+/* const socket = io('http://localhost:3333'); */
 // const socket = io(import.meta.env.VITE_URL_CONNECTION);
 
 const Chatbox = (props) => {

@@ -1,23 +1,28 @@
-import { MenuItem, Select } from '@mui/material';
+import { NativeSelect, Select } from '@mui/material';
 import { InputLabel } from '@mui/material';
 import { FormControl } from '@mui/material';
 
-export default function Options(props) {
+export default function Options({ value, onChange }) {
   return (
     <>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={props.value}
-          label="Age"
-          onChange={props.onChange}
+        <NativeSelect
+          labelId="demo-simple-select-standard-label"
+          color="success"
+          variant="standard"
+          id="demo-simple-select-standard"
+          placeholder="Selecione"
+          value={value}
+          onChange={onChange}
         >
-          <MenuItem value="Nenhum">Nenhum</MenuItem>
-          <MenuItem value="">Alergia a camarão</MenuItem>
-          <MenuItem value={30}>Amnézia</MenuItem>
-        </Select>
+          <option value="Selecione">Selecione</option>
+          <option value="Nenhuma">Nenhuma</option>
+          <option value="Alergia a camarão">Alergia a camarão</option>
+          <option value="Amnésia">Amnésia</option>
+          <option value="Anemia">Anemia</option>
+          <option value="Aids">Aids</option>
+          <option value="Asma">Asma</option>
+        </NativeSelect>
       </FormControl>
     </>
   );

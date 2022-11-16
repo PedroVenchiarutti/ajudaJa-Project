@@ -10,7 +10,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { useEffect, useState, useContext } from 'react';
 import logo from '/images/logo-v2.png';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/auth';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link as Scroll } from 'react-scroll';
@@ -48,6 +48,7 @@ const Header = ({ children }) => {
     drawerOpen: false,
   });
 
+  const navigate = useNavigate();
   const headersData = [
     {
       label: 'Inicio',
@@ -223,12 +224,25 @@ const Header = ({ children }) => {
             Inicio
           </MenuItem>
         </Link>
-
-        <Scroll to={'about'} smooth={true} duration={1000}>
-          <MenuItem sx={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
+        {authenticated ? (
+          <Scroll to={'about'} smooth={true} duration={1000}>
+            <MenuItem sx={{ fontFamily: 'DM Sans', fontWeight: 500 }}>
+              Sobre
+            </MenuItem>
+          </Scroll>
+        ) : (
+          <Link
+            {...{
+              component: Link,
+              to: '/',
+              color: 'inherit',
+              style: { textDecoration: 'none' },
+              key: 'Inicio',
+            }}
+          >
             Sobre
-          </MenuItem>
-        </Scroll>
+          </Link>
+        )}
 
         <Link
           {...{
