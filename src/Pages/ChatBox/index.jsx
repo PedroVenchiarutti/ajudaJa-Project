@@ -16,7 +16,7 @@ import {
 import CircleIcon from '@mui/icons-material/Circle';
 import Message from '../../Components/Message';
 
-const socket = io('http://localhost:3333');
+// const socket = io('http://localhost:3333');
 
 const Chatbox = (props) => {
   // definindo a sala
@@ -77,6 +77,7 @@ const Chatbox = (props) => {
     }
   };
 
+
   useEffect(() => {
     Api.get('/public/webchat')
       .then((response) => {
@@ -99,18 +100,18 @@ const Chatbox = (props) => {
     // return () => {
     //   socket.off('message_client');
     // };
-  }, []);
+  // }, []);
 
-  useEffect(() => {
-    socket.on('message_new', (newdata) => {
-      if (newdata == null) return;
-      setMsg((msg) => [...msg, newdata]);
-    });
-    socket.on('message_bot', (data) => {
-      if (data == null) return;
-      setMsg((msg) => [...msg, data]);
-    });
-  }, [setMsg]);
+  // useEffect(() => {
+  //   socket.on('message_new', (newdata) => {
+  //     if (newdata == null) return;
+  //     setMsg((msg) => [...msg, newdata]);
+  //   });
+  //   socket.on('message_bot', (data) => {
+  //     if (data == null) return;
+  //     setMsg((msg) => [...msg, data]);
+  //   });
+  // }, [setMsg]);
 
   const keyHandler = (e, f) => {
     if (e.key === 'Enter') {

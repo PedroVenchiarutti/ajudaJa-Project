@@ -93,7 +93,7 @@ const Header = ({ children }) => {
         <Toolbar
           sx={{
             backgroundColor: '#3DCC67',
-            paddingRight: '79px',
+            paddingRight: '30px',
             paddingLeft: '30px',
           }}
         >

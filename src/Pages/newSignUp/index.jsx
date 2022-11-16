@@ -4,7 +4,7 @@ import Fade from 'react-reveal/Fade';
 import InputDate from '../../Components/InputDate';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 } from 'uuid';
-import { loadingAlert, loginHandler } from '../../Components/Alerts';
+import { loadingAlert } from '../../Components/Alerts';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { storage } from '../../Api/api';
 import { useForm, FormProvider } from 'react-hook-form';
