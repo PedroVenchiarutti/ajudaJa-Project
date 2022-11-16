@@ -20,7 +20,9 @@ function Homepage() {
           <Information id="about" />
           <Cards />
           <FAQ />
+
           {/* <Chatbox/> */}
+
         </div>
       </div>
     </>

@@ -3,12 +3,22 @@ import PersonSVG from '/images/image-firs-seasson.png';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Api from '../../Api/api';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import Select from '@mui/material/Select';
 import Options from '../../Components/Options/';
-import { FormControl, InputLabel, MenuItem } from '@mui/material';
+import { InputLabel } from '@mui/material';
+import { loadingAlert, loginHandler } from '../../Components/Alerts';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const UserInformation = () => {
+  const INFO_ID = localStorage.getItem('infoId');
   const [formValues, setFormsValues] = useState(['']);
+  const title = 'Algum dos campos adicionados não estão preenchidos';
+  const text =
+    'Preencha-o ou apague para que possamos prosseguir com o seu cadastro!';
+  const icon = 'error';
+
+  const [info, setInfo] = useState();
+  const navigate = useNavigate();
 
   const handleChange = (i, e) => {
     let newFormValues = [...formValues];
@@ -28,21 +38,24 @@ const UserInformation = () => {
     setFormsValues(newFormValues);
   };
 
-  const addAllergy = () => {
-    console.log(formValues.join(', '));
-    Api.post('/public/client/allergy/add', {
-      info_id: 170,
-      description: formValues.join(', '),
-    }).then((resp) => {
-      console.log(resp);
-    });
+  const validaForm = () => {
+    formValues.map((i) => {
+      if (i == '[object Object]' || i == '' || i == ' ') {
+        loginHandler({ title, text, icon });
+        stop();
+      }
+    }, addAllergy());
   };
 
-  const [age, setAge] = React.useState('');
-
-  useEffect(() => {
-    console.log(formValues);
-  }, [formValues]);
+  const addAllergy = () => {
+    Api.post('/public/client/allergy/add', {
+      info_id: INFO_ID,
+      description: Object.values(formValues).toString(),
+    }).then((resp) => {
+      console.log(resp);
+      navigate('/myprofile');
+    });
+  };
 
   return (
     <div className="bg-white ">
@@ -90,7 +103,7 @@ const UserInformation = () => {
                   Voltar
                 </button>
                 <button
-                  onClick={addAllergy}
+                  onClick={validaForm}
                   className="border px-6 py-2 rounded-lg text-navFontColor font-bold  hover:bg-navBg hover:text-white "
                 >
                   Avançar
