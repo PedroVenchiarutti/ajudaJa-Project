@@ -33,7 +33,9 @@ export const urlSignUp = '/public/register';
 import axios from 'axios';
 
 const Api = axios.create({
-  baseURL: import.meta.env.VITE_URL_API
+
+  // baseURL: import.meta.env.VITE_URL_API
+  baseURL: 'http://localhost:3333/api',
 
 });
 

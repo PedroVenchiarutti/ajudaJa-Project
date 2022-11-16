@@ -11,13 +11,13 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import FirstSession from './FirstSession';
 import SecondSession from './SecondSession';
-import FormattedInputs from '../../Components/InputCellphone'
-import { NativeSelect } from '@mui/material'; 
+import FormattedInputs from '../../Components/InputCellphone';
+import { NativeSelect } from '@mui/material';
 import ImageEdit from '../../Components/imageEdit';
 import { AuthContext } from '../../contexts/auth';
 
 const newSignUp = ({ backToLogin }) => {
-  const [date, setDate] = useState(null)
+  const [date, setDate] = useState(null);
   const [success, setSuccess] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -68,7 +68,7 @@ const newSignUp = ({ backToLogin }) => {
   };
 
   const submita = (url) => {
-      register(
+    register(
       user.firstName,
       user.lastName,
       user.password,
@@ -76,11 +76,15 @@ const newSignUp = ({ backToLogin }) => {
       user.userName,
       user.email,
       date,
-      user.emergencyNumber.replace('(', '').replace(')', '').replace(' ', '').replace('-', ''),
+      user.emergencyNumber
+        .replace('(', '')
+        .replace(')', '')
+        .replace(' ', '')
+        .replace('-', ''),
       user.helth_insurance,
       user.gender,
-      url
-      )
+      url,
+    );
   };
 
   const keyHandler = (e) => {
@@ -88,7 +92,7 @@ const newSignUp = ({ backToLogin }) => {
       return handleSubmit(e);
     }
   };
-  const methods = useForm()
+  const methods = useForm();
 
   const nextStep = (data) => setSuccess(true);
   const onSubmit = (data) => {
@@ -99,7 +103,6 @@ const newSignUp = ({ backToLogin }) => {
       uploadImage();
     }
   };
-
   return (
     <>
       <div className="w-[100%] h-[100vh] bg-gradient-to-t from-navFontColor to-firstSessionFontColor  md:from-white md:to-white">
@@ -116,21 +119,30 @@ const newSignUp = ({ backToLogin }) => {
                   </Link>
                 </div>
                 <form onSubmit={methods.handleSubmit(nextStep)}>
-
-                    <FormProvider {...methods}>
-                      <FirstSession 
-                      onChangeUsername={(e) => setUser({...user, userName: e.target.value})}
-                      onChangeEmail={(e) => setUser({...user, email: e.target.value})}
-                      onChangePassword={(e) => setUser({...user, password: e.target.value})}
-                      onChangeConfirmPassword={(e) => setUser({...user, confirmPassword: e.target.value})} />
-                    </FormProvider>
+                  <FormProvider {...methods}>
+                    <FirstSession
+                      onChangeUsername={(e) =>
+                        setUser({ ...user, userName: e.target.value })
+                      }
+                      onChangeEmail={(e) =>
+                        setUser({ ...user, email: e.target.value })
+                      }
+                      onChangePassword={(e) =>
+                        setUser({ ...user, password: e.target.value })
+                      }
+                      onChangeConfirmPassword={(e) =>
+                        setUser({ ...user, confirmPassword: e.target.value })
+                      }
+                    />
+                  </FormProvider>
 
                   <div className="pt-10 flex justify-between md:flex-row flex-col gap-5  content-center ">
                     <Link
                       to="/login"
                       className="hover:underline hover:cursor-pointer text-sm"
                     >
-                      Usuário já cadastrado? <strong>Volte para o login!</strong>
+                      Usuário já cadastrado?{' '}
+                      <strong>Volte para o login!</strong>
                     </Link>
 
                     <button className="hover:cursor-pointer text-sm flex items-center hover:text-navFontColor">
@@ -143,36 +155,50 @@ const newSignUp = ({ backToLogin }) => {
           )}
 
           {success ? (
-
-              <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:max-h-[830px] m-auto flex flex-col gap-5 mb-8 mt-8 rounded-lg shadow-md p-10">
-
-                <ImageEdit preview={preview} srcPreview={preview} onClickIMG={() => {
-                        fileInputRef.current.click()}}
-                        onClickButton={(e) => {
-                          e.preventDefault();
-                          fileInputRef.current.click();
-                        }} reference={fileInputRef} onChange={(e) => setImageUpload(e.target.files[0])}  />
+            <div className="box bg-[#fff] w-[370px] lg:w-[500px] md:w-[370px] md:mx-auto md:max-h-[830px] m-auto flex flex-col gap-5 mb-8 mt-8 rounded-lg shadow-md p-10">
+              <ImageEdit
+                preview={preview}
+                srcPreview={preview}
+                onClickIMG={() => {
+                  fileInputRef.current.click();
+                }}
+                onClickButton={(e) => {
+                  e.preventDefault();
+                  fileInputRef.current.click();
+                }}
+                reference={fileInputRef}
+                onChange={(e) => setImageUpload(e.target.files[0])}
+              />
 
               <FormProvider {...methods}>
+                <SecondSession
+                  onChangeFirstName={handleChange('firstName')}
+                  onChangeLastName={handleChange('lastName')}
+                  methodHandleClick={methods.handleSubmit(onSubmit)}
+                  onClickBackToRegister={(e) => setSuccess(false)}
+                  changeGender={handleChange('gender')}
+                  onChangeHelthInsurance={handleChange('helth_insurance')}
+                >
+                  <FormattedInputs
+                    label="Telefone de emergência"
+                    value={user.emergencyNumber}
+                    onChange={handleChange('emergencyNumber')}
+                  />
 
-                <SecondSession 
-                 onChangeFirstName={handleChange('firstName')}
-                 onChangeLastName={handleChange('lastName')} 
-                 methodHandleClick={methods.handleSubmit(onSubmit)}
-                 onClickBackToRegister={(e) => setSuccess(false)}
-                 changeGender={handleChange('gender')}
-                 onChangeHelthInsurance={handleChange('helth_insurance')}
-                 > 
-                 
-                 <FormattedInputs label="Telefone de emergência" value={user.emergencyNumber} onChange={handleChange('emergencyNumber')}/>
-
-              <InputDate
-                  date={date}
-                  handleChange={(newValue) => {
-                    newValue && setDate(`${newValue['$y']}-${newValue['$M'] + 1}-${newValue['$D']}`,)}} />
-                 </SecondSession> 
+                  <InputDate
+                    date={date}
+                    handleChange={(newValue) => {
+                      newValue &&
+                        setDate(
+                          `${newValue['$y']}-${newValue['$M'] + 1}-${
+                            newValue['$D']
+                          }`,
+                        );
+                    }}
+                  />
+                </SecondSession>
               </FormProvider>
-              </div>
+            </div>
           ) : null}
           <Fade right>
             <div className="hidden md:block bg-gradient-to-t from-navFontColor to-firstSessionFontColor drop-shadow-lg pl-10 pt-20"></div>

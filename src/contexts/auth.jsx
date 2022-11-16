@@ -12,6 +12,7 @@ const ID_STORAGE_KEY = 'id';
 
 
 const saveUserInStorage = (user, token, refreshToken) => {
+
   localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
   localStorage.setItem(REFRESHTOKEN_STORAGE_KEY, refreshToken)
   localStorage.setItem(TOKEN_STORAGE_KEY, token);
@@ -74,8 +75,10 @@ export const AuthProvider = ({ children }) => {
           setLoggedUserState(resp.data.user, resp.data.user.token, resp.data.user.refreshToken);
         
           Swal.close();
-          return navigate('/');
         
+
+          return navigate('/myprofile');
+
         })
         .catch((err) => {
           loginHandler({
@@ -88,25 +91,37 @@ export const AuthProvider = ({ children }) => {
         });
   };
 
-  const register = (name, lastname, password, passwordConfirmation, username, email, birthday, emergencynumber, helth_insurance, gender, avatar ) => { 
-      if(username && password && emergencynumber && birthday ) { 
-        Api.post('/public/register', {
-          name,
-          lastname,
-          password,
-          passwordConfirmation,
-          username,
-          email,
-          birthday,
-          emergencynumber,
-          helth_insurance,
-          gender,
-          avatar
-        })
+  const register = (
+    name,
+    lastname,
+    password,
+    passwordConfirmation,
+    username,
+    email,
+    birthday,
+    emergencynumber,
+    helth_insurance,
+    gender,
+    avatar,
+  ) => {
+    if (username && password && emergencynumber && birthday) {
+      Api.post('/public/register', {
+        name,
+        lastname,
+        password,
+        passwordConfirmation,
+        username,
+        email,
+        birthday,
+        emergencynumber,
+        helth_insurance,
+        gender,
+        avatar,
+      })
         .then((resp) => {
           Swal.close();
           navigate('/userinformation');
-          
+
         })
         .catch((err) => {
           console.log(err);
@@ -117,11 +132,10 @@ export const AuthProvider = ({ children }) => {
             text: err.response.data.message,
           });
         });
-    } else { 
-      alert('Preencha todos os campos')
+    } else {
+      alert('Preencha todos os campos');
     }
-      }
-  
+  };
 
   const logout = () => {
     return (
