@@ -61,14 +61,14 @@ const UserInformation = () => {
     <div className="bg-white ">
       <div className="w-full pt-28">
         <div className=" sm:p-5 md:w-[700px] lg:w-[1080px] m-auto pt-6">
-          <div className="title  px-2 pb-10">
+          <div className="title px-2 pb-10">
             <h1 className="text-2xl  md:text-3xl font-bold pb-3">
               Informe aqui alguma alergia, condição ou síndrome que você possui!
             </h1>
           </div>
 
-          <div className="flex flex-col lg:flex-row justify-between">
-            <div className="flex lg:mt-[33px] flex-col gap-2 ">
+          <div className="flex flex-col lg:flex-row justify-between mb-28">
+            <div className="flex lg:mt-[33px] flex-col gap-2 pl-5 ">
               <InputLabel>
                 Insira alguma vulnarabilidade que você possua:
               </InputLabel>
@@ -118,7 +118,11 @@ const UserInformation = () => {
                 irá visualiza-las.
               </p>
 
-              <img className="w-[350px]" src={PersonSVG} alt="" />
+              <img
+                className="w-[350px] md:block hidden"
+                src={PersonSVG}
+                alt=""
+              />
             </div>
           </div>
         </div>
