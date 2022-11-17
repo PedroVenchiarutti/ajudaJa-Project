@@ -23,15 +23,11 @@ const RouterApp = () => {
     const { authenticated } = useContext(AuthContext);
 
     if (authenticated) {
-      
-
       return children;
     } else {
       return <Navigate to="/login" />;
     }
   };
-
-
 
   const PrivateCard = ({ children }) => {
     const { authenticated } = useContext(AuthContext);
@@ -56,21 +52,9 @@ const RouterApp = () => {
     <Router>
       <AuthProvider>
         <Routes>
-          <Route element={
-          <Layout />
-          }>
-            <Route path="/" element={
-              
-                <HomePage />
-              
-          
-            } />
-            <Route path="/userInformation" element={
-          
-                <UserInformation />
-           
-            
-            } />
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/userInformation" element={<UserInformation />} />
 
             <Route
               path="/myprofile"
@@ -80,7 +64,6 @@ const RouterApp = () => {
                 </Private>
               }
             />
-            <Route path="/myprofilepublic/:id" element={<MyProfilePublic />} />
 
             <Route
               path="/editprofile"
@@ -105,6 +88,14 @@ const RouterApp = () => {
             element={
               <PrivateLogin>
                 <Login />
+              </PrivateLogin>
+            }
+          />
+          <Route
+            path="/myprofilepublic/:id"
+            element={
+              <PrivateLogin>
+                <MyProfilePublic />
               </PrivateLogin>
             }
           />

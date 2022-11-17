@@ -4,21 +4,15 @@ import Swal from 'sweetalert2';
 import Api from '../Api/api';
 import { loginHandler } from '../Components/Alerts';
 import Modal from '../Components/Modal';
-import axios from 'axios';
+
 const USER_STORAGE_KEY = 'username';
 const TOKEN_STORAGE_KEY = 'token';
 const REFRESHTOKEN_STORAGE_KEY = 'refreshToken';
 const ID_STORAGE_KEY = 'id';
 
-const INFO_ID = 'infoId';
-
-
-
 const saveUserInStorage = (user, token, refreshToken) => {
-
-
   localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
-  localStorage.setItem(REFRESHTOKEN_STORAGE_KEY, refreshToken)
+  localStorage.setItem(REFRESHTOKEN_STORAGE_KEY, refreshToken);
   localStorage.setItem(TOKEN_STORAGE_KEY, token);
   localStorage.setItem(ID_STORAGE_KEY, user.id);
 };
@@ -44,25 +38,21 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storageUser = getUserFromStorage();
     const storageToken = localStorage.getItem(TOKEN_STORAGE_KEY);
-    const storageRefreshToken = localStorage.getItem(REFRESHTOKEN_STORAGE_KEY)
-        if (storageToken)
-      storageUser ? setLoggedUserState(storageUser, storageToken, storageRefreshToken): '';
-       else {
+    const storageRefreshToken = localStorage.getItem(REFRESHTOKEN_STORAGE_KEY);
+    if (storageToken)
+      storageUser
+        ? setLoggedUserState(storageUser, storageToken, storageRefreshToken)
+        : '';
+    else {
       setUnloggedUserState();
     }
-
-   
   }, []);
 
-  
-
   const setLoggedUserState = (user, token, refreshToken) => {
-    
     saveUserInStorage(user, token, refreshToken);
     setUser(user);
-    setToken(token)
+    setToken(token);
     setAuthenticated(true);
-    
   };
 
   const setUnloggedUserState = () => {
@@ -70,33 +60,30 @@ export const AuthProvider = ({ children }) => {
     setUser({});
     setToken('');
     setAuthenticated(false);
-    return navigate('/');
   };
 
   const login = (email, password, redirectTo = '/myprofile') => {
     if (email && password)
-      Api.post('/public/login', {
-        email,
-        password,
-      })
+      Api.post('/public/login', { email, password })
         .then((resp) => {
-          setLoggedUserState(resp.data.user, resp.data.user.token, resp.data.user.refreshToken);
-        
+          setLoggedUserState(
+            resp.data.user,
+            resp.data.user.token,
+            resp.data.user.refreshToken,
+          );
+
           Swal.close();
-        
 
           return navigate('/myprofile');
-
         })
         .catch((err) => {
-          console.log(err);
           loginHandler({
             icon: 'error',
             title: 'Oops...',
             text: err.response.data,
           });
 
-          console.log(err)
+          console.log(err);
         });
   };
 
@@ -128,18 +115,8 @@ export const AuthProvider = ({ children }) => {
         avatar,
       })
         .then((resp) => {
-
-          console.log(resp);
           Swal.close();
-          localStorage.setItem(ID_STORAGE_KEY, resp.data.data.user.id);
-          localStorage.setItem(
-            INFO_ID,
-            resp.data.data.user_informations.idinfo,
-          );
           navigate('/userinformation');
-
-          Swal.close();
-
         })
         .catch((err) => {
           console.log(err);
