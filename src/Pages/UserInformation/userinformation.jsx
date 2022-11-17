@@ -52,7 +52,6 @@ const UserInformation = () => {
       info_id: INFO_ID,
       description: Object.values(formValues).toString(),
     }).then((resp) => {
-      console.log(resp);
       navigate('/myprofile');
     });
   };
