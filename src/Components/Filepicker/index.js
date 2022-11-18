@@ -1,16 +1,9 @@
 const file = document.getElementById('fileImg');
-    
-file.addEventListener('change', (e)=>{
 
-    const reader = new FileReader();
+file.addEventListener('change', (e) => {
+  const reader = new FileReader();
 
-    reader.onload = () => {
-            
-        console.log(reader.result);
-        
-    }
-    
-})
-
+  reader.onload = () => {};
+});
 
 module.exports = { file, reader };
