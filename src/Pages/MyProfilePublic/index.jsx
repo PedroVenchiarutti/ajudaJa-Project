@@ -81,7 +81,7 @@ const MyProfile = () => {
                     <strong className="text-sm">
                       Data de Nascimento: <br />
                     </strong>
-                    {client.birthday}
+                    {client.birthday.split('T')[0]}
                   </div>
                 </div>
 
